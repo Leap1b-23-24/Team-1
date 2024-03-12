@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
 
-export const ProductSideBar = () => {
+export const ProductSideBars = () => {
   return <Stack></Stack>;
 };
