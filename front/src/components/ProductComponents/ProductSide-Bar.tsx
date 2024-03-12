@@ -11,7 +11,7 @@ const menu = [
 
 export const ProductSideBar = () => {
   return (
-    <Stack width="12%" py={3} height="100vh">
+    <Stack width="12%" py={3} height="100vh" gap={2}>
       {menu.map((item, index) => {
         return (
           <Stack key={index} direction="row" gap={1} py={1} marginLeft={2}>
