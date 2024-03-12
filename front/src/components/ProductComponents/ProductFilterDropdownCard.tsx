@@ -33,6 +33,7 @@ export const ProductFilterDropdownCard = (
         onClick={() => {
           setIsShown((prev) => !prev);
         }}
+        position={"relative"}
       >
         <Image src={svg} alt="svg" width={24} height={24} />
         <Typography fontWeight={600} fontSize={14} color={"#3F4145"}>
