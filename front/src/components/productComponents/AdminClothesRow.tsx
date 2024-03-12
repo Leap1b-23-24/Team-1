@@ -20,10 +20,20 @@ export const AdminClothesRow = (props: AdminClothesRowType) => {
       direction="row"
       justifyContent="space-between"
       alignItems="center"
+      borderBottom="solid 1px #f0f0f0"
+      py={2}
     >
       <Checkbox />
-      <Stack>
-        <Stack></Stack>
+      <Stack direction="row" gap="12px">
+        <Stack
+          width="40px"
+          height="40px"
+          borderRadius="50%"
+          bgcolor="red"
+          overflow="hidden"
+        >
+          <img src="tshirt.jpeg" alt="" />
+        </Stack>
         <Stack>
           <Typography fontSize="14px" fontWeight={600}>
             {productName}
@@ -48,9 +58,9 @@ export const AdminClothesRow = (props: AdminClothesRowType) => {
       <Typography fontSize="14px" fontWeight={400} color="#3F4145">
         {addedDate}
       </Typography>
-      <Stack direction="row">
-        <DeleteOutline />
-        <CreateOutlined />
+      <Stack direction="row" gap={2}>
+        <DeleteOutline style={{ color: "#b4b4b4" }} />
+        <CreateOutlined style={{ color: "#b4b4b4" }} />
       </Stack>
     </Stack>
   );
