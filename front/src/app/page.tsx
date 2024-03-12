@@ -1,9 +1,10 @@
+import { AdminClothesRow } from "@/components/ProductComponents/AdminClothesRow";
 import { Stack } from "@mui/material";
 
 export default function Home() {
   return (
     <Stack>
-      {/* <AdminClothesRow
+      <AdminClothesRow
         productName="Laptop"
         priority={3}
         category="bag"
@@ -11,7 +12,7 @@ export default function Home() {
         arrearage={9}
         sold={99}
         addedDate="2024-03-09"
-      /> */}
+      />
     </Stack>
   );
 }
