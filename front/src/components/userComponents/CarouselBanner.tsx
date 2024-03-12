@@ -1,27 +1,29 @@
 import { Slide, Stack } from "@mui/material";
 import Image from "next/image";
+import { useState } from "react";
 
 const images = [
-  "vercel.svg",
+  "/image 109.svg",
 
-  "next.svg",
-
-  //   "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
-
-  //   "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
+  "/image 110.svg",
 ];
 
+
+
 export const CarouselBanner = () => {
+  const [page, setPage] = useState(1);
+
   return (
-    <Stack width={"100%"} overflow={"hidden"}>
+    <Stack width={"100%"} overflow={"scroll"} sx={{cursor:'grab', active:"cursor-grabbing", MozWindowDragging:"drag", }} borderRadius={2}>
       {images.map((item, index) => {
         return (
           <Stack
             direction={"row"}
             key={index}
-            width={"200%"}
+            width={"100%"}
             height={557}
             position={"relative"}
+
           >
             <Image src={item} fill alt="" objectFit="cover" />
           </Stack>
