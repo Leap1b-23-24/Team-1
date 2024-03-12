@@ -1,9 +1,13 @@
-
+import {
+  AdminClothesRow,
+  ProductClothesRowHeader,
+} from "@/components/ProductComponents";
 import { Stack } from "@mui/material";
 
 export default function Home() {
   return (
     <Stack>
+      <ProductClothesRowHeader />
       <AdminClothesRow
         productName="Laptop"
         priority={3}
