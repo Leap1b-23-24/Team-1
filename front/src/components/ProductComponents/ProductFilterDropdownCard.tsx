@@ -23,6 +23,7 @@ export const ProductFilterDropdownCard = (
   return (
     <Stack>
       <Stack
+        bgcolor="white"
         direction="row"
         gap={1}
         borderRadius={2}
@@ -41,24 +42,26 @@ export const ProductFilterDropdownCard = (
       </Stack>
       {title !== "Сараар" ? (
         <Stack display={isShown ? "flex" : "none"}>
-          {mapArr?mapArr.map((item, index) => {
-            return (
-              <Stack
-                direction={"row"}
-                p="8px 12px"
-                borderRadius={2}
-                key={index}
-                onClick={() => {
-                  setState(item);
-                  setIsShown((prev) => !prev);
-                }}
-              >
-                <Typography fontWeight={600} color={"#3F4145"}>
-                  {item}
-                </Typography>
-              </Stack>
-            );
-          }):null}
+          {mapArr
+            ? mapArr.map((item, index) => {
+                return (
+                  <Stack
+                    direction={"row"}
+                    p="8px 12px"
+                    borderRadius={2}
+                    key={index}
+                    onClick={() => {
+                      setState(item);
+                      setIsShown((prev) => !prev);
+                    }}
+                  >
+                    <Typography fontWeight={600} color={"#3F4145"}>
+                      {item}
+                    </Typography>
+                  </Stack>
+                );
+              })
+            : null}
         </Stack>
       ) : isShown ? (
         <Input

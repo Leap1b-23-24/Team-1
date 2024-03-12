@@ -9,7 +9,7 @@ export const AddProductButton = () => {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Button>
+      <Button sx={{ gap: "8px", display: "flex", alignItems: "center" }}>
         <Typography color={"#FFFFFF"}>+</Typography>{" "}
         <Typography color={"#FFFFFF"}>Бүтээгдэхүүн нэмэх</Typography>{" "}
       </Button>
