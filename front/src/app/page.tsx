@@ -1,4 +1,4 @@
-import { AdminClothesRow } from "@/components/ProductComponents/AdminClothesRow";
+
 import { Stack } from "@mui/material";
 
 export default function Home() {
