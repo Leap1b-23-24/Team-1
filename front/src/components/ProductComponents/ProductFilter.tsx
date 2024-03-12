@@ -40,7 +40,7 @@ export const ProductFilter = (props: ProductFilterProps) => {
           setState={setDate}
         />
       </Stack>
-      <Stack direction={"row"} position={"relative"} bgcolor="white">
+      <Stack direction={"row"} position={"relative"} bgcolor="white" borderRadius={2} >
         <Stack position={"absolute"} left={8} top={8}>
           <Search />
         </Stack>
@@ -48,7 +48,7 @@ export const ProductFilter = (props: ProductFilterProps) => {
           type="text"
           placeholder="Бүтээгдэхүүний нэр, SKU, UPC"
           InputProps={{
-            style: { width: "419px", height: "40px", paddingLeft: "32px" },
+            style: { width: "419px", height: "42px", paddingLeft: "32px" },
           }}
           onChange={(event) => {
             setSearch(event?.target.value);
