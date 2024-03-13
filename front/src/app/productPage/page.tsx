@@ -6,6 +6,7 @@ import {
   ProductFilter,
   ProductSideBar,
 } from "@/components/ProductComponents";
+import BasicTable from "@/components/ProductComponents/OrderTable";
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 
