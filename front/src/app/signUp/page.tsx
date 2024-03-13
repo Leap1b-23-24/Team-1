@@ -3,9 +3,9 @@ import { SignUp } from "@/components/SignUp/SignUp";
 import { Height } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import { useState } from "react";
-import { MarketInfo } from "./MarketInfo";
-import { LocationInfo } from "./LocationInfo";
-import { MoreInfo } from "./MoreInfo";
+import { MarketInfo } from "../../components/SignUp/MarketInfo";
+import { LocationInfo } from "../../components/SignUp/LocationInfo";
+import { MoreInfo } from "../../components/SignUp/MoreInfo";
 
 export default function Page() {
   const [order, setOrder] = useState(1);
