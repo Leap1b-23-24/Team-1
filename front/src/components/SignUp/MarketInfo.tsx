@@ -3,9 +3,12 @@ import { ArrowBack, ArrowForward, Check } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
 import { StepSection } from "./StepSection";
 import { SignUpInput } from "./SignUpInput";
+import { useState } from "react";
+import { useAuth } from "@/providers/AuthProvider";
 
 export const MarketInfo = (props: SignUpType) => {
   const { order, setOrder } = props;
+  const { marketName, setMarketName } = useAuth();
   return (
     <Stack
       display={order === 2 ? "flex" : "none"}
@@ -18,8 +21,12 @@ export const MarketInfo = (props: SignUpType) => {
           Дэлгүүрийн мэдээлэл
         </Typography>
         <SignUpInput
+          value={marketName}
           label="Танай дэлгүүрийн нэр юу вэ?"
           placeholder="Дэлгүүрийн нэр"
+          onChange={(event) => {
+            setMarketName(event.target.value);
+          }}
         />
         <Stack
           width={"100%"}
@@ -41,6 +48,7 @@ export const MarketInfo = (props: SignUpType) => {
           </Stack>
           <Button
             variant="contained"
+            disabled={!marketName}
             sx={{
               position: "relative",
               p: "16px 20px",
