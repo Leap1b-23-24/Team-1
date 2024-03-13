@@ -11,13 +11,13 @@ export const IncomeFooterTop = () => {
       justifyContent="center"
       alignItems="center"
       borderBottom="solid 1px #b4b4b4"
-      p={2}
     >
       <Stack
         width="100%"
         direction="row"
         justifyContent="space-between"
         alignItems="center"
+        p={2}
       >
         {titles.map((item, index) => {
           return (

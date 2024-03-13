@@ -2,7 +2,6 @@
 
 import { IncomeHeader, ProductHeader } from "@/components/ProductComponents";
 
-import { ProductHeader } from "@/components/ProductComponents";
 import { IncomeFooter } from "@/components/ProductComponents/IncomeFooter";
 
 import { ProductFilter } from "@/components/ProductComponents/ProductFilter";
@@ -18,7 +17,6 @@ export default function Home() {
       <IncomeHeader />
 
       <IncomeFooterTopCom />
-
     </>
   );
 }

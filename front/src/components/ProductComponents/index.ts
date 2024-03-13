@@ -5,3 +5,5 @@ export * from "./AddProductButton";
 export * from "./ProductFilter";
 export * from "./ProductHeader";
 export * from "./IncomeHeader";
+export * from "./IncomeFooter";
+export * from "./IncomeFooterTop";
