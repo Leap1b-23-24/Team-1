@@ -9,6 +9,7 @@ import { MoreInfo } from "../../components/SignUp/MoreInfo";
 
 export default function Page() {
   const [order, setOrder] = useState(1);
+
   return (
     <Stack
       width={"100vw"}

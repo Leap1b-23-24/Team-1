@@ -3,14 +3,19 @@ import { Button, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
+import { SignUpInput } from "./SignUpInput";
 
 export type SignUpType = {
   setOrder: Dispatch<SetStateAction<number>>;
   order: number;
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+  userName: string;
+  setUserName: Dispatch<SetStateAction<string>>;
 };
 
 export const SignUp = (props: SignUpType) => {
-  const { order, setOrder } = props;
+  const { order, setOrder, email, setEmail, userName, setUserName } = props;
   return (
     <Stack
       display={order === 1 ? "flex" : "none"}
@@ -24,11 +29,28 @@ export const SignUp = (props: SignUpType) => {
       <Typography fontSize={32} fontWeight={700}>
         Бүртгүүлэх
       </Typography>
+      <SignUpInput
+        value={email}
+        label="Таны имэйл "
+        placeholder="Имэйл"
+        onChange={(event) => {
+          setEmail(event.target.value);
+        }}
+      />
+      <SignUpInput
+        value={userName}
+        label="Таны нэр "
+        placeholder="Нэр"
+        onChange={(event) => {
+          setUserName(event.target.value);
+        }}
+      />
 
       <Button
         variant="contained"
         fullWidth
         sx={{ position: "relative", p: "16px 20px" }}
+        disabled={!email || !userName}
         onClick={() => {
           setOrder(2);
         }}
