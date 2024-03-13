@@ -21,7 +21,7 @@ export const ProductFilterDropdownCard = (
   const [isShown, setIsShown] = useState(false);
 
   return (
-    <Stack>
+    <Stack     position={"relative"}>
       <Stack
         bgcolor="white"
         direction="row"
@@ -33,6 +33,7 @@ export const ProductFilterDropdownCard = (
         onClick={() => {
           setIsShown((prev) => !prev);
         }}
+    
       >
         <Image src={svg} alt="svg" width={24} height={24} />
         <Typography fontWeight={600} fontSize={14} color={"#3F4145"}>
@@ -41,11 +42,12 @@ export const ProductFilterDropdownCard = (
         {isShown ? <KeyboardArrowUpOutlined /> : <KeyboardArrowDownOutlined />}
       </Stack>
       {title !== "Сараар" ? (
-        <Stack display={isShown ? "flex" : "none"} position={"absolute"} top={48}>
+        <Stack display={isShown ? "flex" : "none"} position={"absolute"} top={48} zIndex={10} bgcolor={"white"} borderRadius={2} width={"100%"} border={"1px solid #ECEDF0"}>
           {mapArr?mapArr.map((item, index) => {
             return (
               <Stack
                 direction={"row"}
+               
                 p="8px 12px"
                 borderRadius={2}
                 key={index}
@@ -67,6 +69,7 @@ export const ProductFilterDropdownCard = (
           onChange={(event) => {
             [setState(event?.target.value)];
           }}
+          sx={{position:"absolute", top:"48px"}}
         />
       ) : null}
     </Stack>
