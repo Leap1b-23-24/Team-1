@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function Home() {
   return (
     <>
-      <Stack width={1440} padding={3} bgcolor={"#F7F7F8"}>
+      <Stack bgcolor={"#F7F7F8"}>
         <AddProduct />
       </Stack>
     </>
