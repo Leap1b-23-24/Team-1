@@ -2,6 +2,7 @@ import { SignUpType } from "@/components/SignUp/SignUp";
 import { ArrowBack, ArrowForward, Check } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
 import { StepSection } from "./StepSection";
+import { SignUpInput } from "./SignUpInput";
 
 export const MarketInfo = (props: SignUpType) => {
   const { order, setOrder } = props;
@@ -16,6 +17,10 @@ export const MarketInfo = (props: SignUpType) => {
         <Typography fontSize={32} fontWeight={700} color={"#121316"}>
           Дэлгүүрийн мэдээлэл
         </Typography>
+        <SignUpInput
+          label="Танай дэлгүүрийн нэр юу вэ?"
+          placeholder="Дэлгүүрийн нэр"
+        />
         <Stack
           width={"100%"}
           direction={"row"}

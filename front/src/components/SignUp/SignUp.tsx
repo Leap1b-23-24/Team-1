@@ -4,18 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { SignUpInput } from "./SignUpInput";
+import { useAuth } from "@/providers/AuthProvider";
 
 export type SignUpType = {
   setOrder: Dispatch<SetStateAction<number>>;
   order: number;
-  email: string;
-  setEmail: Dispatch<SetStateAction<string>>;
-  userName: string;
-  setUserName: Dispatch<SetStateAction<string>>;
 };
 
 export const SignUp = (props: SignUpType) => {
-  const { order, setOrder, email, setEmail, userName, setUserName } = props;
+  const { order, setOrder } = props;
+  const { email, setEmail, userName, setUserName } = useAuth();
   return (
     <Stack
       display={order === 1 ? "flex" : "none"}
