@@ -7,3 +7,4 @@ export * from "./ProductHeader";
 export * from "./IncomeHeader";
 export * from "./IncomeFooter";
 export * from "./IncomeFooterTop";
+export * from "./ProductCard";
