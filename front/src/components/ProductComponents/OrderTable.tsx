@@ -39,30 +39,6 @@ const rows = [
     12000,
     "Хүргэгдсэн"
   ),
-  //   createData(
-  //     "312312312",
-  //     "Zoloo soko",
-  //     "2023-01-09",
-  //     "10:58",
-  //     12.0,
-  //     "Хүргэгдсэн"
-  //   ),
-  //   createData(
-  //     "312312312",
-  //     "Zoloo soko",
-  //     "2023-01-09",
-  //     "10:58",
-  //     12.0,
-  //     "Хүргэгдсэн"
-  //   ),
-  //   createData(
-  //     "312312312",
-  //     "Zoloo soko",
-  //     "2023-01-09",
-  //     "10:58",
-  //     12.0,
-  //     "Хүргэгдсэн"
-  //   ),
 ];
 
 export default function BasicTable() {
@@ -96,7 +72,6 @@ export default function BasicTable() {
               <TableCell component="th" scope="row">
                 <Typography fontWeight={600}>#{row.OrderId}</Typography>
               </TableCell>
-              {/* <TableCell align="right">{row.OrderId}</TableCell> */}
               <TableCell>
                 <Typography fontWeight={600}>{row.customer}</Typography>
               </TableCell>
