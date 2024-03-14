@@ -1,5 +1,6 @@
 "use client";
 
+
 import { IncomeFooter } from "@/components/ProductComponents/IncomeFooter";
 
 import {
@@ -8,6 +9,7 @@ import {
   ProductCard,
   ProductHeader,
 } from "@/components/ProductComponents";
+
 
 import { ProductFilter } from "@/components/ProductComponents/ProductFilter";
 import { Stack } from "@mui/material";
@@ -18,6 +20,7 @@ import DeliveryInformation from "@/components/ProductComponents/DeliveryInformat
 export default function Home() {
   return (
     <>
+
       <ProductHeader />
 
       <IncomeHeader />
@@ -33,6 +36,7 @@ export default function Home() {
         totalPrice={580000}
       />
       <PaymentInformation />
+
     </>
   );
 }
