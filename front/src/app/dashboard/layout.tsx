@@ -28,6 +28,7 @@ export default function RootLayout({
         <ThemeProvider theme={theme}>
           <CssBaseline>
             <AuthProvider>
+              <ProductHeader />
               <Stack direction="row">
                 <ProductSideBar />
                 {children}
@@ -35,7 +36,6 @@ export default function RootLayout({
             </AuthProvider>
           </CssBaseline>
         </ThemeProvider>
-        <ProductHeader />
       </body>
     </html>
   );
