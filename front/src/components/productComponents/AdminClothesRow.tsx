@@ -58,7 +58,7 @@ export const AdminClothesRow = (props: AdminClothesRowType) => {
       <Typography fontSize="14px" fontWeight={400} color="#3F4145">
         {addedDate}
       </Typography>
-      <Stack direction="row" gap={2}>
+      <Stack direction="row" gap={2} marginRight={2}>
         <DeleteOutline style={{ color: "#b4b4b4" }} />
         <CreateOutlined style={{ color: "#b4b4b4" }} />
       </Stack>
