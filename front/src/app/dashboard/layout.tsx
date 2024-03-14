@@ -27,14 +27,15 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider theme={theme}>
           <CssBaseline>
-            <AuthProvider>{children}</AuthProvider>
+            <AuthProvider>
+              <Stack direction="row">
+                <ProductSideBar />
+                {children}
+              </Stack>
+            </AuthProvider>
           </CssBaseline>
         </ThemeProvider>
         <ProductHeader />
-        <Stack direction="row">
-          <ProductSideBar />
-          {children}
-        </Stack>
       </body>
     </html>
   );
