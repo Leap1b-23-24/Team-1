@@ -7,7 +7,7 @@ export const IncomeFooterTop = () => {
   return (
     <Stack
       direction="row"
-      width="50%"
+      width="100%"
       justifyContent="center"
       alignItems="center"
       borderBottom="solid 1px #b4b4b4"

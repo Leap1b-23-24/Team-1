@@ -1,3 +1,4 @@
+"use client";
 import {
   CalendarTodayOutlined,
   ExpandMoreOutlined,
@@ -29,7 +30,13 @@ export const IncomeHeader = () => {
   const [getColor, setGetColor] = useState(buttonNames[0].label);
 
   return (
-    <Stack width="50%" borderRadius="12px" border="solid 1px #ECEDF0">
+    <Stack
+      width="50%"
+      borderRadius="12px"
+      border="solid 1px #ECEDF0"
+      height="fit-content"
+      bgcolor="white"
+    >
       <Stack
         borderBottom="1px solid #ECEDF0"
         px={3}

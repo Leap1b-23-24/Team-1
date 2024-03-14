@@ -1,12 +1,12 @@
 import { Stack, Typography } from "@mui/material";
 
-type ProductCardType = {
+export type ProductCardType = {
   productName: string;
-  date: string;
-  productId: number;
+  date?: string;
+  productId?: number;
   productQuantity: number;
   productPrice: number;
-  totalPrice: number;
+  totalPrice?: number;
 };
 
 export const ProductCard = (props: ProductCardType) => {

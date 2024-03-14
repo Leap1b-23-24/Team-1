@@ -5,7 +5,13 @@ import { IncomeFooterTop } from "./IncomeFooterTop";
 
 export const IncomeFooterTopCom = () => {
   return (
-    <Stack borderRadius="12px" bgcolor="white" direction={"column"}>
+    <Stack
+      borderRadius="12px"
+      bgcolor="white"
+      direction={"column"}
+      border="solid 1px #ECEDF0"
+      width="50%"
+    >
       <IncomeFooterTop />
       <IncomeFooter
         OrderId="1203213"

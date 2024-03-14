@@ -1,9 +1,14 @@
 "use client";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import type { Metadata } from "next";
+// import { Inter } from "next/font/google";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { ProductHeader, ProductSideBar } from "@/components/ProductComponents";
+import { Stack } from "@mui/material";
+// import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+// import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +30,11 @@ export default function RootLayout({
             <AuthProvider>{children}</AuthProvider>
           </CssBaseline>
         </ThemeProvider>
+        <ProductHeader />
+        <Stack direction="row">
+          <ProductSideBar />
+          {children}
+        </Stack>
       </body>
     </html>
   );

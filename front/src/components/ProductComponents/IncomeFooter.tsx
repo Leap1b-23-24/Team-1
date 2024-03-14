@@ -10,7 +10,7 @@ type OrdersRowType = {
 export const IncomeFooter = (props: OrdersRowType) => {
   const { OrderId, Order, payee, addedDate } = props;
   return (
-    <Stack width="50%" borderBottom="solid 1px #f0f0f0">
+    <Stack width="100%" borderBottom="solid 1px #f0f0f0">
       <Stack
         direction="row"
         justifyContent="space-between"
