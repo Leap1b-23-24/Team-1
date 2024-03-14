@@ -50,6 +50,7 @@ export const ProductFilterDropdownCard = (
           borderRadius={2}
           width={"100%"}
           border={"1px solid #ECEDF0"}
+          sx={{ boxShadow: " rgba(149, 157, 165, 0.2) 0px 8px 24px;" }}
         >
           {mapArr
             ? mapArr.map((item, index) => {
