@@ -1,16 +1,12 @@
+import FooterPart from "@/components/userComponents/Footer";
+import { Header } from "@/components/userComponents/Header";
 import { ShoppingCard } from "@/components/userComponents/ShoppingCard";
 import { Stack, Typography } from "@mui/material";
 
 export default function Home() {
   return (
     <Stack width={"100%"} gap={4} alignItems={"center"} bgcolor={"#F7F7F8"}>
-      {/* Header container */}
-      <Stack width={"100%"} border={"1px solid green"} height={"100px"}>
-        <Typography fontSize={20} color={"green"}>
-          Headeree end hiigerei
-        </Typography>
-        {/* Text iig arilgaad hatuu unduriig ni bas arilgaad */}
-      </Stack>
+      <Header />
       {/* Main Container */}
       <Stack
         width={"70%"}
@@ -66,6 +62,7 @@ export default function Home() {
           </Stack>
         </Stack>
       </Stack>
+      <FooterPart />
     </Stack>
   );
 }
