@@ -4,6 +4,7 @@ import { IncomeFooter } from "@/components/ProductComponents/IncomeFooter";
 
 import {
   IncomeHeader,
+  PaymentInformation,
   ProductCard,
   ProductHeader,
 } from "@/components/ProductComponents";
@@ -31,6 +32,7 @@ export default function Home() {
         date="2024-03-02"
         totalPrice={580000}
       />
+      <PaymentInformation />
     </>
   );
 }

@@ -17,7 +17,6 @@ export default function productPage() {
 
   return (
     <Stack direction="row" width="100%">
-      <ProductSideBar />
       <Stack width="100%" bgcolor="#ECEDF0">
         <Stack
           direction="row"

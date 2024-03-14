@@ -9,3 +9,5 @@ export * from "./IncomeFooter";
 export * from "./IncomeFooterTop";
 export * from "./ProductCard";
 export * from "./DeliveryInformation";
+export * from "./PaymentInformation";
+export * from "./income";
