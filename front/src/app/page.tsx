@@ -1,6 +1,5 @@
 "use client";
 
-
 import { IncomeFooter } from "@/components/ProductComponents/IncomeFooter";
 
 import {
@@ -10,17 +9,16 @@ import {
   ProductHeader,
 } from "@/components/ProductComponents";
 
-
 import { ProductFilter } from "@/components/ProductComponents/ProductFilter";
 import { Stack } from "@mui/material";
 import { useState } from "react";
 import { IncomeFooterTopCom } from "@/components/ProductComponents/income";
 import DeliveryInformation from "@/components/ProductComponents/DeliveryInformation";
+import DashboardInformation from "@/components/ProductComponents/DashboardInfo";
 
 export default function Home() {
   return (
     <>
-
       <ProductHeader />
 
       <IncomeHeader />
@@ -36,7 +34,7 @@ export default function Home() {
         totalPrice={580000}
       />
       <PaymentInformation />
-
+      <DashboardInformation name="Орлого" number={235000} />
     </>
   );
 }

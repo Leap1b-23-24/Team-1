@@ -40,7 +40,12 @@ export const ProductFilter = (props: ProductFilterProps) => {
           setState={setDate}
         />
       </Stack>
-      <Stack direction={"row"} position={"relative"} bgcolor="white" borderRadius={2} >
+      <Stack
+        direction={"row"}
+        position={"relative"}
+        bgcolor="white"
+        borderRadius={2}
+      >
         <Stack position={"absolute"} left={8} top={8}>
           <Search />
         </Stack>
