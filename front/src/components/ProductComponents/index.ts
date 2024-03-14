@@ -11,4 +11,4 @@ export * from "./ProductCard";
 export * from "./DeliveryInformation";
 export * from "./PaymentInformation";
 export * from "./income";
-export * from "./DashboardInfo";
+export * from "./OrderTable";

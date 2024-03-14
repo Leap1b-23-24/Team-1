@@ -7,7 +7,7 @@ export default function DeliveryInformation() {
       width={"100%"}
       borderRadius={"12px"}
       border="solid, 1px, #ECEDF0"
-      bgcolor={"fffff"}
+      bgcolor={"white"}
     >
       <Stack height={"64px"} justifyContent={"center"} px={2}>
         <Typography fontWeight={400} fontSize={"16px"}>
