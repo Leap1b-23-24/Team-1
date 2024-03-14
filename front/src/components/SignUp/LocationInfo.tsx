@@ -4,6 +4,7 @@ import { Button, MenuItem, Select, Stack, Typography } from "@mui/material";
 import { StepSection } from "./StepSection";
 import { useAuth } from "@/providers/AuthProvider";
 import { SignUpInput } from "./SignUpInput";
+import { Selection } from "./Selection";
 
 const districts = [
   "Баянзүрх дүүрэг",
@@ -27,9 +28,8 @@ export const LocationInfo = (props: SignUpType) => {
         <Typography fontSize={32} fontWeight={700} color={"#121316"}>
           Бүс нутгийн мэдээлэл
         </Typography>
-        <Select
+        {/* <Select
           value={city}
-          label="Хот/Аймаг"
           placeholder="Сонгох"
           sx={{ color: "#000" }}
           onChange={(event) => {
@@ -46,7 +46,14 @@ export const LocationInfo = (props: SignUpType) => {
               </MenuItem>
             );
           })}
-        </Select>
+        </Select> */}
+        <Selection
+          label="Хот/Аймаг"
+          placeHolder="Сонгох"
+          selections={districts}
+          setState={setCity}
+          state={city}
+        />
         <SignUpInput
           value={district}
           label="Сум/Дүүрэг"

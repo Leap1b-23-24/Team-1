@@ -22,7 +22,7 @@ export const SignUp = (props: SignUpType) => {
       gap={3}
       borderRadius={2.5}
       border={"1px solid #ECEDF0"}
-      alignItems={"center"}
+      // alignItems={"center"}
     >
       <Typography fontSize={32} fontWeight={700}>
         Бүртгүүлэх

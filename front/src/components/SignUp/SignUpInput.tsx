@@ -19,7 +19,11 @@ export const SignUpInput = (props: TextFieldProps) => {
 
   return (
     <Stack justifyContent="center" gap={1} width={"100%"}>
-      {label && <Typography fontSize={14}>{label}</Typography>}
+      {label && (
+        <Typography fontSize={16} fontWeight={600}>
+          {label}
+        </Typography>
+      )}
       <TextField
         {...rest}
         type={type === "password" && showPassword ? "text" : type}

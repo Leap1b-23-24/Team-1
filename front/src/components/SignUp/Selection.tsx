@@ -1,5 +1,6 @@
-import { Stack, Typography } from "@mui/material";
+import { MenuItem, Select, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import { Dispatch, SetStateAction } from "react";
 
 type array = {
   name: String;
@@ -7,45 +8,38 @@ type array = {
 
 type CustomSelectType = {
   placeHolder: string;
-  selections: array[];
+  selections: string[];
+  setState: Dispatch<SetStateAction<string>>;
+  state: string;
+  label: string;
 };
 
 export const Selection = (props: CustomSelectType) => {
-  const { placeHolder, selections } = props;
+  const { placeHolder, selections, setState, state, label } = props;
   return (
-    <Stack width={384} height={48} p={"8px 16px"} bgcolor={"#ECEDF0"}>
-      <Stack direction={"row"} justifyContent={"space-between"}>
-        <Stack direction={"row"}>
-          <Image
-            src={"/svg/location.svg"}
-            width={24}
-            height={24}
-            alt="location icon"
-          />
-          <Typography color={"#8B8E95"}>{placeHolder}</Typography>
-        </Stack>
-        <Image
-          src={"/svg/arrow_forward_ios.svg"}
-          width={24}
-          height={24}
-          alt="see selection icon"
-        />
-      </Stack>
-      <Stack>
-        {selections.map((item) => {
+    <Stack gap={1}>
+      <Typography fontSize={16} fontWeight={600}>
+        {label}
+      </Typography>
+      <Select
+        value={state}
+        placeholder={placeHolder}
+        sx={{ color: "#000" }}
+        onChange={(event) => {
+          setState(event.target.value);
+        }}
+      >
+        {selections.map((item: any) => {
           return (
-            <Stack direction={"row"}>
-              <Image
-                src={"/svg/location.svg"}
-                width={24}
-                height={24}
-                alt="location icon"
-              />
-              <Typography color={"#8B8E95"}>{item.name}</Typography>
-            </Stack>
+            <MenuItem value={item}>
+              <Stack direction={"row"} gap={1}>
+                {" "}
+                {item}
+              </Stack>
+            </MenuItem>
           );
         })}
-      </Stack>
+      </Select>
     </Stack>
   );
 };

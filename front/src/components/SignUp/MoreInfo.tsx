@@ -2,9 +2,15 @@ import { SignUpType } from "@/components/SignUp/SignUp";
 import { ArrowBack, ArrowForward, Check } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
 import { StepSection } from "./StepSection";
+import { Selection } from "./Selection";
+import { useAuth } from "@/providers/AuthProvider";
+
+const answers = ["yes", "no"];
 
 export const MoreInfo = (props: SignUpType) => {
   const { order, setOrder } = props;
+  const { experience, setExperience, productType, setProductType } = useAuth();
+
   return (
     <Stack
       display={order === 4 ? "flex" : "none"}
@@ -19,6 +25,20 @@ export const MoreInfo = (props: SignUpType) => {
         <Typography color={"#121316"}>
           Энэ мэдээллийг дэлгүүрийн тохиргоонд туслах зорилгоор ашиглана.
         </Typography>
+        <Selection
+          label="Та борлуулалт хийж байсан туршлагатай юу?"
+          placeHolder="Сонгох"
+          selections={answers}
+          setState={setExperience}
+          state={experience}
+        />
+        <Selection
+          label="Та ямар төрлийн бүтээгдэхүүн борлуулах вэ?"
+          placeHolder="Сонгох"
+          selections={answers}
+          setState={setProductType}
+          state={productType}
+        />
         <Stack
           width={"100%"}
           direction={"row"}
