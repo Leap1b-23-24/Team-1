@@ -11,12 +11,7 @@ export default function Page() {
   const [order, setOrder] = useState(1);
 
   return (
-    <Stack
-      width={"100vw"}
-      height={"100vh"}
-      alignItems={"center"}
-      justifyContent={"center"}
-    >
+    <Stack width={"100vw"} height={"100vh"} alignItems={"center"} pt={15}>
       <SignUp setOrder={setOrder} order={order} />
       <MarketInfo order={order} setOrder={setOrder} />
       <LocationInfo order={order} setOrder={setOrder} />

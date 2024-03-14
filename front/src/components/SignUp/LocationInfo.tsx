@@ -6,12 +6,29 @@ import { useAuth } from "@/providers/AuthProvider";
 import { SignUpInput } from "./SignUpInput";
 import { Selection } from "./Selection";
 
-const districts = [
-  "Баянзүрх дүүрэг",
-  "Хан-Уул дүүрэг",
-  "Баянгол дүүрэг",
-  "Сонгинохайрхан дүүрэг",
-  "Чингэлтэй дүүрэг",
+const cities = [
+  "Архангай аймаг",
+  "Баян-Өлгий аймаг",
+  "Баянхонгор аймаг",
+  "Булган аймаг",
+  "Говь-Алтай аймаг",
+  "Говьсүмбэр аймаг",
+  "Дархан-Уул аймаг",
+  "Дорноговь аймаг",
+  "Дорнод аймаг",
+  "Дундговь аймаг",
+  "Завхан аймаг",
+  "Орхон аймаг",
+  "Өвөрхангай аймаг",
+  "Өмнөговь аймаг",
+  "Сүхбаатар аймаг",
+  "Сэлэнгэ аймаг",
+  "Төв аймаг",
+  "Увс аймаг",
+  "Ховд аймаг",
+  "Хөвсгөл аймаг",
+  "Хэнтий аймаг",
+  "Улаанбаатар",
 ];
 
 export const LocationInfo = (props: SignUpType) => {
@@ -28,29 +45,10 @@ export const LocationInfo = (props: SignUpType) => {
         <Typography fontSize={32} fontWeight={700} color={"#121316"}>
           Бүс нутгийн мэдээлэл
         </Typography>
-        {/* <Select
-          value={city}
-          placeholder="Сонгох"
-          sx={{ color: "#000" }}
-          onChange={(event) => {
-            setCity(event.target.value);
-          }}
-        >
-          {districts.map((item) => {
-            return (
-              <MenuItem value={item}>
-                <Stack direction={"row"} gap={1}>
-                  {" "}
-                  {item}
-                </Stack>
-              </MenuItem>
-            );
-          })}
-        </Select> */}
         <Selection
           label="Хот/Аймаг"
           placeHolder="Сонгох"
-          selections={districts}
+          selections={cities}
           setState={setCity}
           state={city}
         />

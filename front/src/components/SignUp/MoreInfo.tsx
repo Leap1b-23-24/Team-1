@@ -59,6 +59,7 @@ export const MoreInfo = (props: SignUpType) => {
           </Stack>
           <Button
             variant="contained"
+            disabled={!productType || !experience}
             sx={{
               position: "relative",
               p: "16px 20px",
