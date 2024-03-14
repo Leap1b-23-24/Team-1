@@ -8,7 +8,12 @@ export const PaymentInformation = () => {
   const [totalPrice, setTotalPrice] = useState(807800);
   const [chosenClothes, setChosenClothes] = useState<[]>([]);
   return (
-    <Stack borderRadius="12px" border="solid 1px #ECEDF0" width="100%">
+    <Stack
+      borderRadius="12px"
+      border="solid 1px #ECEDF0"
+      width="100%"
+      bgcolor="white"
+    >
       <Stack
         borderBottom="1px solid #ECEDF0"
         px={3}

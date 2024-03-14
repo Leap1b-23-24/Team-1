@@ -9,9 +9,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Stack, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 function createData(
-  //   name: string,
   OrderId: string,
   customer: string,
   addedDate: string,
@@ -42,8 +42,9 @@ const rows = [
 ];
 
 export default function BasicTable() {
+  const router = useRouter();
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ borderRadius: "12px" }}>
       <Table sx={{ width: "100%" }} aria-label="simple table">
         <TableHead>
           <Stack p={2}>
@@ -88,12 +89,18 @@ export default function BasicTable() {
                   {row.status}
                 </Stack>
               </TableCell>
-              <TableCell>&#62;</TableCell>
+              <TableCell
+                onClick={() =>
+                  router.push("/dashboard/orderPage/orderDetailPage")
+                }
+                sx={{ cursor: "pointer" }}
+              >
+                &#62;
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      //fjdshjfhdsj
     </TableContainer>
   );
 }

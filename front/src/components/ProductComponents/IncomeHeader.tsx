@@ -15,7 +15,7 @@ type IncomeHeaderButtonType = {
   getColor?: string;
 };
 
-const buttonNames = [
+export const buttonNames = [
   { label: "Өнөөдөр" },
   { label: "7 хоног" },
   {
