@@ -11,6 +11,7 @@ import { Inter } from "next/font/google";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PropsWithChildren } from "react";
+import { usePathname } from "next/navigation";
 // import "./globals.css";
 
 // export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const [isShown, setIsShown] = useState(fasle);
+  const pathName = usePathname();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline>

@@ -15,7 +15,12 @@ export const ProductSideBar = () => {
   const pathName = usePathname();
 
   return (
-    <Stack width={"fit-content"} height="100%" gap={2}>
+    <Stack
+      padding={"24px 20px"}
+      height="100%"
+      gap={2}
+      display={pathName.includes("signUp") ? "none" : "flex"}
+    >
       {menu.map((item, index) => {
         return (
           <Link href={item.link} key={index} style={{ textDecoration: "none" }}>
