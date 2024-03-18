@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
   const [khoroo, setKhoroo] = useState("");
   const [experience, setExperience] = useState("");
   const [productType, setProductType] = useState("");
+
   return (
     <AuthContext.Provider
       value={{
