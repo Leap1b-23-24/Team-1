@@ -15,12 +15,11 @@ export const ProductSideBar = () => {
   const pathName = usePathname();
 
   return (
-    <Stack width="12%" py={3} height="100vh" gap={2}>
+    <Stack padding={"24px 20px"} height="100%" gap={2}>
       {menu.map((item, index) => {
         return (
-          <Link href={item.link} style={{ textDecoration: "none" }}>
+          <Link href={item.link} key={index} style={{ textDecoration: "none" }}>
             <Stack
-              key={index}
               direction="row"
               gap={1}
               py={1}

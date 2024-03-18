@@ -1,10 +1,17 @@
+"use client";
 import { Button, Stack } from "@mui/material";
 import { AddProductContainer } from "./AddProductContainer";
 import { CustomInput } from "./CustomInput";
 import { AddPicture } from "./AddPicture";
 import { AddCategory } from "./AddCategory";
+import { useState } from "react";
 
-export const AddProduct = () => {
+export const AddProductComp = () => {
+  const [imageLinks, setImageLink] = useState<{ link: string }[]>([
+    { link: "" },
+    { link: "" },
+    { link: "" },
+  ]);
   return (
     <Stack
       width={"100%"}
@@ -12,6 +19,7 @@ export const AddProduct = () => {
       gap={2}
       padding={3}
       alignItems={"flex-end"}
+      bgcolor={"#F7F7F8"}
     >
       <Stack
         width={"100%"}
@@ -30,16 +38,36 @@ export const AddProduct = () => {
           justifyContent={"space-between"}
         >
           <AddProductContainer flexDirection="column">
-            <CustomInput placeholder="Нэр" label="Бүтээгдэхүүний нэр" />
-            <CustomInput placeholder="Нэр" label="Бүтээгдэхүүний нэр" />
-            <CustomInput placeholder="Нэр" label="Бүтээгдэхүүний нэр" />
+            <CustomInput
+              placeholder="Нэр"
+              type="text"
+              label="Бүтээгдэхүүний нэр"
+            />
+            <CustomInput
+              placeholder="Гол онцлог, давуу тал, техникийн үзүүлэлтүүдийг онцолсон дэлгэрэнгүй, сонирхолтой тайлбар."
+              type="text"
+              label="Нэмэлт мэдээлэл"
+            />
+            <CustomInput
+              placeholder="#12345678"
+              type="text"
+              label="Барааны код"
+            />
           </AddProductContainer>
           <AddProductContainer flexDirection="row">
-            <AddPicture />
+            <AddPicture setLink={setImageLink} links={imageLinks} />
           </AddProductContainer>
           <AddProductContainer flexDirection="row">
-            <CustomInput placeholder="Нэр" label="Бүтээгдэхүүний нэр" />
-            <CustomInput placeholder="Нэр" label="Бүтээгдэхүүний нэр" />
+            <CustomInput
+              placeholder="Үндсэн үнэ"
+              type="number"
+              label="Үндсэн үнэ"
+            />
+            <CustomInput
+              placeholder="Үлдэгдэл тоо ширхэг"
+              type="number"
+              label="Үлдэгдэл тоо ширхэг"
+            />
           </AddProductContainer>
         </Stack>
         {/* Right Side */}
@@ -50,27 +78,39 @@ export const AddProduct = () => {
           justifyContent={"space-between"}
         >
           <AddProductContainer flexDirection="column">
-            <CustomInput placeholder="Нэр" label="Бүтээгдэхүүний нэр" />
-            <CustomInput placeholder="Нэр" label="Бүтээгдэхүүний нэр" />
+            <CustomInput
+              placeholder="Ерөнхий ангилал"
+              type="select"
+              label="Сонгох"
+            />
+            <CustomInput
+              placeholder="Дэд ангилал"
+              type="select"
+              label="Сонгох"
+            />
           </AddProductContainer>
           <AddProductContainer flexDirection="row">
             <AddCategory />
           </AddProductContainer>
           <AddProductContainer flexDirection="column">
-            <CustomInput placeholder="Нэр" label="Бүтээгдэхүүний нэр" />
+            <CustomInput
+              placeholder="Таг нэмэх..."
+              type="text"
+              label="Таг"
+              helperText="Санал болгох: Гутал , Цүнх , Эмэгтэй "
+            />
           </AddProductContainer>
         </Stack>
       </Stack>
       <Stack gap={3} flexDirection={"row"}>
         <Button
           variant="contained"
+          color="secondary"
           disableElevation
-          disableFocusRipple
-          disableRipple
-          disableTouchRipple
           sx={{
-            color: "black",
-            paddingX: "10px",
+            flexDirection: "row",
+            color: "primary",
+            paddingX: "13px",
             fontSize: "16px",
             fontWeight: "550",
             border: "1px solid #D6D8DB",
@@ -78,15 +118,15 @@ export const AddProduct = () => {
         >
           Ноорог
         </Button>
+
         <Button
           variant="contained"
+          color="primary"
           disableElevation
           sx={{
-            color: "white",
             paddingX: "10px",
             fontSize: "16px",
             fontWeight: "550",
-            border: "1px solid #D6D8DB",
           }}
         >
           Нийтлэх
