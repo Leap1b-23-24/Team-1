@@ -12,23 +12,28 @@ import {
   Menu,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 
 const type = ["Хямдралтай", "Эрэгтэй", "Эмэгтэй", "Хүүхдийн"];
 
 export const Header = () => {
   return (
-    <Stack>
+    <Stack width="100%">
       <Stack width="100%" height="fit-content" bgcolor="#12A795">
         <Container
-          maxWidth="lg"
+          maxWidth="xl"
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
           }}
         >
-          <img src="logo.png" alt=""></img>
+          <img
+            src="svgCompanyLogo.svg"
+            alt=""
+            style={{ padding: "16px" }}
+          ></img>
 
           <TextField
             type="search"
@@ -74,12 +79,9 @@ export const Header = () => {
           <Stack direction="row" gap={2}>
             {type.map((name, index) => {
               return (
-                <Stack
-                  key={index}
-                  style={{ fontSize: "14px", fontWeight: "600" }}
-                >
+                <Typography key={index} color={"#121316"}>
                   {name}
-                </Stack>
+                </Typography>
               );
             })}
           </Stack>

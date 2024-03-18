@@ -5,7 +5,7 @@ import { Stack, Typography } from "@mui/material";
 
 export default function Home() {
   return (
-    <Stack width={"100%"} gap={4} alignItems={"center"} bgcolor={"#F7F7F8"}>
+    <Stack width={"100vw"} gap={4} alignItems={"center"} bgcolor={"#F7F7F8"}>
       <Header />
       {/* Main Container */}
       <Stack
