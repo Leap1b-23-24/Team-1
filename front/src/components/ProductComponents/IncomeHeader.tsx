@@ -31,7 +31,7 @@ export const IncomeHeader = () => {
 
   return (
     <Stack
-      width="50%"
+      width="100%"
       borderRadius="12px"
       border="solid 1px #ECEDF0"
       height="fit-content"
