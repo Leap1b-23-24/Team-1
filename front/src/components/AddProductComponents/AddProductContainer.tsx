@@ -12,7 +12,6 @@ export const AddProductContainer = (props: AddProductContainerProps) => {
       flexDirection={flexDirection}
       padding={3}
       gap={2}
-      border={"1px solid grey"}
       borderRadius={"12px"}
       bgcolor={"white"}
     >
