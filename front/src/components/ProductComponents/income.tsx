@@ -10,7 +10,7 @@ export const IncomeFooterTopCom = () => {
       bgcolor="white"
       direction={"column"}
       border="solid 1px #ECEDF0"
-      width="50%"
+      width="100%"
     >
       <IncomeFooterTop />
       <IncomeFooter

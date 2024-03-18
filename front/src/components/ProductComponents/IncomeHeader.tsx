@@ -31,7 +31,7 @@ export const IncomeHeader = () => {
 
   return (
     <Stack
-      width="50%"
+      width="100%"
       borderRadius="12px"
       border="solid 1px #ECEDF0"
       height="fit-content"
@@ -54,6 +54,7 @@ export const IncomeHeader = () => {
           gap={1}
           py={1}
           px="12px"
+          sx={{ cursor: "pointer" }}
           borderRadius="8px"
           alignItems="center"
           onClick={() => {}}
