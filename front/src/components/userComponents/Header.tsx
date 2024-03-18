@@ -22,7 +22,7 @@ export const Header = () => {
     <Stack width="100%">
       <Stack width="100%" height="fit-content" bgcolor="#12A795">
         <Container
-          maxWidth="xl"
+          maxWidth="lg"
           sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -32,8 +32,8 @@ export const Header = () => {
           <img
             src="svgCompanyLogo.svg"
             alt=""
-            style={{ padding: "16px" }}
-          ></img>
+            style={{ paddingTop: "16px", paddingBottom: "16px" }}
+          />
 
           <TextField
             type="search"
@@ -66,7 +66,13 @@ export const Header = () => {
           </Stack>
         </Container>
       </Stack>
-      <Stack width="100%" height="30px" bgcolor="white" py="8px">
+      <Stack
+        width="100%"
+        height="30px"
+        bgcolor="white"
+        py="8px"
+        justifyContent="center"
+      >
         <Container
           maxWidth="lg"
           sx={{
