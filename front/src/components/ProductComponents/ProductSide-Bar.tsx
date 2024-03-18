@@ -15,7 +15,7 @@ export const ProductSideBar = () => {
   const pathName = usePathname();
 
   return (
-    <Stack padding={"24px 20px"} height="100%" gap={2}>
+    <Stack width={"fit-content"} height="100%" gap={2}>
       {menu.map((item, index) => {
         return (
           <Link href={item.link} key={index} style={{ textDecoration: "none" }}>
@@ -24,11 +24,12 @@ export const ProductSideBar = () => {
               gap={1}
               py={1}
               paddingLeft={2}
+              paddingRight={3}
               bgcolor={pathName == item.link ? "#ECEDF0" : ""}
               color="#121316"
             >
               {item.icon}
-              <Typography fontSize="16px" fontWeight={600}>
+              <Typography whiteSpace="nowrap" fontSize="16px" fontWeight={600}>
                 {item.name}
               </Typography>
             </Stack>

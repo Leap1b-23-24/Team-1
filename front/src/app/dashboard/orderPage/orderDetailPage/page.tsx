@@ -5,7 +5,7 @@ import { Stack } from "@mui/material";
 
 export default function OrderDetailPage() {
   return (
-    <Stack width="100%" bgcolor="#ECEDF0">
+    <Stack width="100%" bgcolor="#F7F7F8" height="95vh">
       <Stack
         width="100%"
         padding={2}

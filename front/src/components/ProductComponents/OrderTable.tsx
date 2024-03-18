@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Stack, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { ArrowForwardIosOutlined } from "@mui/icons-material";
 
 function createData(
   OrderId: string,
@@ -95,7 +96,7 @@ export default function BasicTable() {
                 }
                 sx={{ cursor: "pointer" }}
               >
-                &#62;
+                <ArrowForwardIosOutlined />
               </TableCell>
             </TableRow>
           ))}

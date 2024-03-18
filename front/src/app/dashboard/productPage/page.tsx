@@ -16,8 +16,8 @@ export default function productPage() {
   const [search, setSearch] = useState("");
 
   return (
-    <Stack direction="row" width="100%">
-      <Stack width="100%" bgcolor="#ECEDF0">
+    <Stack direction="row" width="100%" height={"95vh"} bgcolor={"#F7F7F8"}>
+      <Stack width="100%">
         <Stack
           direction="row"
           padding={3}

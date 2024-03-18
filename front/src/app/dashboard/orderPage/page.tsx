@@ -23,7 +23,7 @@ const mapBarMenu = [
 export default function OrderPage() {
   const pathName = usePathname();
   return (
-    <Stack width="100%" bgcolor="#ECEDF0">
+    <Stack width="100%" bgcolor="#F7F7F8" height={"95vh"}>
       <Stack width="100%" direction="row" borderBottom={"1px solid #D6D8DB"}>
         {mapBarMenu.map((word, index) => {
           return (
