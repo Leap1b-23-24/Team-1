@@ -5,6 +5,10 @@ import "./globals.css";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
+<<<<<<< HEAD
+=======
+import { ToastContainer } from "react-toastify";
+>>>>>>> 668ed2c (done)
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,9 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline>{children}</CssBaseline>
-        </ThemeProvider>
+        {/* <ThemeProvider theme={theme}>
+          <CssBaseline> */}
+        {children}
+        <ToastContainer />
+        {/* </CssBaseline>
+          </ThemeProvider> */}
       </body>
     </html>
   );

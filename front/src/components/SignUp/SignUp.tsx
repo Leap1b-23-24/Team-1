@@ -1,10 +1,12 @@
+"use client";
 import { ArrowForward } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { SignUpInput } from "./SignUpInput";
 import { useAuth } from "@/providers/AuthProvider";
+import { toast } from "react-toastify";
 
 export type SignUpType = {
   setOrder: Dispatch<SetStateAction<number>>;
@@ -13,7 +15,22 @@ export type SignUpType = {
 
 export const SignUp = (props: SignUpType) => {
   const { order, setOrder } = props;
-  const { email, setEmail, userName, setUserName } = useAuth();
+  const { email, setEmail, userName, setUserName, password, setPassword } =
+    useAuth();
+  const [rePass, setRePass] = useState("");
+
+  const checker = (email: string, password: string, rePass: string) => {
+    if (!email.includes("@" || ".com")) {
+      toast.warning("Та имэйл хаягаа зөв оруулна уу");
+    } else if (password.length <= 8) {
+      toast.warning("Нууц үг дор хаяж 8 тэмдэгт агуулна");
+    } else if (password !== rePass) {
+      toast.warning("Ижил нууц үг оруулна уу");
+    } else {
+      setOrder(2);
+    }
+  };
+
   return (
     <Stack
       display={order === 1 ? "flex" : "none"}
@@ -22,7 +39,6 @@ export const SignUp = (props: SignUpType) => {
       gap={3}
       borderRadius={2.5}
       border={"1px solid #ECEDF0"}
-      // alignItems={"center"}
     >
       <Typography fontSize={32} fontWeight={700}>
         Бүртгүүлэх
@@ -43,14 +59,32 @@ export const SignUp = (props: SignUpType) => {
           setUserName(event.target.value);
         }}
       />
+      <SignUpInput
+        type="password"
+        value={password}
+        label="Нууц үг"
+        placeholder="********"
+        onChange={(event) => {
+          setPassword(event.target.value);
+        }}
+      />
+      <SignUpInput
+        type="password"
+        value={rePass}
+        label="Нууц үг давтах"
+        placeholder="********"
+        onChange={(event) => {
+          setRePass(event.target.value);
+        }}
+      />
 
       <Button
         variant="contained"
         fullWidth
         sx={{ position: "relative", p: "16px 20px" }}
-        disabled={!email || !userName}
+        disabled={!email || !userName || !password || !rePass}
         onClick={() => {
-          setOrder(2);
+          checker(email, password, rePass);
         }}
       >
         <Typography fontSize={18}>Дараах</Typography>

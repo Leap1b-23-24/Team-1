@@ -9,7 +9,17 @@ const answers = ["yes", "no"];
 
 export const MoreInfo = (props: SignUpType) => {
   const { order, setOrder } = props;
-  const { experience, setExperience, productType, setProductType } = useAuth();
+  const {
+    experience,
+    setExperience,
+    productType,
+    setProductType,
+    signUp,
+    userName,
+    email,
+    password,
+    marketName,
+  } = useAuth();
 
   return (
     <Stack
@@ -65,6 +75,9 @@ export const MoreInfo = (props: SignUpType) => {
               p: "16px 20px",
               gap: "8px",
               borderRadius: "8px",
+            }}
+            onClick={() => {
+              signUp({ email, userName, password, marketName });
             }}
           >
             <Typography fontSize={18}>Дараах</Typography>
