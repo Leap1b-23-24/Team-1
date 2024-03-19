@@ -4,6 +4,8 @@ const orderSchema = new Schema({
   orderNumber: String,
   status: String,
   phoneNumber: String,
+  email: String,
+  orderer: String,
   deliveryDate: Date,
   amountPaid: Number,
   amoutToBePaid: Number,
