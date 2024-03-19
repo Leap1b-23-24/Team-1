@@ -8,11 +8,7 @@ export const addProduct: RequestHandler = async (req, res) => {
     productPrice,
     categoryId,
     quantity,
-    thumbNails,
-    link1,
-    link2,
-    link3,
-    salePercent,
+    images,
     description,
   } = req.body;
   try {
@@ -22,9 +18,7 @@ export const addProduct: RequestHandler = async (req, res) => {
       productPrice,
       categoryId,
       quantity,
-      thumbNails,
-      images: [{ link1 }, { link2 }, { link3 }],
-      salePercent,
+      images,
       description,
     });
 

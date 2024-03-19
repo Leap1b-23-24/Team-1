@@ -8,7 +8,7 @@ const productSchema = new Schema(
     categoryId: String,
     quantity: Number,
     thumbNails: String,
-    images: [{ link1: String }, { link2: String }, { link3: String }],
+    images: Object,
     salePercent: Number,
     description: String,
     viewsCount: String,
