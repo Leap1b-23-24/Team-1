@@ -24,7 +24,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathName = usePathname();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline>
