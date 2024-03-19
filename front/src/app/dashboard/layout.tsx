@@ -7,6 +7,7 @@ import { ProductHeader, ProductSideBar } from "@/components/ProductComponents";
 import { Stack } from "@mui/material";
 
 import "react-toastify/dist/ReactToastify.css";
+import { AddProductProvider } from "@/providers/AddproductProvider";
 
 export default function RootLayout({
   children,
@@ -16,13 +17,15 @@ export default function RootLayout({
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline>
-        <AuthProvider>
-          <ProductHeader />
-          <Stack direction="row">
-            <ProductSideBar />
-            {children}
-          </Stack>
-        </AuthProvider>
+        <AddProductProvider>
+          <AuthProvider>
+            <ProductHeader />
+            <Stack direction="row">
+              <ProductSideBar />
+              {children}
+            </Stack>
+          </AuthProvider>
+        </AddProductProvider>
       </CssBaseline>
     </ThemeProvider>
   );

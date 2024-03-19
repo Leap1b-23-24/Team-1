@@ -1,7 +1,8 @@
+import { useProduct } from "@/providers/AddproductProvider";
 import { Add } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
-
 export const AddCategory = () => {
+  const { setAddCategory } = useProduct();
   return (
     <Stack width={"100%"} alignItems={"flex-start"} gap={3}>
       <Typography fontSize={18} fontWeight={600}>
@@ -42,6 +43,9 @@ export const AddCategory = () => {
         border={"1px solid #D6D8DB"}
         borderRadius={1.5}
         sx={{ cursor: "pointer" }}
+        onClick={() => {
+          setAddCategory(true);
+        }}
       >
         Төрөл нэмэх
       </Typography>

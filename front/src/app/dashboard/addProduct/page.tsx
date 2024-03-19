@@ -1,10 +1,5 @@
 import { AddProductComp } from "@/components/AddProductComponents/AddProduct";
-import {
-  ArrowBackIosOutlined,
-  ArrowBackOutlined,
-  ArrowLeft,
-  ArrowLeftOutlined,
-} from "@mui/icons-material";
+import { ArrowBackIosOutlined } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 
 export default function AddProduct() {
