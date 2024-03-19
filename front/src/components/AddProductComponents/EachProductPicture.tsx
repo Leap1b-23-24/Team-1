@@ -22,7 +22,7 @@ export const ProductPicture = (props: ProductPictureProps) => {
         overflow: "hidden",
       }}
     >
-      {link ? <Image src={`${link}`} alt="" fill /> : <ImageOutlined />}
+      {/* {link ? <Image src={`${link}`} alt="" fill /> : <ImageOutlined />} */}
     </Stack>
   );
 };
