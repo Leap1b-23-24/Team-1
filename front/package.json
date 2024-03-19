@@ -15,6 +15,7 @@
     "@mui/joy": "^5.0.0-beta.30",
     "@mui/material": "^5.15.12",
     "@mui/styled-engine-sc": "^6.0.0-alpha.17",
+    "@types/express": "^4.17.21",
     "axios": "^1.6.8",
     "formik": "^2.4.5",
     "next": "14.1.3",

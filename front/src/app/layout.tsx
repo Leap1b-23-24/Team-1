@@ -6,6 +6,7 @@ import "./globals.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
 import { ToastContainer } from "react-toastify";
+
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
