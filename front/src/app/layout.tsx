@@ -5,10 +5,7 @@ import "./globals.css";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
-<<<<<<< HEAD
-=======
 import { ToastContainer } from "react-toastify";
->>>>>>> 668ed2c (done)
 
 const inter = Inter({ subsets: ["latin"] });
 
