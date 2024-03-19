@@ -7,7 +7,7 @@ const orderSchema = new Schema({
   email: String,
   orderer: String,
   deliveryDate: Date,
-
+  amountPaid: Number,
   amoutToBePaid: Number,
   coupon: {
     type: String,
@@ -15,7 +15,6 @@ const orderSchema = new Schema({
   },
   description: String,
   orderType: String,
-  details: [String],
   createdAt: Date,
   updatedAt: Date,
 });
