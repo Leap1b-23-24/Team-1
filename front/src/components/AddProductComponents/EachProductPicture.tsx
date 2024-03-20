@@ -1,3 +1,4 @@
+"use client";
 import { ImageOutlined } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import Image from "next/image";
@@ -15,14 +16,14 @@ export const ProductPicture = (props: ProductPictureProps) => {
       sx={{
         position: "relative",
         aspectRatio: "1/1",
-        border: "1px dotted #D6D8DB",
+        border: "1px dashed #D6D8DB",
         borderRadius: "10px",
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
       }}
     >
-      {/* {link ? <Image src={`${link}`} alt="" fill /> : <ImageOutlined />} */}
+      {link ? <Image src={`${link}`} alt="" fill /> : <ImageOutlined />}
     </Stack>
   );
 };

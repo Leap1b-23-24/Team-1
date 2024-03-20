@@ -15,7 +15,7 @@ type ImageUploadTypes = {
   index: number;
 };
 export const AddPicture = (props: AddPictureProps) => {
-  const { links } = props;
+  const { setLink, links } = props;
 
   const isLinkEmpty = (e: ChangeEvent<HTMLInputElement>) => {
     let counter = 0;
@@ -45,10 +45,13 @@ export const AddPicture = (props: AddPictureProps) => {
         const data = await response.json();
 
         const url: string = data.secure_url;
+        const array = links;
 
-        console.log(url, index);
+        array[index] = url;
 
-        // setLink();
+        console.log(array);
+
+        setLink(array);
       } catch (error) {}
     }
   };

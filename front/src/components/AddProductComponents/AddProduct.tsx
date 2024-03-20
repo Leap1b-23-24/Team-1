@@ -13,7 +13,11 @@ import { toast } from "react-toastify";
 import { useProduct } from "@/providers/AddproductProvider";
 
 export const AddProductComp = () => {
-  const [imageLinks, setImageLink] = useState<string[]>(["", "", ""]);
+  const [imageLinks, setImageLink] = useState<string[]>([
+    "https://res.cloudinary.com/drwacb3lb/image/upload/v1710899225/productImage/tdo0vyebpod1bgt1xdpw.jpg",
+    "https://res.cloudinary.com/drwacb3lb/image/upload/v1710899225/productImage/tdo0vyebpod1bgt1xdpw.jpg",
+    "",
+  ]);
   const [mainCategory, setMainCategory] = useState<string>("");
   const [subCategory, setSubCategory] = useState<string>("");
   const { categories, subCategories } = useProduct();
