@@ -29,7 +29,7 @@ export const AddCategoryName = () => {
         toast.success(res.data.message);
 
         setAddCategory(false);
-        setCategoryAdded((prev) => !prev);
+        // setCategoryAdded((prev) => !prev);
       } catch (error: any) {
         toast.warn(error.response.data.message);
       }
