@@ -3,6 +3,7 @@
 import { IncomeFooter } from "@/components/ProductComponents/IncomeFooter";
 
 import {
+  AreasBarChart,
   IncomeHeader,
   PaymentInformation,
   ProductCard,
@@ -10,11 +11,13 @@ import {
 } from "@/components/ProductComponents";
 
 import { ProductFilter } from "@/components/ProductComponents/ProductFilter";
-import { Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import { useState } from "react";
 import { IncomeFooterTopCom } from "@/components/ProductComponents/income";
 import DeliveryInformation from "@/components/ProductComponents/DeliveryInformation";
 import DashboardInformation from "@/components/ProductComponents/DashboardInfo";
+import { BarChartContainer } from "@/components/ProductComponents/ChartOptions";
+import { SalesBarChart } from "@/components/ProductComponents/SellBar";
 
 export default function Home() {
   return (
