@@ -4,7 +4,8 @@ const productSchema = new Schema(
   {
     shopId: String,
     productName: String,
-    productPrice: String,
+    productPrice: Number,
+    productCode: String,
     categoryId: String,
     quantity: Number,
     thumbNails: String,
