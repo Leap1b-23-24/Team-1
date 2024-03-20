@@ -1,4 +1,5 @@
 "use client";
+import { CategoryType, useProduct } from "@/providers/AddproductProvider";
 import { ArrowDropDown } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -6,7 +7,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 type CustomSelectProps = {
   setValue: Dispatch<SetStateAction<string>>;
   value: string;
-  options: string[];
+  options: CategoryType[];
   label: string;
   placeholder: string;
 };
@@ -14,6 +15,8 @@ type CustomSelectProps = {
 export const CustomSelect = (props: CustomSelectProps) => {
   const { setValue, options, label, placeholder, value } = props;
   const [isShown, setIsshown] = useState(false);
+  const [index, setIndex] = useState<number | null>(null);
+  const { addCategory } = useProduct();
   return (
     <Stack width={"100%"} gap={2} position={"relative"}>
       <Typography fontSize={16} fontWeight={600}>
@@ -32,9 +35,9 @@ export const CustomSelect = (props: CustomSelectProps) => {
           setIsshown((prev) => !prev);
         }}
       >
-        {value ? (
+        {index !== null ? (
           <Typography fontSize={16} fontWeight={600} color={"primary"}>
-            {value}
+            {options[index].name}
           </Typography>
         ) : (
           <Typography fontSize={18} color={"#8B8E95"}>
@@ -57,21 +60,23 @@ export const CustomSelect = (props: CustomSelectProps) => {
         <Stack
           width={"100%"}
           position={"absolute"}
+          maxHeight={300}
           top={"110%"}
           left={0}
-          zIndex={1}
+          zIndex={10}
           borderRadius={2}
           border={"1px solid #D6D8DB"}
           overflow={"hidden"}
         >
-          {options.map((each) => {
+          {options.map((each, index) => {
             return (
               <Typography
                 fontSize={16}
                 fontWeight={550}
                 padding={2}
                 onClick={() => {
-                  setValue(each);
+                  setValue(each._id);
+                  setIndex(index);
                   setIsshown(false);
                 }}
                 sx={{
@@ -83,7 +88,7 @@ export const CustomSelect = (props: CustomSelectProps) => {
                   },
                 }}
               >
-                {each}
+                {each.name}
               </Typography>
             );
           })}

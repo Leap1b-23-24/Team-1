@@ -10,13 +10,14 @@ import * as yup from "yup";
 import { CustomSelect } from "./CustomSelect";
 import { api } from "@/common";
 import { toast } from "react-toastify";
+import { useProduct } from "@/providers/AddproductProvider";
 
 export const AddProductComp = () => {
   const [imageLinks, setImageLink] = useState<string[]>(["", "", ""]);
   const [mainCategory, setMainCategory] = useState<string>("");
   const [subCategory, setSubCategory] = useState<string>("");
+  const { categories, subCategories } = useProduct();
   const errorText = "Энэ талбар хоосон байж болохгүй!";
-  const categories = ["цамц", "өмд", "юбка", "хүрэм", "малгай"];
   const validationSchema = yup.object({
     name: yup.string().required(errorText),
     price: yup.number().required(errorText),
@@ -171,7 +172,7 @@ export const AddProductComp = () => {
             <CustomSelect
               setValue={setSubCategory}
               value={subCategory}
-              options={categories}
+              options={subCategories}
               label="Дэд ангилал"
               placeholder="Сонгох"
             />
