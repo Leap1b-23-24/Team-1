@@ -12,3 +12,4 @@ export * from "./DeliveryInformation";
 export * from "./PaymentInformation";
 export * from "./income";
 export * from "./OrderTable";
+export * from "./Chart";
