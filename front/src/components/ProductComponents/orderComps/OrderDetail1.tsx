@@ -3,7 +3,7 @@ import { ArrowDropDown } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import { OrderDetailTop } from "./OrderDetailTop";
-import { ProductCard } from "..";
+import { ProductCard, ProductCardType } from "..";
 
 type OrderDetail1Props = {
   orderNumber: string;
@@ -12,7 +12,7 @@ type OrderDetail1Props = {
   userNumber: string;
   order: object[];
   orderState: string;
-  setOrderState: Dispatch<SetStateAction<string>>;
+  setOrderState?: Dispatch<SetStateAction<string>>;
 };
 
 export const OrderDetail1 = (props: OrderDetail1Props) => {
@@ -31,13 +31,14 @@ export const OrderDetail1 = (props: OrderDetail1Props) => {
       width={"100%"}
       height={"100%"}
       border={"1px solid #ECEDF0"}
-      borderRadius={1.5}
+      borderRadius={4}
       p={3}
       gap={3}
+      bgcolor={"white"}
     >
       <OrderDetailTop
         orderNumber={orderNumber}
-        setOrderState={setOrderState}
+        // setOrderState={setOrderState}
         isShown={isShown}
         setIsShown={setIsShown}
       />

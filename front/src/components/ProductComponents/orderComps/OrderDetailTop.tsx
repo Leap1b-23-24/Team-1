@@ -7,7 +7,7 @@ type Props = {
   orderNumber: string;
   setIsShown: Dispatch<SetStateAction<boolean>>;
   isShown: boolean;
-  setOrderState: Dispatch<SetStateAction<string>>;
+  setOrderState?: Dispatch<SetStateAction<string>>;
 };
 
 const options = ["Бэлтгэгдэж байна", "Хүргэлтэд гарсан", "Амжилттай"];
@@ -53,7 +53,7 @@ export const OrderDetailTop = (props: Props) => {
                 key={index}
                 width={"100%"}
                 onClick={() => {
-                  setOrderState(item);
+                  // setOrderState(item);
                   setIsShown((prev) => !prev);
                 }}
               >
