@@ -68,7 +68,7 @@ export const DashboardProduct = () => {
           paddingY={"14px"}
           justifyContent={"space-between"}
           bgcolor={"#D6D8DB"}
-          border={1}
+          borderBottom={"1px solid grey"}
         >
           {headers.map((each) => {
             return (
