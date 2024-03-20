@@ -13,7 +13,6 @@ import { toast } from "react-toastify";
 import { useProduct } from "@/providers/AddproductProvider";
 
 export const AddProductComp = () => {
-
   const [imageLinks, setImageLink] = useState<string[]>([]);
 
   const [mainCategory, setMainCategory] = useState<string>("");
@@ -43,16 +42,19 @@ export const AddProductComp = () => {
         return;
       }
       try {
-        const res = await api.post("/product/add", {
-          productName: values.name,
-          productCode: values.productCode,
-          shopId: "empty",
-          productPrice: values.price,
-          categoryId: mainCategory,
-          quantity: values.inStock,
-          images: imageLinks,
-          description: values.description,
-        });
+        const res = await api.post(
+          "/product/add",
+          {
+            productName: values.name,
+            productCode: values.productCode,
+            productPrice: values.price,
+            categoryId: mainCategory,
+            quantity: values.inStock,
+            images: imageLinks,
+            description: values.description,
+          },
+          { headers: { Authorization: localStorage.getItem("token") } }
+        );
 
         toast.success(res.data.message);
 

@@ -6,6 +6,7 @@ import "./globals.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
 import { ToastContainer } from "react-toastify";
+import { Userprovider } from "@/providers/UserProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,10 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <ThemeProvider theme={theme}>
+        <Userprovider>
+          {/* <ThemeProvider theme={theme}>
           <CssBaseline> */}
-        {children}
-        <ToastContainer />
+          {children}
+          <ToastContainer />
+        </Userprovider>
         {/* </CssBaseline>
           </ThemeProvider> */}
       </body>

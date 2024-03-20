@@ -4,7 +4,6 @@ import {
   AdminClothesRow,
   ProductClothesRowHeader,
   ProductFilter,
-  ProductSideBar,
 } from "@/components/ProductComponents";
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
