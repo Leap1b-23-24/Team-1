@@ -11,6 +11,7 @@ const productSchema = new Schema(
     thumbNails: String,
     images: Object,
     salePercent: Number,
+    soldQuantity: Number,
     description: String,
     viewsCount: String,
   },

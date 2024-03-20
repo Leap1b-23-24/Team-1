@@ -13,7 +13,9 @@ import { toast } from "react-toastify";
 import { useProduct } from "@/providers/AddproductProvider";
 
 export const AddProductComp = () => {
-  const [imageLinks, setImageLink] = useState<string[]>(["", "", ""]);
+
+  const [imageLinks, setImageLink] = useState<string[]>([]);
+
   const [mainCategory, setMainCategory] = useState<string>("");
   const [subCategory, setSubCategory] = useState<string>("");
   const { categories, subCategories } = useProduct();
@@ -53,6 +55,11 @@ export const AddProductComp = () => {
         });
 
         toast.success(res.data.message);
+
+        formik.resetForm();
+        setImageLink([]);
+        setMainCategory("");
+        setSubCategory("");
       } catch (error) {
         console.log(error);
       }
