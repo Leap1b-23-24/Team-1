@@ -4,36 +4,16 @@ import { Stack, Typography } from "@mui/material";
 import { EachDashboardProduct } from "./EachDashboardProduct";
 import { useEffect, useState } from "react";
 import { api } from "@/common";
-
-type ProductType = {
-  productName: string;
-  productPrice: number;
-  productCode: string;
-  categoryId: string;
-  quantity: number;
-  thumbNails: string;
-  images: string[];
-  salePercent: number;
-  description: string;
-  viewsCount: string;
-  soldQuantity?: number;
-}[];
+import { useUser } from "@/providers/UserProvider";
 
 export const DashboardProduct = () => {
-  const [products, setProducts] = useState<ProductType>([]);
   const headers = [
     { text: "№", width: 0.5 },
     { text: "Бүтээгдэхүүн", width: 2 },
     { text: "Зарагдсан", width: 1 },
     { text: "Үнэ", width: 1 },
   ];
-  const getUserProducts = async () => {
-    try {
-      const res = await api.get("/product/getUser");
-
-      setProducts(res.data.products);
-    } catch (error) {}
-  };
+  const { getUserProducts, userProduct } = useUser();
 
   useEffect(() => {
     getUserProducts();
@@ -70,9 +50,10 @@ export const DashboardProduct = () => {
           bgcolor={"#D6D8DB"}
           borderBottom={"1px solid grey"}
         >
-          {headers.map((each) => {
+          {headers.map((each, index) => {
             return (
               <Typography
+                key={index}
                 width={each.width / 5}
                 height={30}
                 textAlign={"center"}
@@ -84,18 +65,21 @@ export const DashboardProduct = () => {
             );
           })}
         </Stack>
-        {products.map((each, index) => {
-          return (
-            <EachDashboardProduct
-              number={index + 1}
-              title={each.productName}
-              quantity={each.soldQuantity}
-              price={each.productPrice}
-              image={each.images[0]}
-              productCode={each.productCode}
-            />
-          );
-        })}
+        {userProduct
+          ? userProduct.map((each, index) => {
+              return (
+                <EachDashboardProduct
+                  key={index}
+                  number={index + 1}
+                  title={each.productName}
+                  quantity={each.soldQuantity}
+                  price={each.productPrice}
+                  image={each.images[0]}
+                  productCode={each.productCode}
+                />
+              );
+            })
+          : null}
       </Stack>
     </Stack>
   );

@@ -37,7 +37,9 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
   const getCategory = async () => {
     try {
-      const res = await api.get("/category/get");
+      const res = await api.get("/category/get", {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
 
       setCategories(res.data.categories);
     } catch (error) {}
@@ -45,7 +47,9 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
 
   const getSubCategory = async () => {
     try {
-      const res = await api.get("/category/getSub");
+      const res = await api.get("/category/getSub", {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
 
       setSubCategories(res.data.categories);
     } catch (error) {}

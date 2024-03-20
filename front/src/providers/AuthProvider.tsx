@@ -1,5 +1,4 @@
 "use client";
-
 import { api } from "@/common";
 import { useRouter } from "next/navigation";
 import {
@@ -66,14 +65,15 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
         marketName: params.marketName,
         password: params.password,
       });
-      if (res.data.message === "User created successfully") {
-        toast.success(res.data.message);
-        router.push("/");
-      } else {
-        toast.error(res.data.message);
-      }
-    } catch (error) {
-      console.log(error);
+
+      const { message, token } = res.data;
+
+      toast.success(message);
+
+      localStorage.setItem("token", token);
+      router.push("/");
+    } catch (error: any) {
+      toast.warn(error.response.data.message);
     }
   };
 

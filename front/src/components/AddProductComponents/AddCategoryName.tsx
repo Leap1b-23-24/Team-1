@@ -21,15 +21,19 @@ export const AddCategoryName = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        const res = await api.post("/category/add", {
-          name: values.name,
-          type: generalOrSub ? "general" : "sub",
-        });
+        const res = await api.post(
+          "/category/add",
+          {
+            name: values.name,
+            type: generalOrSub ? "general" : "sub",
+          },
+          { headers: { Authorization: localStorage.getItem("token") } }
+        );
 
         toast.success(res.data.message);
 
         setAddCategory(false);
-        // setCategoryAdded((prev) => !prev);
+        setCategoryAdded((prev) => !prev);
       } catch (error: any) {
         toast.warn(error.response.data.message);
       }

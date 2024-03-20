@@ -1,9 +1,16 @@
 import { RequestHandler } from "express";
 import { CategoryModel } from "../model/category.model";
 import { SubCategoryModel } from "../model/subCategory.model";
+import jwt from "jsonwebtoken";
 
 export const addCategory: RequestHandler = async (req, res) => {
   const { name, type } = req.body;
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const shopId = jwt.verify(authorization, "secret-key");
   try {
     const category = await CategoryModel.findOne({ name: name });
     const subCategory = await SubCategoryModel.findOne({
@@ -16,8 +23,8 @@ export const addCategory: RequestHandler = async (req, res) => {
       });
     }
     type === "general"
-      ? await CategoryModel.create({ name: name })
-      : await SubCategoryModel.create({ name: name });
+      ? await CategoryModel.create({ name, shopId })
+      : await SubCategoryModel.create({ name, shopId });
 
     res.json({ message: "Ангилал нэмсэн" });
   } catch (error) {
@@ -26,8 +33,15 @@ export const addCategory: RequestHandler = async (req, res) => {
 };
 
 export const getCategory: RequestHandler = async (req, res) => {
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const shopId = jwt.verify(authorization, "secret-key");
   try {
-    const categories = await CategoryModel.find({});
+    const categories = await CategoryModel.find({ shopId: shopId });
 
     res.json({ categories });
   } catch (error) {
@@ -36,8 +50,15 @@ export const getCategory: RequestHandler = async (req, res) => {
 };
 
 export const getSubCategory: RequestHandler = async (req, res) => {
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const shopId = jwt.verify(authorization, "secret-key");
   try {
-    const categories = await SubCategoryModel.find({});
+    const categories = await SubCategoryModel.find({ shopId: shopId });
 
     res.json({ categories });
   } catch (error) {

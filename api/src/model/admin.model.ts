@@ -7,4 +7,4 @@ const userSchema = new Schema({
   marketName: String,
 });
 
-export const UserModel = model("user", userSchema);
+export const UserModel = model("admin", userSchema);

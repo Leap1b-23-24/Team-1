@@ -1,10 +1,10 @@
 import { RequestHandler } from "express";
 import { ProductModel } from "../model/product.model";
+import Jwt, { JwtPayload } from "jsonwebtoken";
 
 export const addProduct: RequestHandler = async (req, res) => {
   const {
     productName,
-    shopId,
     productPrice,
     categoryId,
     quantity,
@@ -12,6 +12,13 @@ export const addProduct: RequestHandler = async (req, res) => {
     description,
     productCode,
   } = req.body;
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(401).json({ message: "No toke found" });
+  }
+  const shopId = Jwt.verify(authorization, "secret-key") as JwtPayload;
+
   try {
     await ProductModel.create({
       productName,
