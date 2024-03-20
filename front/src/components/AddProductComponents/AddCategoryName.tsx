@@ -12,7 +12,7 @@ import { Toggle } from "./Toggle";
 
 export const AddCategoryName = () => {
   const [generalOrSub, setGenaral] = useState(true);
-  const { setAddCategory } = useProduct();
+  const { setAddCategory, setCategoryAdded } = useProduct();
   const validationSchema = yup.object({
     name: yup.string().required("Энэ талбар хоосон байж болохгүй!"),
   });

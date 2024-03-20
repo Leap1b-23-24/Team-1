@@ -1,10 +1,8 @@
 "use client";
 import { Add } from "@mui/icons-material";
-import { Stack, TextField, Typography, useForkRef } from "@mui/material";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { Stack, TextField, Typography } from "@mui/material";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { ProductPicture } from "./EachProductPicture";
-import { toast } from "react-toastify";
-import { url } from "inspector";
 
 type AddPictureProps = {
   setLink: Dispatch<SetStateAction<string[]>>;
@@ -17,25 +15,25 @@ type ImageUploadTypes = {
 export const AddPicture = (props: AddPictureProps) => {
   const { setLink, links } = props;
 
-  const isLinkEmpty = (e: ChangeEvent<HTMLInputElement>) => {
-    let counter = 0;
-    let indicator = 0;
-    while (counter < links.length && indicator === 0) {
-      if (links[counter] === "") {
-        indicator++;
-      }
-      counter++;
-    }
-    indicator !== 0
-      ? handleImageUpload({ file: e, index: counter - 1 })
-      : toast.warning("Таны зураг дүүрэн байна");
-  };
+  // const isLinkEmpty = (e: ChangeEvent<HTMLInputElement>) => {
+  //   let counter = 0;
+  //   let indicator = 0;
+  //   while (counter < links.length && indicator === 0) {
+  //     if (links[counter] === "") {
+  //       indicator++;
+  //     }
+  //     counter++;
+  //   }
+  //   indicator !== 0
+  //     ? handleImageUpload({ file: e, index: counter - 1 })
+  //     : toast.warning("Таны зураг дүүрэн байна");
+  // };
 
-  const handleImageUpload = async ({ file, index }: ImageUploadTypes) => {
-    if (file.target.files) {
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
       try {
         const formData = new FormData();
-        formData.append("file", file.target.files[0]);
+        formData.append("file", e.target.files[0]);
 
         const response = await fetch(
           "https://api.cloudinary.com/v1_1/drwacb3lb/upload?upload_preset=up6cstnd",
@@ -45,14 +43,11 @@ export const AddPicture = (props: AddPictureProps) => {
         const data = await response.json();
 
         const url: string = data.secure_url;
-        const array = links;
 
-        array[index] = url;
-
-        console.log(array);
-
-        setLink(array);
-      } catch (error) {}
+        setLink([...links, url]);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return (
@@ -64,6 +59,8 @@ export const AddPicture = (props: AddPictureProps) => {
         width={"100%"}
         flexDirection={"row"}
         gap={1}
+        maxHeight={300}
+        overflow={"scroll"}
         sx={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)" }}
       >
         {links.map((each, index) => {
@@ -95,7 +92,7 @@ export const AddPicture = (props: AddPictureProps) => {
               type="file"
               variant="standard"
               fullWidth
-              onChange={isLinkEmpty}
+              onChange={handleImageUpload}
               inputProps={{
                 style: {
                   alignSelf: "center",
