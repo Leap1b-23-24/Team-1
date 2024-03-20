@@ -16,6 +16,7 @@ type ProductType = {
   salePercent: number;
   description: string;
   viewsCount: string;
+  soldQuantity?: number;
 }[];
 
 export const DashboardProduct = () => {
@@ -38,7 +39,14 @@ export const DashboardProduct = () => {
     getUserProducts();
   }, []);
   return (
-    <Stack width={"100%"} gap={3}>
+    <Stack
+      width={"100%"}
+      gap={3}
+      padding={3}
+      borderRadius={2}
+      bgcolor={"white"}
+      overflow={"hidden"}
+    >
       <Stack
         width={"100%"}
         flexDirection={"row"}
@@ -80,9 +88,9 @@ export const DashboardProduct = () => {
           return (
             <EachDashboardProduct
               number={index + 1}
-              title={""}
-              quantity={0}
-              price={0}
+              title={each.productName}
+              quantity={each.soldQuantity}
+              price={each.productPrice}
               image={each.images[0]}
               productCode={each.productCode}
             />
