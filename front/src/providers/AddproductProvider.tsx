@@ -9,6 +9,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { ProductType } from "./UserProvider";
 
 type AddProductProviderProps = {
   children: ReactNode;
@@ -24,6 +25,10 @@ type AddProductContextType = {
   categories: CategoryType[];
   subCategories: CategoryType[];
   setCategoryAdded: Dispatch<SetStateAction<boolean>>;
+  getProduct: (category: string) => Promise<void>;
+  products: ProductType[];
+  setFilter: Dispatch<SetStateAction<string>>;
+  categoryFilder: string;
 };
 
 const AddProductContext = createContext<AddProductContextType>(
@@ -35,6 +40,9 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [categoryAdded, setCategoryAdded] = useState<boolean>(false);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const [categoryFilder, setFilter] = useState("");
+
   const getCategory = async () => {
     try {
       const res = await api.get("/category/get", {
@@ -54,10 +62,33 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
       setSubCategories(res.data.categories);
     } catch (error) {}
   };
+
+  const getProduct = async (category: string) => {
+    try {
+      const res = await api.get("/product/getAdmin", {
+        headers: { Authorization: localStorage.getItem("token") },
+        params: {
+          category: category,
+        },
+      });
+
+      const { products } = res.data;
+
+      setProducts(products);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getCategory();
     getSubCategory();
   }, [categoryAdded]);
+
+  useEffect(() => {
+    getProduct(categoryFilder);
+  }, [categoryFilder]);
+
   return (
     <AddProductContext.Provider
       value={{
@@ -66,6 +97,10 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         categories,
         setCategoryAdded,
         subCategories,
+        getProduct,
+        products,
+        setFilter,
+        categoryFilder,
       }}
     >
       {children}

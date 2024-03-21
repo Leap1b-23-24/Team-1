@@ -5,14 +5,18 @@ import {
   ProductClothesRowHeader,
   ProductFilter,
 } from "@/components/ProductComponents";
+import { useProduct } from "@/providers/AddproductProvider";
 import { Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function productPage() {
-  const [category, setCategory] = useState("");
-  const [date, setDate] = useState("");
+  // const [category, setCategory] = useState("");
+  const [date, setDate] = useState<string>("");
   const [price, setPrice] = useState("");
   const [search, setSearch] = useState("");
+  const { products, setFilter, categoryFilder } = useProduct();
+
+  console.log(products);
 
   return (
     <Stack direction="row" width="100%" height={"95vh"} bgcolor={"#F7F7F8"}>
@@ -33,22 +37,30 @@ export default function productPage() {
         <Stack padding={3} gap={3}>
           <AddProductButton />
           <ProductFilter
-            setCategory={setCategory}
+            setCategory={setFilter}
+            category={categoryFilder}
             setDate={setDate}
+            date={date}
             setPrice={setPrice}
+            price={price}
             setSearch={setSearch}
           />
           <Stack borderRadius="12px" bgcolor="white">
             <ProductClothesRowHeader />
-            <AdminClothesRow
-              priority={23}
-              productName="bag"
-              category="bag"
-              price={345000}
-              arrearage={89}
-              sold={809}
-              addedDate="2024-03-12"
-            />
+            {products.map((product) => {
+              const {} = product;
+              return (
+                <AdminClothesRow
+                  priority={23}
+                  productName="bag"
+                  category="bag"
+                  price={345000}
+                  arrearage={89}
+                  sold={809}
+                  addedDate="2024-03-12"
+                />
+              );
+            })}
           </Stack>
         </Stack>
       </Stack>
