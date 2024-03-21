@@ -6,9 +6,10 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
-import { toast } from "react-toastify";
+import { Id, toast } from "react-toastify";
 
 type AuthProviderType = {
   children: React.ReactNode;
@@ -34,12 +35,22 @@ type AuthContextType = {
   productType: string;
   setProductType: Dispatch<SetStateAction<string>>;
   signUp: (params: signUpParams) => Promise<void>;
+  logIn: (params: logInParams) => Promise<Id | undefined>;
+  logOut: () => void;
+  isLogged: boolean;
+  userRole: string;
+  setUserRole: Dispatch<SetStateAction<string>>;
 };
 
 type signUpParams = {
   userName: string;
   email: string;
   marketName: string;
+  password: string;
+};
+
+type logInParams = {
+  email: string;
   password: string;
 };
 
@@ -56,6 +67,19 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
   const [khoroo, setKhoroo] = useState("");
   const [experience, setExperience] = useState("");
   const [productType, setProductType] = useState("");
+  const [isLogged, setIsLogged] = useState(false);
+  const [isChecked, setChecked] = useState(false);
+  const [userRole, setUserRole] = useState("Худалдан авагч");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  }, [isChecked]);
 
   const signUp = async (params: signUpParams) => {
     try {
@@ -66,15 +90,42 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
         password: params.password,
       });
 
-      const { message, token } = res.data;
+      const { message } = res.data;
 
       toast.success(message);
 
-      localStorage.setItem("token", token);
       router.push("/");
     } catch (error: any) {
       toast.warn(error.response.data.message);
     }
+  };
+
+  const logIn = async (params: logInParams) => {
+    try {
+      const res = await api.post("/user/logIn", {
+        email: params.email,
+        password: params.password,
+      });
+
+      const { token } = res.data;
+
+      if (!token) return toast.warning(res.data.message);
+
+      localStorage.setItem("token", token);
+
+      toast.success("Амжилттай нэвтэрлээ");
+
+      setIsLogged(true);
+      setChecked((prev) => !prev);
+    } catch (error) {
+      console.log(error, "logIn ");
+    }
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+
+    setChecked((prev) => !prev);
   };
 
   return (
@@ -99,6 +150,11 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
         productType,
         setProductType,
         signUp,
+        logIn,
+        logOut,
+        isLogged,
+        userRole,
+        setUserRole,
       }}
     >
       {children}
