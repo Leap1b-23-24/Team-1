@@ -19,6 +19,7 @@ export const MoreInfo = (props: SignUpType) => {
     email,
     password,
     marketName,
+    userRole,
   } = useAuth();
 
   return (
@@ -77,7 +78,15 @@ export const MoreInfo = (props: SignUpType) => {
               borderRadius: "8px",
             }}
             onClick={() => {
-              signUp({ email, userName, password, marketName });
+              // console.log(email, password, userName, marketName, userRole);
+
+              signUp({
+                email: email,
+                password: password,
+                userName: userName,
+                marketName: marketName,
+                role: userRole,
+              });
             }}
           >
             <Typography fontSize={18}>Дараах</Typography>

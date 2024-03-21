@@ -1,9 +1,15 @@
 "use client";
 import { ArrowForward } from "@mui/icons-material";
-import { Button, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { SignUpInput } from "./SignUpInput";
 import { useAuth } from "@/providers/AuthProvider";
 import { toast } from "react-toastify";
@@ -15,8 +21,18 @@ export type SignUpType = {
 
 export const SignUp = (props: SignUpType) => {
   const { order, setOrder } = props;
-  const { email, setEmail, userName, setUserName, password, setPassword } =
-    useAuth();
+  const {
+    email,
+    setEmail,
+    userName,
+    setUserName,
+    password,
+    setPassword,
+    userRole,
+    marketName,
+    setUserRole,
+    signUp,
+  } = useAuth();
   const [rePass, setRePass] = useState("");
 
   const checker = (email: string, password: string, rePass: string) => {
@@ -26,9 +42,18 @@ export const SignUp = (props: SignUpType) => {
       toast.warning("Нууц үг дор хаяж 8 тэмдэгт агуулна");
     } else if (password !== rePass) {
       toast.warning("Ижил нууц үг оруулна уу");
-    } else {
+    } else if (userRole === "Борлуулагч") {
       setOrder(2);
+    } else {
+      signUp({ email, password, userName, marketName, role: userRole });
     }
+  };
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: "Худалдан авагч" | "Борлуулагч"
+  ) => {
+    if (newAlignment === null) return;
+    setUserRole(newAlignment);
   };
 
   return (
@@ -40,9 +65,35 @@ export const SignUp = (props: SignUpType) => {
       borderRadius={2.5}
       border={"1px solid #ECEDF0"}
     >
-      <Typography fontSize={32} fontWeight={700}>
-        Бүртгүүлэх
-      </Typography>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+      >
+        <Typography fontSize={32} fontWeight={700}>
+          Бүртгүүлэх
+        </Typography>
+        <ToggleButtonGroup
+          sx={{ height: 36 }}
+          color="primary"
+          value={userRole}
+          exclusive
+          onChange={handleChange}
+          aria-label="Platform"
+        >
+          <ToggleButton value={"Борлуулагч"} sx={{ fontSize: 8 }}>
+            Борлуулагч
+          </ToggleButton>
+          <ToggleButton
+            value={"Худалдан авагч"}
+            sx={{
+              fontSize: 8,
+            }}
+          >
+            Худалдан авагч
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </Stack>
       <SignUpInput
         value={email}
         label="Таны имэйл "
@@ -137,9 +188,9 @@ export const SignUp = (props: SignUpType) => {
         </Typography>
       </Stack>
       <Stack width={"100%"} height={2} bgcolor={"#ECEDF0"} />
-      <Stack direction={"row"} gap={0.5} p={5}>
+      <Stack direction={"row"} gap={0.5} p={5} justifyContent={"center"}>
         <Typography color={"#525252"}>Бүртгэлтэй юу?</Typography>
-        <Link href={""} style={{ textDecorationColor: "#121316" }}>
+        <Link href={"/logIn"} style={{ textDecorationColor: "#121316" }}>
           <Typography color={"#121316"}>Нэвтрэх</Typography>
         </Link>
       </Stack>

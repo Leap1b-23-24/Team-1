@@ -3,14 +3,16 @@ import { UserModel } from "../model/admin.model";
 import jwt from "jsonwebtoken";
 
 export const signUp: RequestHandler = async (req, res) => {
-  const { userName, email, password, marketName } = req.body;
+  const { userName, email, password, marketName, role } = req.body;
+
+  // console.log(userName, email, password, marketName, role);
 
   try {
     const user = await UserModel.findOne({ email: email });
 
     if (user)
       return res.status(401).json({
-        message: "User already exists",
+        message: "Бүртгэлтэй хэрэглэгч байна",
       });
 
     await UserModel.create({
@@ -18,23 +20,37 @@ export const signUp: RequestHandler = async (req, res) => {
       email: email,
       password: password,
       marketName: marketName,
+      role: role,
     });
 
-    const createdUser = await UserModel.findOne({ email: email });
-
-    if (!createdUser) {
-      throw new Error();
-    }
-
-    const token = jwt.sign(createdUser._id.toJSON(), "secret-key");
-
-    console.log(token);
-
     res.json({
-      message: "User created successfully",
-      token: token,
+      message: "Амжилттай бүртгэгдлээ",
     });
   } catch (error) {
     console.log(error, "signup error");
+  }
+};
+
+export const logIn: RequestHandler = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await UserModel.findOne({ email: email });
+
+    if (!user)
+      return res
+        .status(401)
+        .json({ message: "Бүртгэлтэй хэрэглэгч олдсонгүй" });
+
+    if (password !== user.password)
+      return res.status(401).json({ message: "Нууц үг буруу байна" });
+
+    const userId = user._id;
+
+    const token = jwt.sign({ userId }, "secret-key");
+
+    res.json({ token: token, role: user.role });
+  } catch (error) {
+    console.log(error, "logIn error");
   }
 };

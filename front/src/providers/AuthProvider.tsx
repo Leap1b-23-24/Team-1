@@ -6,9 +6,10 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
-import { toast } from "react-toastify";
+import { Id, toast } from "react-toastify";
 
 type AuthProviderType = {
   children: React.ReactNode;
@@ -34,12 +35,23 @@ type AuthContextType = {
   productType: string;
   setProductType: Dispatch<SetStateAction<string>>;
   signUp: (params: signUpParams) => Promise<void>;
+  logIn: (params: logInParams) => Promise<void>;
+  logOut: () => void;
+  isLogged: boolean;
+  userRole: "Худалдан авагч" | "Борлуулагч";
+  setUserRole: Dispatch<SetStateAction<"Худалдан авагч" | "Борлуулагч">>;
 };
 
 type signUpParams = {
   userName: string;
   email: string;
   marketName: string;
+  password: string;
+  role: "Худалдан авагч" | "Борлуулагч";
+};
+
+type logInParams = {
+  email: string;
   password: string;
 };
 
@@ -56,25 +68,71 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
   const [khoroo, setKhoroo] = useState("");
   const [experience, setExperience] = useState("");
   const [productType, setProductType] = useState("");
+  const [isLogged, setIsLogged] = useState(false);
+  const [isChecked, setChecked] = useState(false);
+  const [userRole, setUserRole] = useState<"Худалдан авагч" | "Борлуулагч">(
+    "Худалдан авагч"
+  );
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  }, [isChecked]);
 
   const signUp = async (params: signUpParams) => {
+    console.log("hello");
+
     try {
       const res = await api.post("/user/signUp", {
         userName: params.userName,
         email: params.email,
-        marketName: params.marketName,
+        role: params.role,
         password: params.password,
+        marketName: params.role === "Борлуулагч" ? params.marketName : null,
       });
+      console.log("hello2");
 
-      const { message, token } = res.data;
+      const { message } = res.data;
 
       toast.success(message);
 
-      localStorage.setItem("token", token);
-      router.push("/");
+      router.push("/logIn");
     } catch (error: any) {
       toast.warn(error.response.data.message);
     }
+  };
+
+  const logIn = async (params: logInParams) => {
+    try {
+      const res = await api.post("/user/logIn", {
+        email: params.email,
+        password: params.password,
+      });
+
+      const { token, role } = res.data;
+
+      localStorage.setItem("token", token);
+
+      toast.success("Амжилттай нэвтэрлээ");
+
+      role === "Борлуулагч" ? router.push("/dashboard") : router.push("/");
+
+      setIsLogged(true);
+      setChecked((prev) => !prev);
+    } catch (error: any) {
+      toast.warn(error.response.data.message);
+    }
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+
+    setChecked((prev) => !prev);
   };
 
   return (
@@ -99,6 +157,11 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
         productType,
         setProductType,
         signUp,
+        logIn,
+        logOut,
+        isLogged,
+        userRole,
+        setUserRole,
       }}
     >
       {children}
