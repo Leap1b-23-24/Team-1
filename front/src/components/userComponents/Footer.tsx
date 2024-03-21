@@ -24,10 +24,10 @@ const socialImg = ["/Group 202.png", "/Group 203.png", "/twitter.png"];
 
 export const Footer = () => {
   return (
-    <>
+    <Stack width={1}>
       <Stack width={1} bgcolor={"#EEEFFB"}>
         <Container
-          maxWidth="xl"
+          maxWidth="lg"
           className="flex flex-col  py-[50px] max-w-[1200px] w-fit m-auto  justify-center items-center gap-12 color-[#FFFFFF]"
         >
           <Stack
@@ -159,6 +159,6 @@ export const Footer = () => {
           </Stack>
         </Container>
       </Stack>
-    </>
+    </Stack>
   );
 };

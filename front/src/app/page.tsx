@@ -1,4 +1,3 @@
-
 "use client";
 
 import { IncomeFooter } from "@/components/ProductComponents/IncomeFooter";
@@ -19,19 +18,14 @@ import DeliveryInformation from "@/components/ProductComponents/DeliveryInformat
 import DashboardInformation from "@/components/ProductComponents/DashboardInfo";
 import { BarChartContainer } from "@/components/ProductComponents/ChartOptions";
 import { SalesBarChart } from "@/components/ProductComponents/SellBar";
-import { Footer } from "@/components/userComponents";
-import { ChartContainer } from "@/components/ProductComponents/ChartContainer";
-
-import FooterPart from "@/components/userComponents/Footer";
-import { Header } from "@/components/userComponents/Header";
+import { Footer, UnderHeader, WholeHeader } from "@/components/userComponents";
 import { ShoppingCard } from "@/components/userComponents/ShoppingCard";
-import { Container, Stack, Typography } from "@mui/material";
-
+import { Container, Typography } from "@mui/material";
 
 export default function Home() {
   return (
     <Stack width={"100vw"} gap={4} alignItems={"center"} bgcolor={"#F7F7F8"}>
-      <Header />
+      <WholeHeader />
       {/* Main Container */}
       <Container maxWidth="lg">
         <Stack width={"100%"} gap={4} border={"1px solid red"} padding={1}>
@@ -83,8 +77,7 @@ export default function Home() {
           </Stack>
         </Stack>
       </Container>
-
-      <FooterPart />
+      <Footer />
     </Stack>
   );
 }
