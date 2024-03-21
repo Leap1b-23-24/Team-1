@@ -7,6 +7,7 @@ export const addProduct: RequestHandler = async (req, res) => {
     productName,
     productPrice,
     categoryId,
+    subCategoryId,
     quantity,
     images,
     description,
@@ -17,7 +18,10 @@ export const addProduct: RequestHandler = async (req, res) => {
   if (!authorization) {
     return res.status(401).json({ message: "No toke found" });
   }
-  const shopId = Jwt.verify(authorization, "secret-key") as JwtPayload;
+  const { userId: shopId } = Jwt.verify(
+    authorization,
+    "secret-key"
+  ) as JwtPayload;
 
   try {
     await ProductModel.create({
@@ -26,6 +30,7 @@ export const addProduct: RequestHandler = async (req, res) => {
       productPrice,
       productCode,
       categoryId,
+      subCategoryId,
       quantity,
       images,
       description,

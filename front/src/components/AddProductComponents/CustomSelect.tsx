@@ -66,7 +66,7 @@ export const CustomSelect = (props: CustomSelectProps) => {
           zIndex={10}
           borderRadius={2}
           border={"1px solid #D6D8DB"}
-          overflow={"hidden"}
+          overflow={"scroll"}
         >
           {options.map((each, index) => {
             return (

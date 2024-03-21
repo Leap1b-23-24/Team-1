@@ -49,6 +49,7 @@ export const AddProductComp = () => {
             productCode: values.productCode,
             productPrice: values.price,
             categoryId: mainCategory,
+            subCategoryId: subCategory,
             quantity: values.inStock,
             images: imageLinks,
             description: values.description,

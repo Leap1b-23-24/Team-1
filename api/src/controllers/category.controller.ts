@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import { CategoryModel } from "../model/category.model";
 import { SubCategoryModel } from "../model/subCategory.model";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const addCategory: RequestHandler = async (req, res) => {
   const { name, type } = req.body;
@@ -10,11 +10,19 @@ export const addCategory: RequestHandler = async (req, res) => {
   if (!authorization) {
     return res.status(401).json({ message: "Unauthorized" });
   }
-  const shopId = jwt.verify(authorization, "secret-key");
+  const { userId: shopId } = jwt.verify(
+    authorization,
+    "secret-key"
+  ) as JwtPayload;
+
   try {
-    const category = await CategoryModel.findOne({ name: name });
+    const category = await CategoryModel.findOne({
+      name: name,
+      shopId,
+    });
     const subCategory = await SubCategoryModel.findOne({
       name: name,
+      shopId,
     });
 
     if (category || subCategory) {
@@ -39,7 +47,10 @@ export const getCategory: RequestHandler = async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const shopId = jwt.verify(authorization, "secret-key");
+  const { userId: shopId } = jwt.verify(
+    authorization,
+    "secret-key"
+  ) as JwtPayload;
   try {
     const categories = await CategoryModel.find({ shopId: shopId });
 
@@ -56,9 +67,12 @@ export const getSubCategory: RequestHandler = async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const shopId = jwt.verify(authorization, "secret-key");
+  const { userId: shopId } = jwt.verify(
+    authorization,
+    "secret-key"
+  ) as JwtPayload;
   try {
-    const categories = await SubCategoryModel.find({ shopId: shopId });
+    const categories = await SubCategoryModel.find({ shopId });
 
     res.json({ categories });
   } catch (error) {
