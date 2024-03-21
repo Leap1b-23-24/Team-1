@@ -16,7 +16,7 @@ export const ProductSideBar = () => {
 
   return (
     <Stack
-      padding={"24px 20px"}
+      paddingTop={"20px"}
       height="100%"
       gap={2}
       display={pathName.includes("signUp") ? "none" : "flex"}

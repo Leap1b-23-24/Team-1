@@ -71,6 +71,7 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
       toast.success(message);
 
       localStorage.setItem("token", token);
+
       router.push("/");
     } catch (error: any) {
       toast.warn(error.response.data.message);
