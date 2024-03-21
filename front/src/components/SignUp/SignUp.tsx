@@ -38,9 +38,9 @@ export const SignUp = (props: SignUpType) => {
       toast.warning("Та имэйл хаягаа зөв оруулна уу");
     } else if (password.length <= 8) {
       toast.warning("Нууц үг дор хаяж 8 тэмдэгт агуулна");
-    } else  (password !== rePass) {
-      toast.warning("Ижил нууц үг оруулна уу");}
-    
+    } else if (password !== rePass) {
+      toast.warning("Ижил нууц үг оруулна уу");
+    }
   };
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,

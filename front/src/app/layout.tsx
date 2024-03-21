@@ -6,6 +6,7 @@ import "./globals.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Userprovider } from "@/providers/UserProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
 

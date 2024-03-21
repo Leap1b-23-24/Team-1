@@ -34,10 +34,13 @@ export const logIn: RequestHandler = async (req, res) => {
   try {
     const user = await UserModel.findOne({ email: email });
 
-    if (!user) return res.json({ message: "Бүртгэлтэй хэрэглэгч олдсонгүй" });
+    if (!user)
+      return res
+        .status(401)
+        .json({ message: "Бүртгэлтэй хэрэглэгч олдсонгүй" });
 
     if (password !== user.password)
-      return res.json({ message: "Нууц үг буруу байна" });
+      return res.status(401).json({ message: "Нууц үг буруу байна" });
 
     const userId = user._id;
 

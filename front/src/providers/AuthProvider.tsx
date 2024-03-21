@@ -35,7 +35,7 @@ type AuthContextType = {
   productType: string;
   setProductType: Dispatch<SetStateAction<string>>;
   signUp: (params: signUpParams) => Promise<void>;
-  logIn: (params: logInParams) => Promise<Id | undefined>;
+  logIn: (params: logInParams) => Promise<void>;
   logOut: () => void;
   isLogged: boolean;
   userRole: string;
@@ -109,16 +109,14 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
 
       const { token } = res.data;
 
-      if (!token) return toast.warning(res.data.message);
-
       localStorage.setItem("token", token);
 
       toast.success("Амжилттай нэвтэрлээ");
 
       setIsLogged(true);
       setChecked((prev) => !prev);
-    } catch (error) {
-      console.log(error, "logIn ");
+    } catch (error: any) {
+      toast.warn(error.response.data.message);
     }
   };
 
