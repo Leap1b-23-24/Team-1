@@ -38,8 +38,8 @@ type AuthContextType = {
   logIn: (params: logInParams) => Promise<void>;
   logOut: () => void;
   isLogged: boolean;
-  userRole: string;
-  setUserRole: Dispatch<SetStateAction<string>>;
+  userRole: "Худалдан авагч" | "Борлуулагч";
+  setUserRole: Dispatch<SetStateAction<"Худалдан авагч" | "Борлуулагч">>;
 };
 
 type signUpParams = {
@@ -47,6 +47,7 @@ type signUpParams = {
   email: string;
   marketName: string;
   password: string;
+  role: "Худалдан авагч" | "Борлуулагч";
 };
 
 type logInParams = {
@@ -69,7 +70,9 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
   const [productType, setProductType] = useState("");
   const [isLogged, setIsLogged] = useState(false);
   const [isChecked, setChecked] = useState(false);
-  const [userRole, setUserRole] = useState("Худалдан авагч");
+  const [userRole, setUserRole] = useState<"Худалдан авагч" | "Борлуулагч">(
+    "Худалдан авагч"
+  );
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -82,19 +85,23 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
   }, [isChecked]);
 
   const signUp = async (params: signUpParams) => {
+    console.log("hello");
+
     try {
       const res = await api.post("/user/signUp", {
         userName: params.userName,
         email: params.email,
-        marketName: params.marketName,
+        role: params.role,
         password: params.password,
+        marketName: params.role === "Борлуулагч" ? params.marketName : null,
       });
+      console.log("hello2");
 
       const { message } = res.data;
 
       toast.success(message);
 
-      router.push("/");
+      router.push("/logIn");
     } catch (error: any) {
       toast.warn(error.response.data.message);
     }
@@ -107,11 +114,13 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
         password: params.password,
       });
 
-      const { token } = res.data;
+      const { token, role } = res.data;
 
       localStorage.setItem("token", token);
 
       toast.success("Амжилттай нэвтэрлээ");
+
+      role === "Борлуулагч" ? router.push("/dashboard") : router.push("/");
 
       setIsLogged(true);
       setChecked((prev) => !prev);

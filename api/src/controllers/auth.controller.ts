@@ -3,7 +3,9 @@ import { UserModel } from "../model/admin.model";
 import jwt from "jsonwebtoken";
 
 export const signUp: RequestHandler = async (req, res) => {
-  const { userName, email, password, marketName } = req.body;
+  const { userName, email, password, marketName, role } = req.body;
+
+  // console.log(userName, email, password, marketName, role);
 
   try {
     const user = await UserModel.findOne({ email: email });
@@ -18,6 +20,7 @@ export const signUp: RequestHandler = async (req, res) => {
       email: email,
       password: password,
       marketName: marketName,
+      role: role,
     });
 
     res.json({
@@ -46,7 +49,7 @@ export const logIn: RequestHandler = async (req, res) => {
 
     const token = jwt.sign({ userId }, "secret-key");
 
-    res.json({ token: token });
+    res.json({ token: token, role: user.role });
   } catch (error) {
     console.log(error, "logIn error");
   }

@@ -29,7 +29,9 @@ export const SignUp = (props: SignUpType) => {
     password,
     setPassword,
     userRole,
+    marketName,
     setUserRole,
+    signUp,
   } = useAuth();
   const [rePass, setRePass] = useState("");
 
@@ -40,11 +42,15 @@ export const SignUp = (props: SignUpType) => {
       toast.warning("Нууц үг дор хаяж 8 тэмдэгт агуулна");
     } else if (password !== rePass) {
       toast.warning("Ижил нууц үг оруулна уу");
+    } else if (userRole === "Борлуулагч") {
+      setOrder(2);
+    } else {
+      signUp({ email, password, userName, marketName, role: userRole });
     }
   };
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
+    newAlignment: "Худалдан авагч" | "Борлуулагч"
   ) => {
     if (newAlignment === null) return;
     setUserRole(newAlignment);
