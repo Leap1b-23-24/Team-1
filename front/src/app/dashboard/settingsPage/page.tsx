@@ -1,6 +1,3 @@
-// export default function SettingsPage() {
-//   return <></>;
-// }
 import { Button, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import CheckIcon from "@mui/icons-material/Check";

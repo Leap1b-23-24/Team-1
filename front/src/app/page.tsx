@@ -19,6 +19,7 @@ import DashboardInformation from "@/components/ProductComponents/DashboardInfo";
 import { BarChartContainer } from "@/components/ProductComponents/ChartOptions";
 import { SalesBarChart } from "@/components/ProductComponents/SellBar";
 import { Footer } from "@/components/userComponents";
+import { ChartContainer } from "@/components/ProductComponents/ChartContainer";
 
 export default function Home() {
   return (
@@ -39,7 +40,6 @@ export default function Home() {
       />
       <PaymentInformation />
       <DashboardInformation name="Орлого" number={235000} />
-      <Footer />
     </>
   );
 }
