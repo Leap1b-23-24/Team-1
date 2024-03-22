@@ -1,29 +1,9 @@
 "use client";
 
-import { IncomeFooter } from "@/components/ProductComponents/IncomeFooter";
-
-import {
-  AreasBarChart,
-  IncomeHeader,
-  PaymentInformation,
-  ProductCard,
-  ProductHeader,
-} from "@/components/ProductComponents";
-
-import { ProductFilter } from "@/components/ProductComponents/ProductFilter";
 import { Grid, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
-import { IncomeFooterTopCom } from "@/components/ProductComponents/income";
-import DeliveryInformation from "@/components/ProductComponents/DeliveryInformation";
-import DashboardInformation from "@/components/ProductComponents/DashboardInfo";
-import { BarChartContainer } from "@/components/ProductComponents/ChartOptions";
-import { SalesBarChart } from "@/components/ProductComponents/SellBar";
-import {
-  Footer,
-  ServiceCards,
-  UnderHeader,
-  WholeHeader,
-} from "@/components/userComponents";
+import { useEffect } from "react";
+
+import { Footer, ServiceCards, WholeHeader } from "@/components/userComponents";
 import { ShoppingCard } from "@/components/userComponents/ShoppingCard";
 import { Container, Typography } from "@mui/material";
 import { useProduct } from "@/providers/AddproductProvider";
@@ -36,7 +16,7 @@ const slides = [
 ];
 
 export default function Home() {
-  const { getAllProducts, products, allProducts } = useProduct();
+  const { getAllProducts, allProducts } = useProduct();
   useEffect(() => {
     getAllProducts();
   }, []);
@@ -46,7 +26,7 @@ export default function Home() {
       <WholeHeader />
       {/* Main Container */}
       <Container maxWidth="lg">
-        <Stack width={"100%"} gap={4} border={"1px solid red"} padding={1}>
+        <Stack width={"100%"} gap={4}>
           {/* carousel container */}
           <Stack width={"100%"} height={557} border={"1px solid black"}>
             {/* <Typography color={"black"}>Carousel container</Typography> */}
