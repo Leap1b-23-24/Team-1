@@ -51,3 +51,14 @@ export const getUserProduct: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
+
+export const getAdminProduct: RequestHandler = async (req, res) => {
+  const { category } = req.query;
+  try {
+    const products = await ProductModel.find(
+      category === "" ? {} : { categoryId: category }
+    );
+
+    res.json({ products });
+  } catch (error) {}
+};
