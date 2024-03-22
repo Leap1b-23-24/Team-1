@@ -62,3 +62,15 @@ export const getAdminProduct: RequestHandler = async (req, res) => {
     res.json({ products });
   } catch (error) {}
 };
+export const getAllProducts: RequestHandler = async (req, res) => {
+  try {
+    const allProducts = await ProductModel.find({});
+    if (!allProducts)
+      return res.status(401).json({
+        message: "Sorry we don't have any product to for you",
+      });
+    res.json(allProducts);
+  } catch (err) {
+    res.json(err);
+  }
+};
