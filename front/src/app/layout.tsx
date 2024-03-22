@@ -25,16 +25,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CssBaseline>
-          <AuthProvider>
-            <Userprovider>
+       <AuthProvider>
+          <Userprovider>
+            <CssBaseline>
               {/* <ThemeProvider theme={theme}> */}
-
               {children}
-              <ToastContainer />
-            </Userprovider>
-          </AuthProvider>
-        </CssBaseline>
+            </CssBaseline>
+            <ToastContainer />
+          </Userprovider>
+        </AuthProvider>
         {/* </ThemeProvider> */}
       </body>
     </html>
