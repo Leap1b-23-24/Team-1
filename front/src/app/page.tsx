@@ -21,6 +21,13 @@ import { SalesBarChart } from "@/components/ProductComponents/SellBar";
 import { Footer, UnderHeader, WholeHeader } from "@/components/userComponents";
 import { ShoppingCard } from "@/components/userComponents/ShoppingCard";
 import { Container, Typography } from "@mui/material";
+import { Carousel } from "@/components/userComponents/CarouselBanner";
+
+const slides = [
+  { image: "/ads1xbet.webp", title: "1xbet" },
+  { image: "/adsCoke.jpeg", title: "Coke" },
+  { image: "/adsVape.jpg", title: "Vape" },
+];
 
 export default function Home() {
   return (
@@ -31,7 +38,8 @@ export default function Home() {
         <Stack width={"100%"} gap={4} border={"1px solid red"} padding={1}>
           {/* carousel container */}
           <Stack width={"100%"} height={557} border={"1px solid black"}>
-            <Typography color={"black"}>Carousel container</Typography>
+            {/* <Typography color={"black"}>Carousel container</Typography> */}
+            <Carousel slides={slides} />
           </Stack>
           {/* Suggest container */}
           <Stack width={"100%"} border={"1px solid purple"} gap={3}>
