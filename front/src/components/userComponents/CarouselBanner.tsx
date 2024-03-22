@@ -22,6 +22,7 @@ export const Carousel = (props: CarouselProps) => {
   return (
     <Stack overflow={"hidden"}>
       <Swiper
+        className="swiper"
         modules={[Navigation, Pagination, Scrollbar]}
         navigation
         pagination={{ clickable: true }}
