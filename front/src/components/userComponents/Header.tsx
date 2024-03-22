@@ -1,9 +1,5 @@
 "use client";
-import {
-  MarkunreadMailbox,
-  PhoneInTalkOutlined,
-  ShoppingCartOutlined,
-} from "@mui/icons-material";
+import { PhoneInTalkOutlined, ShoppingCartOutlined } from "@mui/icons-material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -18,9 +14,20 @@ import {
 import Image from "next/image";
 export const Header = () => {
   return (
-    <Stack bgcolor={"#7E33E0"} py={"2px"} width={1} height={"44px"}>
-      <Container maxWidth="lg">
-        <Box display={"flex"} justifyContent={"space-between"}>
+    <Stack
+      bgcolor={"#7E33E0"}
+      py={"2px"}
+      width={1}
+      height={"44px"}
+      alignItems={"center"}
+    >
+      <Container maxWidth="lg" sx={{ height: "100%" }}>
+        <Box
+          height={"100%"}
+          display={"flex"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
           <Stack flexDirection={"row"} gap={"66px"}>
             <Stack
               flexDirection={"row"}
@@ -51,6 +58,7 @@ export const Header = () => {
               gap={"3px"}
               fontSize={"24px"}
               color={"#F1F1F1"}
+              alignItems={"center"}
             >
               <Typography fontSize={16} fontWeight={600}>
                 Нэвтрэх
@@ -71,9 +79,11 @@ export const Header = () => {
             </Stack>
             <IconButton size="small">
               <Badge color="warning">
-                <Typography color={"#f1f1f1"}>
-                  <ShoppingCartOutlined fontSize="medium" color="inherit" />
-                </Typography>
+                <ShoppingCartOutlined
+                  style={{ color: "white" }}
+                  fontSize="small"
+                  color="inherit"
+                />
               </Badge>
             </IconButton>
           </Stack>
