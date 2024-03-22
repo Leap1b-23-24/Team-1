@@ -1,34 +1,55 @@
-import {  Stack } from "@mui/material";
-import Image from "next/image";
-import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar } from "swiper/modules";
 
-const images = [
-  "/image 109.svg",
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "swiper/css/bundle";
+import { Stack } from "@mui/material";
 
-  "/image 110.svg",
-];
+type slideType = {
+  title: string;
+  image: string;
+};
 
+type CarouselProps = {
+  slides: slideType[];
+};
 
-
-export const CarouselBanner = () => {
-  const [page, setPage] = useState(1);
-
+export const Carousel = (props: CarouselProps) => {
+  const { slides } = props;
   return (
-    <Stack width={"100%"} overflow={"scroll"} sx={{cursor:'grab', active:"cursor-grabbing", MozWindowDragging:"drag", }} borderRadius={2}>
-      {images.map((item, index) => {
-        return (
-          <Stack
-            direction={"row"}
-            key={index}
-            width={"100%"}
-            height={557}
-            position={"relative"}
-
-          >
-            <Image src={item} fill alt="" objectFit="cover" />
-          </Stack>
-        );
-      })}
+    <Stack overflow={"hidden"}>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar]}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        spaceBetween={0}
+        slidesPerView={1}
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
+        style={{ width: "100%" }}
+      >
+        {slides.map((slide, index) => {
+          return (
+            <SwiperSlide key={index}>
+              <Stack maxWidth={"1280px"} maxHeight={"800px"}>
+                <img
+                  src={`${slide.image}`}
+                  alt={`${slide.title}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              </Stack>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
     </Stack>
   );
 };

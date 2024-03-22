@@ -31,3 +31,13 @@ body {
     text-wrap: balance;
   }
 } */
+/* .swiper-paginaiton-bullet-active {
+  background-color: red !important;
+} */
+/* .swiper :global(.swiper-pagination-bullet) {
+  background: red !important;
+} */
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: red in !important;
+  opacity: 1;
+}
