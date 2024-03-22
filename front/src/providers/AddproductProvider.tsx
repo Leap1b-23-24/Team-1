@@ -10,9 +10,16 @@ import {
   useState,
 } from "react";
 import { ProductType } from "./UserProvider";
+import { toast } from "react-toastify";
 
 type AddProductProviderProps = {
   children: ReactNode;
+};
+
+type Product = {
+  productName: string;
+  images: string;
+  productPrice: number;
 };
 
 export type CategoryType = {
@@ -31,6 +38,9 @@ type AddProductContextType = {
     setState: Dispatch<SetStateAction<string>>,
     categoryId: string
   ) => Promise<void>;
+  setAllProducts: (value: Product[]) => void;
+  allProducts: Product[];
+  getAllProducts: () => Promise<void>;
 };
 
 const AddProductContext = createContext<AddProductContextType>(
@@ -43,6 +53,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
 
   const getCategory = async () => {
     try {
@@ -80,6 +91,14 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
       console.log(error);
     }
   };
+  const getAllProducts = async () => {
+    try {
+      const { data } = await api.get("product/getAllProducts");
+      setAllProducts(data);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   const getSingleCategory = async (
     setState: Dispatch<SetStateAction<string>>,
@@ -113,6 +132,9 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         getProduct,
         products,
         getSingleCategory,
+        setAllProducts,
+        allProducts,
+        getAllProducts,
       }}
     >
       {children}
