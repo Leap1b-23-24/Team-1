@@ -6,17 +6,20 @@ import {
   ProductFilter,
 } from "@/components/ProductComponents";
 import { useProduct } from "@/providers/AddproductProvider";
+import { ProductType } from "@/providers/UserProvider";
 import { Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function productPage() {
-  // const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("");
   const [date, setDate] = useState<string>("");
   const [price, setPrice] = useState("");
   const [search, setSearch] = useState("");
-  const { products, setFilter, categoryFilder } = useProduct();
+  const { products, getProduct } = useProduct();
 
-  console.log(products);
+  useEffect(() => {
+    getProduct(category);
+  }, [category]);
 
   return (
     <Stack direction="row" width="100%" height={"95vh"} bgcolor={"#F7F7F8"}>
@@ -37,8 +40,8 @@ export default function productPage() {
         <Stack padding={3} gap={3}>
           <AddProductButton />
           <ProductFilter
-            setCategory={setFilter}
-            category={categoryFilder}
+            setCategory={setCategory}
+            category={category}
             setDate={setDate}
             date={date}
             setPrice={setPrice}
@@ -47,17 +50,27 @@ export default function productPage() {
           />
           <Stack borderRadius="12px" bgcolor="white">
             <ProductClothesRowHeader />
-            {products.map((product) => {
-              const {} = product;
+            {products.map((each) => {
+              const {
+                productCode,
+                productName,
+                createdAt,
+                quantity,
+                soldQuantity,
+                images,
+                productPrice,
+                categoryId,
+              } = each;
               return (
                 <AdminClothesRow
-                  priority={23}
-                  productName="bag"
-                  category="bag"
-                  price={345000}
-                  arrearage={89}
-                  sold={809}
-                  addedDate="2024-03-12"
+                  productCode={productCode}
+                  productName={productName}
+                  addedDate={createdAt}
+                  inStock={quantity}
+                  sold={soldQuantity ? soldQuantity : 0}
+                  image={images[0]}
+                  categoryId={categoryId}
+                  price={productPrice}
                 />
               );
             })}

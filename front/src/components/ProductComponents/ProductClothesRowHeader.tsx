@@ -2,18 +2,20 @@ import { CheckBox, CreateOutlined, DeleteOutline } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 
 const titles = [
+  "",
   "Бүтээгдэхүүн",
   "Ангилал",
   "Үнэ",
   "Үлдэгдэл",
   "Зарагдсан",
   " Нэмсэн огноо",
+  "",
 ];
 
 export const ProductClothesRowHeader = () => {
   return (
     <Stack
-      direction="row"
+      flexDirection="row"
       width="100%"
       justifyContent="center"
       alignItems="center"
@@ -21,10 +23,10 @@ export const ProductClothesRowHeader = () => {
       py="12px"
     >
       <Stack
-        width="72%"
+        width="100%"
         direction="row"
-        justifyContent="space-between"
         alignItems="center"
+        sx={{ display: "grid", gridTemplateColumns: "repeat(8,1fr)" }}
       >
         {titles.map((item, index) => {
           return (

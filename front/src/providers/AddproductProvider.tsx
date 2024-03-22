@@ -26,9 +26,11 @@ type AddProductContextType = {
   subCategories: CategoryType[];
   setCategoryAdded: Dispatch<SetStateAction<boolean>>;
   getProduct: (category: string) => Promise<void>;
-  products: ProductType[];
-  setFilter: Dispatch<SetStateAction<string>>;
-  categoryFilder: string;
+  products: ProductType;
+  getSingleCategory: (
+    setState: Dispatch<SetStateAction<string>>,
+    categoryId: string
+  ) => Promise<void>;
 };
 
 const AddProductContext = createContext<AddProductContextType>(
@@ -40,8 +42,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [categoryAdded, setCategoryAdded] = useState<boolean>(false);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
-  const [products, setProducts] = useState<ProductType[]>([]);
-  const [categoryFilder, setFilter] = useState("");
+  const [products, setProducts] = useState<ProductType>([]);
 
   const getCategory = async () => {
     try {
@@ -80,14 +81,26 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
     }
   };
 
+  const getSingleCategory = async (
+    setState: Dispatch<SetStateAction<string>>,
+    categoryId: string
+  ) => {
+    try {
+      const res = await api.post("/category/getSingle", {
+        categoryId: categoryId,
+      });
+
+      setState(res.data.category);
+    } catch (error) {}
+  };
   useEffect(() => {
     getCategory();
     getSubCategory();
   }, [categoryAdded]);
 
-  useEffect(() => {
-    getProduct(categoryFilder);
-  }, [categoryFilder]);
+  // useEffect(() => {
+  //   getProduct(categoryFilder);
+  // }, [categoryFilder]);
 
   return (
     <AddProductContext.Provider
@@ -99,8 +112,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         subCategories,
         getProduct,
         products,
-        setFilter,
-        categoryFilder,
+        getSingleCategory,
       }}
     >
       {children}

@@ -79,3 +79,12 @@ export const getSubCategory: RequestHandler = async (req, res) => {
     console.log(error, "get sub category error");
   }
 };
+
+export const getSingleCategory: RequestHandler = async (req, res) => {
+  const { categoryId } = req.body;
+  try {
+    const category = await CategoryModel.findOne({ _id: categoryId });
+
+    res.json({ category: category?.name });
+  } catch (error) {}
+};
