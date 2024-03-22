@@ -65,35 +65,39 @@ export const SignUp = (props: SignUpType) => {
       borderRadius={2.5}
       border={"1px solid #ECEDF0"}
     >
-      <Stack
-        direction={"row"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
+      <Typography fontSize={32} fontWeight={700}>
+        Бүртгүүлэх
+      </Typography>
+      <Typography>
+        Та Борлуулагч эсвэл Худалдан авагчаар бүртгүүлэх ээ сонгоно уу
+      </Typography>
+      <ToggleButtonGroup
+        sx={{ height: "36px", width: "100%" }}
+        color="primary"
+        value={userRole}
+        exclusive
+        onChange={handleChange}
+        aria-label="Platform"
       >
-        <Typography fontSize={32} fontWeight={700}>
-          Бүртгүүлэх
-        </Typography>
-        <ToggleButtonGroup
-          sx={{ height: 36 }}
-          color="primary"
-          value={userRole}
-          exclusive
-          onChange={handleChange}
-          aria-label="Platform"
+        <ToggleButton
+          value={"Борлуулагч"}
+          sx={{
+            fontSize: 10,
+            fontWeight: userRole === "Борлуулагч" ? 700 : 400,
+          }}
         >
-          <ToggleButton value={"Борлуулагч"} sx={{ fontSize: 8 }}>
-            Борлуулагч
-          </ToggleButton>
-          <ToggleButton
-            value={"Худалдан авагч"}
-            sx={{
-              fontSize: 8,
-            }}
-          >
-            Худалдан авагч
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </Stack>
+          Борлуулагч
+        </ToggleButton>
+        <ToggleButton
+          value={"Худалдан авагч"}
+          sx={{
+            fontSize: 10,
+            fontWeight: userRole === "Худалдан авагч" ? 700 : 400,
+          }}
+        >
+          Худалдан авагч
+        </ToggleButton>
+      </ToggleButtonGroup>
       <SignUpInput
         value={email}
         label="Таны имэйл "
