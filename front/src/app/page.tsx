@@ -44,6 +44,16 @@ export default function Home() {
               gap={2}
             >
               <ShoppingCard
+                productImage="./tshirt.jpeg"
+                productColor={{ color: "white" }}
+                productName="3213"
+                productPrice={312312}
+                // image="/tshirt.jpeg"
+                // title="Guess цахилгаант цамц"
+                // price={58000}
+                // description="Чөлөөт цамц"
+              />
+              {/* <ShoppingCard
                 image="/tshirt.jpeg"
                 title="Guess цахилгаант цамц"
                 price={58000}
@@ -66,13 +76,7 @@ export default function Home() {
                 title="Guess цахилгаант цамц"
                 price={58000}
                 description="Чөлөөт цамц"
-              />
-              <ShoppingCard
-                image="/tshirt.jpeg"
-                title="Guess цахилгаант цамц"
-                price={58000}
-                description="Чөлөөт цамц"
-              />
+              /> */}
             </Stack>
           </Stack>
         </Stack>
