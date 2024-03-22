@@ -1,98 +1,85 @@
+"use client";
 import {
-  Favorite,
-  MenuOutlined,
-  Search,
-  SearchOutlined,
-  ShoppingCart,
-  Visibility,
+  MarkunreadMailbox,
+  PhoneInTalkOutlined,
+  ShoppingCartOutlined,
 } from "@mui/icons-material";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import {
+  Badge,
+  Box,
   Container,
-  InputAdornment,
-  Menu,
+  IconButton,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
-
-const type = ["Хямдралтай", "Эрэгтэй", "Эмэгтэй", "Хүүхдийн"];
-
+import Image from "next/image";
 export const Header = () => {
   return (
-    <Stack width="100%">
-      <Stack width="100%" height="fit-content" bgcolor="#12A795">
-        <Container
-          maxWidth="lg"
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <img
-            src="svgCompanyLogo.svg"
-            alt=""
-            style={{ paddingTop: "16px", paddingBottom: "16px" }}
-          />
-
-          <TextField
-            type="search"
-            placeholder="Хайлт"
-            variant="standard"
-            sx={{
-              background: "white",
-              borderRadius: "8px",
-              width: "30%",
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment sx={{ padding: "8px" }} position="start">
-                  <SearchOutlined />
-                </InputAdornment>
-              ),
-              disableUnderline: true,
-            }}
-          />
-
-          <Stack direction="row" alignItems="center" gap={2}>
-            <Favorite sx={{ color: "white" }} />{" "}
-            <ShoppingCart sx={{ color: "white" }} />{" "}
+    <Stack bgcolor={"#7E33E0"} py={"2px"} width={1} height={"44px"}>
+      <Container maxWidth="lg">
+        <Box display={"flex"} justifyContent={"space-between"}>
+          <Stack flexDirection={"row"} gap={"66px"}>
             <Stack
-              width="40px"
-              height="40px"
-              borderRadius="50%"
-              bgcolor="red"
-            ></Stack>
+              flexDirection={"row"}
+              alignItems={"center"}
+              gap={1.25}
+              color={"#F1F1F1"}
+            >
+              <MailOutlineIcon fontSize="small" />
+              <Typography fontSize={16} fontWeight={600}>
+                info@ecommerce.mn
+              </Typography>
+            </Stack>
+            <Stack
+              flexDirection={"row"}
+              alignItems={"center"}
+              gap={1.25}
+              color={"#F1F1F1"}
+            >
+              <PhoneInTalkOutlined fontSize="small" />
+              <Typography fontSize={16} fontWeight={600}>
+                info@ecommerce.mn
+              </Typography>
+            </Stack>
           </Stack>
-        </Container>
-      </Stack>
-      <Stack
-        width="100%"
-        height="30px"
-        bgcolor="white"
-        py="8px"
-        justifyContent="center"
-      >
-        <Container
-          maxWidth="lg"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: "4%",
-          }}
-        >
-          <MenuOutlined />
-          <Stack direction="row" gap={2}>
-            {type.map((name, index) => {
-              return (
-                <Typography key={index} color={"#121316"}>
-                  {name}
+          <Stack flexDirection={"row"} alignItems={"center"} gap={"29px"}>
+            <Stack
+              flexDirection={"row"}
+              gap={"3px"}
+              fontSize={"24px"}
+              color={"#F1F1F1"}
+            >
+              <Typography fontSize={16} fontWeight={600}>
+                Нэвтрэх
+              </Typography>
+              <PermIdentityIcon fontSize="small" />
+            </Stack>
+            <Stack
+              flexDirection={"row"}
+              alignItems={"center"}
+              gap={"3px"}
+              fontSize={"24px"}
+              color={"#F1F1F1"}
+            >
+              <Typography fontSize={16} fontWeight={600}>
+                Хадгалах
+              </Typography>
+              <FavoriteBorderIcon fontSize="small" />
+            </Stack>
+            <IconButton size="small">
+              <Badge color="warning">
+                <Typography color={"#f1f1f1"}>
+                  <ShoppingCartOutlined fontSize="medium" color="inherit" />
                 </Typography>
-              );
-            })}
+              </Badge>
+            </IconButton>
           </Stack>
-        </Container>
-      </Stack>
+        </Box>
+      </Container>
+      <Container maxWidth="lg"></Container>
     </Stack>
   );
 };
