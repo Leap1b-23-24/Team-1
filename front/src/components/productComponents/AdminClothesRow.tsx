@@ -1,7 +1,7 @@
 "use client";
 import { useProduct } from "@/providers/AddproductProvider";
 import { Check, CreateOutlined, DeleteOutline } from "@mui/icons-material";
-import { Checkbox, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { format } from "date-fns";
 import Image from "next/image";
 import { useEffect, useState } from "react";
