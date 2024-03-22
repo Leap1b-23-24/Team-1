@@ -18,7 +18,12 @@ import DeliveryInformation from "@/components/ProductComponents/DeliveryInformat
 import DashboardInformation from "@/components/ProductComponents/DashboardInfo";
 import { BarChartContainer } from "@/components/ProductComponents/ChartOptions";
 import { SalesBarChart } from "@/components/ProductComponents/SellBar";
-import { Footer, UnderHeader, WholeHeader } from "@/components/userComponents";
+import {
+  Footer,
+  ServiceCards,
+  UnderHeader,
+  WholeHeader,
+} from "@/components/userComponents";
 import { ShoppingCard } from "@/components/userComponents/ShoppingCard";
 import { Container, Typography } from "@mui/material";
 import { Carousel } from "@/components/userComponents/CarouselBanner";
@@ -84,6 +89,7 @@ export default function Home() {
             </Stack>
           </Stack>
         </Stack>
+        <ServiceCards />
       </Container>
       <Footer />
     </Stack>
