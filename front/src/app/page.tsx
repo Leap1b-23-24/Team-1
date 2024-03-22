@@ -47,7 +47,7 @@ export default function Home() {
                 productImage="./tshirt.jpeg"
                 productColor={{ color: "white" }}
                 productName="3213"
-                productPrice={312312}
+                productPrice={312}
                 // image="/tshirt.jpeg"
                 // title="Guess цахилгаант цамц"
                 // price={58000}
