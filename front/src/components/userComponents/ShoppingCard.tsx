@@ -44,6 +44,7 @@
 
 "use client";
 
+import { useProduct } from "@/providers/AddproductProvider";
 import {
   FavoriteBorder,
   ShoppingCartOutlined,
@@ -52,13 +53,14 @@ import {
 import { Button, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 type ShoppingCardProps = {
-  productImage: string;
+  images: string;
   productName: string;
-  productColor: string[];
+  // productColor: string[];
   productPrice: number;
 };
 export const ShoppingCard = (props: ShoppingCardProps) => {
-  const { productImage, productName, productColor, productPrice } = props;
+  const { getProduct } = useProduct();
+  const { images, productName, productPrice } = props;
   return (
     <Stack width={1} height={1}>
       <Stack
@@ -85,7 +87,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
           className="image"
           alt="product image"
           style={{ objectFit: "cover" }}
-          src={productImage}
+          src={images}
           fill
           sizes="small"
         />
@@ -111,7 +113,10 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
               fontSize={20}
               sx={{ cursor: "pointer" }}
             >
-              <ShoppingCartOutlined fontSize="inherit" color="inherit" />
+              <ShoppingCartOutlined
+                fontSize="inherit"
+                sx={{ fill: "#151875" }}
+              />
             </Stack>
 
             <Stack
@@ -124,7 +129,11 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
               fontSize={20}
               sx={{ cursor: "pointer" }}
             >
-              <FavoriteBorder fontSize="inherit" color="inherit" />
+              <FavoriteBorder
+                fontSize="inherit"
+                // color="#151875"
+                sx={{ fill: "#151875" }}
+              />
             </Stack>
             <Stack
               width={30}
@@ -136,7 +145,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
               fontSize={20}
               sx={{ cursor: "pointer" }}
             >
-              <ZoomIn fontSize="inherit" color="inherit" />
+              <ZoomIn fontSize="inherit" sx={{ fill: "#151875" }} />
             </Stack>
           </Stack>
         </Stack>
@@ -151,20 +160,21 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
           {productName}
         </Typography>
         <Stack flexDirection={"row"} gap={"6px"} mt={1} mb="15px">
-          {productColor.map((item, index) => (
+          {/* {productColor.map((item, index) => (
             <Stack
               key={index}
               p={"5px"}
               borderRadius={10}
               bgcolor={item}
             ></Stack>
-          ))}
+          ))} */}
         </Stack>
         <Stack flexDirection={"row"} gap={1.25} fontSize={14} fontWeight={400}>
-          <Typography color={"#151875"}>{"₮"}</Typography>
-          <Typography color={"#FB2E86"} sx={{ textDecoration: "line-through" }}>
-            {"₮"}
-          </Typography>
+          <Typography color={"#151875"}>{`${productPrice}₮`}</Typography>
+          <Typography
+            color={"#FB2E86"}
+            sx={{ textDecoration: "line-through" }}
+          ></Typography>
         </Stack>
       </Stack>
     </Stack>
