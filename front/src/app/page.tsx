@@ -16,7 +16,6 @@ const slides = [
 export default function Home() {
   return (
     <Stack width={"100vw"} alignItems={"center"} bgcolor={"#F7F7F8"}>
-      <WholeHeader />
       {/* Main Container */}
       <Stack width={"100%"} gap={20}>
         {/* carousel container */}
@@ -33,7 +32,6 @@ export default function Home() {
           </Stack>
         </Container>
       </Stack>
-      <Footer />
     </Stack>
   );
 }

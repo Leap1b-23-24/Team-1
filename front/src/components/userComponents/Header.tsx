@@ -12,7 +12,9 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 export const Header = () => {
+  const router = useRouter();
   return (
     <Stack
       bgcolor={"#7E33E0"}
@@ -77,7 +79,12 @@ export const Header = () => {
               </Typography>
               <FavoriteBorderIcon fontSize="small" />
             </Stack>
-            <IconButton size="small">
+            <IconButton
+              size="small"
+              onClick={() => {
+                router.push("/bucket");
+              }}
+            >
               <Badge color="warning">
                 <ShoppingCartOutlined
                   style={{ color: "white" }}

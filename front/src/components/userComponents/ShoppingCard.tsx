@@ -17,7 +17,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
   const { getProduct } = useProduct();
   const { images, productName, productPrice } = props;
   return (
-    <Stack width={1} height={1}>
+    <Stack width={"100%"} height={1} paddingX={1}>
       <Stack
         position={"relative"}
         width={1}

@@ -29,7 +29,6 @@ export const NewProducts = () => {
       <Stack
         width={"100%"}
         sx={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)" }}
-        gap={2}
       >
         {products?.map((item, index) => {
           return (

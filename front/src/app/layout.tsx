@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Userprovider } from "@/providers/UserProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { AddProductProvider } from "@/providers/AddproductProvider";
+import { Footer, WholeHeader } from "@/components/userComponents";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,8 +31,10 @@ export default function RootLayout({
           <Userprovider>
             <CssBaseline>
               <AddProductProvider>
+                <WholeHeader />
                 {/* <ThemeProvider theme={theme}> */}
                 {children}
+                <Footer />
               </AddProductProvider>
             </CssBaseline>
             <ToastContainer />

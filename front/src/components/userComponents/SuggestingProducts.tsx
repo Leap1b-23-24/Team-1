@@ -22,17 +22,19 @@ export const SuggestingProducts = () => {
       <Typography fontSize={30} fontWeight={800} color={"#1A0B5B"}>
         Онцлох бүтээгдэхүүн
       </Typography>
-      <Stack width={"100%"} flexDirection={"row"} gap={1}>
-        {products.map((item, index) => {
-          return (
-            <ShoppingCard
-              key={index}
-              images={item.images[0]}
-              productName={item.productName}
-              productPrice={item.productPrice}
-            />
-          );
-        })}
+      <Stack width={"100%"} overflow={"hidden"} position={"relative"}>
+        <Stack width={"100%"} flexDirection={"row"}>
+          {products.map((item, index) => {
+            return (
+              <ShoppingCard
+                key={index}
+                images={item.images[0]}
+                productName={item.productName}
+                productPrice={item.productPrice}
+              />
+            );
+          })}
+        </Stack>
       </Stack>
     </Stack>
   );
