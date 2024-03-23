@@ -1,6 +1,5 @@
 "use client";
-
-import { useProduct } from "@/providers/AddproductProvider";
+import { useOrder } from "@/providers/OrderProvider";
 import {
   FavoriteBorder,
   ShoppingCartOutlined,
@@ -9,13 +8,24 @@ import {
 import { Stack, Typography } from "@mui/material";
 import Image from "next/image";
 type ShoppingCardProps = {
+  productId: string;
+  color: string;
   images: string;
   productName: string;
   productPrice: number;
 };
+
+type BucketProduct = {
+  _id: string;
+  productName: string;
+  productColor: string;
+  image: string;
+  price: number;
+  quantity: number;
+};
 export const ShoppingCard = (props: ShoppingCardProps) => {
-  const { getProduct } = useProduct();
-  const { images, productName, productPrice } = props;
+  const { images, productName, productPrice, productId, color } = props;
+  const { addToBucket } = useOrder();
   return (
     <Stack width={"100%"} height={1} paddingX={1}>
       <Stack
@@ -67,6 +77,16 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
               justifyContent={"center"}
               fontSize={20}
               sx={{ cursor: "pointer" }}
+              onClick={() => {
+                addToBucket({
+                  productColor: color,
+                  productName: productName,
+                  _id: productId,
+                  quantity: 1,
+                  image: images,
+                  price: productPrice,
+                });
+              }}
             >
               <ShoppingCartOutlined
                 fontSize="inherit"

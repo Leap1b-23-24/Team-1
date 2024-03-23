@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { Footer, ServiceCards, WholeHeader } from "@/components/userComponents";
 import { Container } from "@mui/material";
 import { Carousel } from "@/components/userComponents/CarouselBanner";
@@ -27,7 +27,6 @@ export default function Home() {
           <Stack width={"100%"} alignItems={"center"} gap={10}>
             <SuggestingProducts />
             <NewProducts />
-
             <ServiceCards />
           </Stack>
         </Container>

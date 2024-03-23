@@ -11,9 +11,21 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useOrder } from "@/providers/OrderProvider";
 export const Header = () => {
+  const [buckets, setBucket] = useState<number>(0);
+  const { isBucketAdded } = useOrder();
+  useEffect(() => {
+    let array = localStorage.getItem("bucket");
+    if (!array) {
+      setBucket(0);
+    } else {
+      let bucket = JSON.parse(array);
+      setBucket(bucket.length);
+    }
+  }, [isBucketAdded]);
   const router = useRouter();
   return (
     <Stack
@@ -80,11 +92,31 @@ export const Header = () => {
               <FavoriteBorderIcon fontSize="small" />
             </Stack>
             <IconButton
+              sx={{ position: "relative" }}
               size="small"
               onClick={() => {
                 router.push("/bucket");
               }}
             >
+              {buckets === 0 ? null : (
+                <Stack
+                  zIndex={1}
+                  paddingX={0.5}
+                  sx={{ aspectRatio: "1/1" }}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  position={"absolute"}
+                  color={"white"}
+                  bgcolor={"#33CF38"}
+                  fontSize={10}
+                  fontWeight={800}
+                  borderRadius={"50%"}
+                  top={0}
+                  right={0}
+                >
+                  {buckets}
+                </Stack>
+              )}
               <Badge color="warning">
                 <ShoppingCartOutlined
                   style={{ color: "white" }}

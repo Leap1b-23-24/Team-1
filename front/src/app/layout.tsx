@@ -11,6 +11,8 @@ import { Userprovider } from "@/providers/UserProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { AddProductProvider } from "@/providers/AddproductProvider";
 import { Footer, WholeHeader } from "@/components/userComponents";
+import { usePathname } from "next/navigation";
+import { OrderProvider } from "@/providers/OrderProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,24 +26,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathName = usePathname();
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider>
-          <Userprovider>
-            <CssBaseline>
-              <AddProductProvider>
-                <WholeHeader />
-                {/* <ThemeProvider theme={theme}> */}
-                {children}
-                <Footer />
-              </AddProductProvider>
-            </CssBaseline>
-            <ToastContainer />
-          </Userprovider>
-        </AuthProvider>
-
-        {/* </ThemeProvider> */}
+        <ThemeProvider theme={theme}>
+          <AuthProvider>
+            <Userprovider>
+              <OrderProvider>
+                <CssBaseline>
+                  <AddProductProvider>
+                    {pathName.includes("dashboard") ? null : <WholeHeader />}
+                    {children}
+                    {pathName.includes("dashboard") ? null : <Footer />}
+                  </AddProductProvider>
+                </CssBaseline>
+              </OrderProvider>
+              <ToastContainer />
+            </Userprovider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
