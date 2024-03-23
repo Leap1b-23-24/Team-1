@@ -43,8 +43,18 @@ export const addProduct: RequestHandler = async (req, res) => {
 };
 
 export const getUserProduct: RequestHandler = async (req, res) => {
+  const { quantity, date, special } = req.query;
+
   try {
-    const products = await ProductModel.find({});
+    const products = await ProductModel.find({})
+      .limit(Number(quantity))
+      .sort(
+        Boolean(date)
+          ? { createdAt: -1 }
+          : Boolean(special)
+          ? { quantity: -1 }
+          : {}
+      );
 
     res.json({ products });
   } catch (error) {

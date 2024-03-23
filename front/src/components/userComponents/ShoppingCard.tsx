@@ -6,12 +6,11 @@ import {
   ShoppingCartOutlined,
   ZoomIn,
 } from "@mui/icons-material";
-import { Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Image from "next/image";
 type ShoppingCardProps = {
   images: string;
   productName: string;
-  // productColor: string[];
   productPrice: number;
 };
 export const ShoppingCard = (props: ShoppingCardProps) => {

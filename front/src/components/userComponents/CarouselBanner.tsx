@@ -36,7 +36,7 @@ export const Carousel = (props: CarouselProps) => {
         {slides.map((slide, index) => {
           return (
             <SwiperSlide key={index}>
-              <Stack maxWidth={"1280px"} maxHeight={"800px"}>
+              <Stack maxHeight={"850px"}>
                 <img
                   src={`${slide.image}`}
                   alt={`${slide.title}`}
