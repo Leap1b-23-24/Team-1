@@ -29,8 +29,6 @@ export const Carousel = (props: CarouselProps) => {
         scrollbar={{ draggable: true }}
         spaceBetween={0}
         slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
         style={{ width: "100%" }}
       >
         {slides.map((slide, index) => {

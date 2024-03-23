@@ -12,7 +12,9 @@ type UserProviderType = {
   children: ReactNode;
 };
 export type ProductType = {
+  _id: string;
   productName: string;
+  color: string;
   productPrice: number;
   productCode: string;
   categoryId: string;
