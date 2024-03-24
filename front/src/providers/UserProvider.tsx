@@ -13,6 +13,7 @@ type UserProviderType = {
 };
 export type ProductType = {
   _id: string;
+  shopId: string;
   productName: string;
   color: string;
   productPrice: number;

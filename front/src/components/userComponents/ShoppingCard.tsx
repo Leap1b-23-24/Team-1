@@ -8,6 +8,7 @@ import {
 import { Stack, Typography } from "@mui/material";
 import Image from "next/image";
 type ShoppingCardProps = {
+  shopId: string;
   productId: string;
   color: string;
   images: string;
@@ -24,7 +25,7 @@ type BucketProduct = {
   quantity: number;
 };
 export const ShoppingCard = (props: ShoppingCardProps) => {
-  const { images, productName, productPrice, productId, color } = props;
+  const { images, productName, productPrice, productId, color, shopId } = props;
   const { addToBucket } = useOrder();
   return (
     <Stack width={"100%"} height={1} paddingX={1}>
@@ -85,6 +86,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
                   quantity: 1,
                   image: images,
                   price: productPrice,
+                  shopId: shopId,
                 });
               }}
             >

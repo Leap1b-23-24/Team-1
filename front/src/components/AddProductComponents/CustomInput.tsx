@@ -10,17 +10,13 @@ export const CustomInput = (props: TextFieldProps) => {
       </Typography>
       <TextField
         fullWidth
-        variant="standard"
         inputProps={{
           style: {
             padding: "8px 12px",
-            border: "1px solid #D6D8DB",
-            borderRadius: "8px",
             overflow: "hidden",
             backgroundColor: "#F7F7F8",
           },
         }}
-        InputProps={{ disableUnderline: true }}
         {...rest}
       />
       <Typography

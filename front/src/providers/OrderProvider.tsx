@@ -13,6 +13,7 @@ type OrderProviderType = {
 };
 
 export type BucketProductType = {
+  shopId: string;
   _id: string;
   productName: string;
   productColor: string;
