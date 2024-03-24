@@ -1,23 +1,29 @@
 "use client";
-import { BucketProductType } from "@/providers/OrderProvider";
+import { BucketProductType, useOrder } from "@/providers/OrderProvider";
 import { Stack, Typography } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const AddedPrice = (props: { productChanged?: boolean }) => {
   const [addedPrice, setAddedPrice] = useState<number>(0);
-  const [productiD, setProductId] = useState<string[]>([]);
+  const [orderDetails, setOrderDetails] = useState<
+    { id: string; quantity: number }[]
+  >([]);
   const router = useRouter();
   const pathName = usePathname();
+  const { orderProducts } = useOrder();
   useEffect(() => {
     let raw = localStorage.getItem("bucket");
     if (raw) {
       let products: BucketProductType[] = JSON.parse(raw);
       setAddedPrice(0);
-      setProductId([]);
+      setOrderDetails([]);
       products.forEach((each) => {
         setAddedPrice((prev) => (prev += each.price));
-        setProductId([...productiD, each._id]);
+        setOrderDetails((prev) => [
+          ...prev,
+          { id: each._id, quantity: each.quantity },
+        ]);
       });
     }
   }, [props.productChanged]);
@@ -74,7 +80,12 @@ export const AddedPrice = (props: { productChanged?: boolean }) => {
           onClick={() => {
             pathName.includes("bucket")
               ? router.push("/order")
-              : console.log(productiD);
+              : orderProducts({
+                  status: "paid",
+                  amountToBePaid: addedPrice,
+                  orderDetail: orderDetails,
+                  contactInfo: "80125413",
+                });
           }}
         >
           Худалдан авах

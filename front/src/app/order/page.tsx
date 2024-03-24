@@ -92,9 +92,11 @@ export default function Order() {
             <Stack width={"30%"} gap={4}>
               <Stack width={"100%"} overflow={"scroll"} gap={2}>
                 {products.map((product) => {
-                  const { productColor, productName, price, image } = product;
+                  const { productColor, productName, price, image, _id } =
+                    product;
                   return (
                     <OrderProduct
+                      key={_id}
                       color={productColor}
                       name={productName}
                       price={price}

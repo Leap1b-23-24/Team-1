@@ -7,6 +7,7 @@ import {
 } from "react";
 import { ProductType } from "./UserProvider";
 import { toast } from "react-toastify";
+import { api } from "@/common";
 
 type OrderProviderType = {
   children: React.ReactNode;
@@ -30,11 +31,18 @@ type OrderContextType = {
   ) => void;
   isBucketAdded: boolean;
   setBucketAdded: Dispatch<SetStateAction<boolean>>;
+  orderProducts: (params: OrderParamsType) => Promise<void>;
 };
 
 type Order = {
   orderNumber: string;
   status: string;
+};
+type OrderParamsType = {
+  status: string;
+  contactInfo: string;
+  amountToBePaid: number;
+  orderDetail: { id: string; quantity: number }[];
 };
 
 const OrderContext = createContext<OrderContextType>({} as OrderContextType);
@@ -69,6 +77,25 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
       setProduct(products);
     }
   };
+  const orderProducts = async (params: OrderParamsType) => {
+    const { status, contactInfo, amountToBePaid, orderDetail } = params;
+    try {
+      const res = await api.post(
+        "/order/addOrder",
+        {
+          status,
+          contactInfo,
+          amountToBePaid,
+          orderDetail,
+        },
+        { headers: { Authorization: localStorage.getItem("token") } }
+      );
+
+      toast.success(res.data.message);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   return (
     <OrderContext.Provider
@@ -78,6 +105,7 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
         getBucketProducts,
         isBucketAdded,
         setBucketAdded,
+        orderProducts,
       }}
     >
       {children}

@@ -3,8 +3,7 @@ import { Schema, model } from "mongoose";
 const orderSchema = new Schema({
   orderNumber: String,
   status: String,
-  phoneNumber: String,
-  email: String,
+  contactInfo: String,
   orderer: String,
   deliveryDate: Date,
   amountPaid: Number,
@@ -15,6 +14,7 @@ const orderSchema = new Schema({
   },
   description: String,
   orderType: String,
+  orderDetails: [{ id: String, quantity: Number }],
   createdAt: Date,
   updatedAt: Date,
 });
