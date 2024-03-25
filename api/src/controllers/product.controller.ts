@@ -67,7 +67,7 @@ export const getAllProducts: RequestHandler = async (req, res) => {
     const allProducts = await ProductModel.find({});
     if (!allProducts)
       return res.status(401).json({
-        message: "Sorry we don't have any product to for you",
+        message: "Sorry we don't have any product for you",
       });
     res.json(allProducts);
   } catch (err) {
