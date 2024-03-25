@@ -27,7 +27,7 @@ type BucketProduct = {
   quantity: number;
 };
 
-export const ShoppingCard = (props: ShoppingCardProps) => {
+export const SecondCard = (props: ShoppingCardProps) => {
   const { images, productName, productPrice, productId, color, shopId } = props;
   const { addToBucket } = useOrder();
   const [open, setOpen] = useState(false);
@@ -202,11 +202,11 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
             >
               <CloseIcon />
             </Stack>
-            <Stack position={"relative"} width={"550px"} height={"550px"}>
+            <Stack position={"relative"} width={"600px"} height={"600px"}>
               <Image
                 style={{ objectFit: "contain" }}
                 src={images}
-                alt="shaadgue"
+                alt="zoom in"
                 fill
               />
             </Stack>
