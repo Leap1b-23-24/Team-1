@@ -9,7 +9,7 @@ import {
   ZoomIn,
 } from "@mui/icons-material";
 import { useState } from "react";
-import { ShoppingCardProps } from "./ShoppingCard";
+import { ShoppingCardProps } from "../ShoppingCard";
 
 export const SorttingCard = (props: ShoppingCardProps) => {
   const {
