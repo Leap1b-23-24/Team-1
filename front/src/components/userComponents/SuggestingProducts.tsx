@@ -3,7 +3,6 @@ import { useProduct } from "@/providers/AddproductProvider";
 import { ProductType } from "@/providers/UserProvider";
 import { Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { ShoppingCard } from "./ShoppingCard";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar } from "swiper/modules";
@@ -12,10 +11,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import "swiper/css/scrollbar";
 import "swiper/css/bundle";
+import { SecondCard } from "./SecondCard";
 
 export const SuggestingProducts = () => {
   const [products, setProducts] = useState<ProductType>([]);
-  const [slider, setSlider] = useState<number>(0);
   const { getAllProducts } = useProduct();
   useEffect(() => {
     getAllProducts({
@@ -27,7 +26,7 @@ export const SuggestingProducts = () => {
   }, []);
   return (
     <Stack width={"100%"} alignItems={"center"} gap={5}>
-      <Typography fontSize={30} fontWeight={800} color={"#1A0B5B"}>
+      <Typography fontSize={30} fontWeight={800} color={"#151875"}>
         Онцлох бүтээгдэхүүн
       </Typography>
       <Stack width={"100%"} overflow={"hidden"} position={"relative"}>
@@ -47,7 +46,7 @@ export const SuggestingProducts = () => {
           {products.map((item, index) => {
             return (
               <SwiperSlide key={index}>
-                <ShoppingCard
+                <SecondCard
                   key={index}
                   shopId={item.shopId}
                   productId={item._id}
