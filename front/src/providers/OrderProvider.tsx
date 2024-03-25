@@ -31,20 +31,34 @@ type OrderContextType = {
   ) => void;
   isBucketAdded: boolean;
   setBucketAdded: Dispatch<SetStateAction<boolean>>;
-  orderProducts: (params: OrderParamsType) => Promise<void>;
+  orderProducts: (params: OrderDetailType) => Promise<void>;
+  getOrders: (params: GetOrderParams) => Promise<void>;
 };
 
 type Order = {
   orderNumber: string;
   status: string;
 };
-export type OrderParamsType = {
+// export type OrderParamsType = {
+//   status: string;
+//   contactInfo: string;
+//   amountToBePaid: number;
+//   orderDetail: { id: string; quantity: number; shopId: string }[];
+// };
+
+export type OrderDetailType = {
+  _id?: string;
+  orderer?: string;
+  createdAt?: string;
   status: string;
   contactInfo: string;
   amountToBePaid: number;
   orderDetail: { id: string; quantity: number; shopId: string }[];
 };
 
+type GetOrderParams = {
+  setOrders: Dispatch<SetStateAction<OrderDetailType[]>>;
+};
 const OrderContext = createContext<OrderContextType>({} as OrderContextType);
 
 export const OrderProvider = ({ children }: OrderProviderType) => {
@@ -77,7 +91,7 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
       setProduct(products);
     }
   };
-  const orderProducts = async (params: OrderParamsType) => {
+  const orderProducts = async (params: OrderDetailType) => {
     const { status, contactInfo, amountToBePaid, orderDetail } = params;
     try {
       const res = await api.post(
@@ -97,6 +111,17 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
     }
   };
 
+  const getOrders = async (params: GetOrderParams) => {
+    const { setOrders } = params;
+    try {
+      const res = await api.get("/order/getAdmin", {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
+
+      setOrders(res.data.orders);
+    } catch (error) {}
+  };
+
   return (
     <OrderContext.Provider
       value={{
@@ -106,6 +131,7 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
         isBucketAdded,
         setBucketAdded,
         orderProducts,
+        getOrders,
       }}
     >
       {children}

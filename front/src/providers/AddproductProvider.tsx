@@ -11,8 +11,6 @@ import {
 } from "react";
 import { ProductType } from "./UserProvider";
 import { toast } from "react-toastify";
-import { OrderParamsType } from "./OrderProvider";
-
 type AddProductProviderProps = {
   children: ReactNode;
 };
@@ -23,17 +21,6 @@ type getAllProduct = {
   setProducts: Dispatch<SetStateAction<ProductType>>;
 };
 
-export type OrderDetailType = {
-  _id: string;
-  status: string;
-  contactInfo: string;
-  amountToBePaid: number;
-  orderDetail: { id: string; quantity: number; shopId: string }[];
-};
-
-type GetOrderParams = {
-  setOrders: Dispatch<SetStateAction<OrderDetailType[]>>;
-};
 export type CategoryType = {
   name: string;
   _id: string;
@@ -50,9 +37,7 @@ type AddProductContextType = {
     setState: Dispatch<SetStateAction<string>>,
     categoryId: string
   ) => Promise<void>;
-  userProducts: ProductType;
   getAllProducts: (params: getAllProduct) => Promise<void>;
-  getOrders: (params: GetOrderParams) => Promise<void>;
 };
 
 const AddProductContext = createContext<AddProductContextType>(
@@ -65,7 +50,6 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType>([]);
-  const [userProducts, setUserProducts] = useState<ProductType>([]);
 
   const getCategory = async () => {
     try {
@@ -94,7 +78,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         params: { category: category },
       });
 
-      setUserProducts(res.data.products);
+      setProducts(res.data.products);
     } catch (error) {
       console.log(error, "user product get error");
     }
@@ -115,17 +99,6 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
     } catch (error: any) {
       toast.error(error.response.data.message);
     }
-  };
-
-  const getOrders = async (params: GetOrderParams) => {
-    const { setOrders } = params;
-    try {
-      const res = await api.get("/order/getAdmin", {
-        headers: { Authorization: localStorage.getItem("token") },
-      });
-
-      setOrders(res.data.orders);
-    } catch (error) {}
   };
 
   const getSingleCategory = async (
@@ -161,8 +134,6 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         products,
         getSingleCategory,
         getAllProducts,
-        userProducts,
-        getOrders,
       }}
     >
       {children}

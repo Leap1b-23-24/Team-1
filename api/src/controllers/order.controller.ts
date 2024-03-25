@@ -35,7 +35,6 @@ export const getAdminOrder: RequestHandler = async (req, res) => {
 
   const { userId } = jwt.verify(authorization, "secret-key") as JwtPayload;
 
-  console.log(userId, "shopId");
   try {
     const orders = await OrderModel.find({
       orderDetails: {

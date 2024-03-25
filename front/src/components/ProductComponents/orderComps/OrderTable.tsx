@@ -1,56 +1,122 @@
+"use client";
+import { OrderDetailType, useOrder } from "@/providers/OrderProvider";
+import { ArrowRight } from "@mui/icons-material";
 import {
   Stack,
   Table,
+  TableBody,
+  TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
-import { formatDate } from "date-fns";
-import { date } from "yup";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
 
 type Column = {
-  id: "id" | "user" | "date" | "time" | "status" | "more";
+  id:
+    | "_id"
+    | "orderer"
+    | "createdAt"
+    | "status"
+    | "amountToBePaid"
+    | "orderDetail";
   label: string;
   minWidth?: number;
-  align?: "right" | "left";
-  format?: (value: number) => string;
-  date?: (date: Date) => string;
+  align?: "right" | "left" | "center";
 };
 
 const columns: readonly Column[] = [
-  { id: "id", label: "Захиалгын ID дугаар", minWidth: 170 },
-  { id: "user", label: "Үйлчлүүлэгч", minWidth: 100 },
+  { id: "_id", label: "Захиалгын ID дугаар", minWidth: 200, align: "left" },
+  { id: "orderer", label: "Үйлчлүүлэгч", minWidth: 170, align: "left" },
   {
-    id: "date",
+    id: "createdAt",
     label: "Огноо",
     minWidth: 170,
     align: "left",
-    date: (value: Date) => formatDate(value, "yyyy-MM-dd"),
   },
   {
-    id: "size",
-    label: "Size\u00a0(km\u00b2)",
+    id: "createdAt",
+    label: "Цаг",
     minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toLocaleString("en-US"),
+    align: "left",
   },
   {
-    id: "density",
-    label: "Density",
+    id: "amountToBePaid",
+    label: "Төлбөр",
     minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toFixed(2),
+    align: "left",
   },
+  {
+    id: "status",
+    label: "Статус",
+    minWidth: 170,
+    align: "left",
+  },
+  { id: "orderDetail", label: "Дэлгэрэнгүй", minWidth: 100, align: "left" },
 ];
 
 export const OrderTable = () => {
+  const [orders, setOrders] = useState<OrderDetailType[]>([]);
+  const { getOrders } = useOrder();
+
+  useEffect(() => {
+    getOrders({ setOrders: setOrders });
+  }, []);
+
   return (
-    <Stack width={"100%"}>
+    <Stack width={"100%"} height={"100%"}>
       <TableContainer sx={{ maxHeight: "80%" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow></TableRow>
+            <TableRow>
+              {columns.map((each) => {
+                return (
+                  <TableCell
+                    key={each.id}
+                    align={each.align}
+                    style={{ minWidth: each.minWidth }}
+                    onClick={() => {
+                      console.log(orders);
+                    }}
+                  >
+                    {each.label}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
           </TableHead>
+          <TableBody>
+            {orders.length === 0
+              ? null
+              : orders.map((order) => {
+                  console.log(order);
+                  return (
+                    <TableRow>
+                      <TableCell>{order._id}</TableCell>
+                      <TableCell>{order.orderer}</TableCell>
+                      <TableCell>
+                        {order.createdAt
+                          ? format(order.createdAt, "yyyy-MM-dd")
+                          : null}
+                      </TableCell>
+                      <TableCell>
+                        {order.createdAt
+                          ? format(order.createdAt, "hh-mm")
+                          : null}
+                      </TableCell>
+                      <TableCell>{order.amountToBePaid}</TableCell>
+                      <TableCell sx={{ fontWeight: 800 }}>
+                        {order.status}
+                      </TableCell>
+                      <TableCell>
+                        <ArrowRight />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+          </TableBody>
         </Table>
       </TableContainer>
     </Stack>
