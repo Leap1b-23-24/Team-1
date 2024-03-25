@@ -29,41 +29,51 @@ const services = [
 
 export const ServiceCards = () => {
   return (
-    <Stack direction={"row"} width={"100%"} gap={3}>
-      {services.map((service) => {
-        return (
-          <Stack
-            key={service.image}
-            width={"100%"}
-            gap={3}
-            alignItems={"center"}
-            justifyContent={"center"}
-            boxShadow={"1px 2px 10px #1C202414"}
-            py={"4%"}
-          >
-            <Stack width={"50%"} alignItems={"center"}>
-              <img src={`${service.image}`} />
+    <Stack width={"100%"} gap={5}>
+      <Typography
+        fontSize={30}
+        fontWeight={800}
+        color={"#151875"}
+        textAlign={"center"}
+      >
+        {"Үйлчилгээний тухай"}
+      </Typography>
+      <Stack direction={"row"} width={"100%"} gap={3}>
+        {services.map((service) => {
+          return (
+            <Stack
+              key={service.image}
+              width={"100%"}
+              gap={3}
+              alignItems={"center"}
+              justifyContent={"center"}
+              boxShadow={"1px 2px 10px #1C202414"}
+              py={"4%"}
+            >
+              <Stack width={"50%"} alignItems={"center"}>
+                <img src={`${service.image}`} />
+              </Stack>
+              <Typography
+                color="#151875"
+                fontWeight={800}
+                fontSize={"22px"}
+                textAlign={"center"}
+              >
+                {service.name}
+              </Typography>
+              <Typography
+                px={1}
+                color={"#1A0B5B4D"}
+                fontWeight={700}
+                fontSize={"16px"}
+                textAlign={"center"}
+              >
+                {service.infomation}
+              </Typography>
             </Stack>
-            <Typography
-              color="#151875"
-              fontWeight={800}
-              fontSize={"22px"}
-              textAlign={"center"}
-            >
-              {service.name}
-            </Typography>
-            <Typography
-              px={1}
-              color={"#1A0B5B4D"}
-              fontWeight={700}
-              fontSize={"16px"}
-              textAlign={"center"}
-            >
-              {service.infomation}
-            </Typography>
-          </Stack>
-        );
-      })}
+          );
+        })}
+      </Stack>
     </Stack>
   );
 };

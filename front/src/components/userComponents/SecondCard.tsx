@@ -34,7 +34,8 @@ export const SecondCard = (props: ShoppingCardProps) => {
   return (
     <Stack
       width={1}
-      boxShadow={1}
+      boxShadow={"5px 10px 8px  #F5F5F5 "}
+      border={"solid 1px #F5F5F5"}
       overflow={"hidden"}
       sx={{
         aspectRatio: 270 / 361,
