@@ -17,7 +17,15 @@ export const UnderHeader = () => {
     <Stack bgcolor={"common.white"} py={"19px"} width={1}>
       <Container maxWidth="lg">
         <Stack width={1} flexDirection={"row"} justifyContent={"space-between"}>
-          <Stack flexDirection={"row"} alignItems={"center"} gap={"58px"}>
+          <Stack
+            flexDirection={"row"}
+            alignItems={"center"}
+            gap={"58px"}
+            onClick={() => {
+              router.push("/");
+            }}
+            sx={{ cursor: "pointer" }}
+          >
             <Typography fontSize={34} fontWeight={700} color={"#0D0E43"}>
               Ecommerce
             </Typography>

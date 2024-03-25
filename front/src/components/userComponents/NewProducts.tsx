@@ -28,19 +28,20 @@ export const NewProducts = () => {
       </Typography>
       <Stack
         width={"100%"}
-        sx={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)" }}
+        sx={{ display: "grid", gridTemplateColumns: "repeat(4,2fr)" }}
       >
         {products?.map((item, index) => {
-          return (
-            <ShoppingCard
-              key={index}
-              productId={item._id}
-              color={item.color}
-              images={item.images[0]}
-              productName={item.productName}
-              productPrice={item.productPrice}
-            />
-          );
+          if (index < 8)
+            return (
+              <ShoppingCard
+                key={index}
+                productId={item._id}
+                color={item.color}
+                images={item.images[0]}
+                productName={item.productName}
+                productPrice={item.productPrice}
+              />
+            );
         })}
       </Stack>
     </Stack>
