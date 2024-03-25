@@ -7,16 +7,16 @@ const orderSchema = new Schema({
   orderer: String,
   deliveryDate: Date,
   amountPaid: Number,
-  amoutToBePaid: Number,
+  amountToBePaid: Number,
   coupon: {
     type: String,
     required: false,
   },
   description: String,
   orderType: String,
-  orderDetails: [{ id: String, quantity: Number }],
+  orderDetails: [{ id: String, quantity: Number, shopId: String }],
   createdAt: Date,
   updatedAt: Date,
 });
 
-export const OrderModal = model("order", orderSchema);
+export const OrderModel = model("order", orderSchema);

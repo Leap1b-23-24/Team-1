@@ -42,7 +42,7 @@ type OrderParamsType = {
   status: string;
   contactInfo: string;
   amountToBePaid: number;
-  orderDetail: { id: string; quantity: number }[];
+  orderDetail: { id: string; quantity: number; shopId: string }[];
 };
 
 const OrderContext = createContext<OrderContextType>({} as OrderContextType);

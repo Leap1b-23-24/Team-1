@@ -29,18 +29,21 @@ export type ProductType = {
   createdAt: Date;
 }[];
 type UserContextType = {
-  getUserProducts: () => Promise<void>;
-  userProduct: ProductType;
+  getAdminProducts: (category: string) => Promise<void>;
+  adminProducts: ProductType;
 };
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
 
 export const Userprovider = ({ children }: UserProviderType) => {
-  const [userProduct, setUserProducts] = useState<ProductType>([]);
+  const [adminProducts, setUserProducts] = useState<ProductType>([]);
 
-  const getUserProducts = async () => {
+  const getAdminProducts = async (category: string) => {
     try {
-      const res = await api.get("/product/getUser");
+      const res = await api.get("/product/getAdmin", {
+        headers: { Authorization: localStorage.getItem("token") },
+        params: { category: category },
+      });
 
       setUserProducts(res.data.products);
     } catch (error) {
@@ -49,7 +52,7 @@ export const Userprovider = ({ children }: UserProviderType) => {
   };
 
   return (
-    <UserContext.Provider value={{ getUserProducts, userProduct }}>
+    <UserContext.Provider value={{ getAdminProducts, adminProducts }}>
       {children}
     </UserContext.Provider>
   );

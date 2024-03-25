@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export const AddedPrice = (props: { productChanged?: boolean }) => {
   const [addedPrice, setAddedPrice] = useState<number>(0);
   const [orderDetails, setOrderDetails] = useState<
-    { id: string; quantity: number }[]
+    { id: string; quantity: number; shopId: string }[]
   >([]);
   const router = useRouter();
   const pathName = usePathname();
@@ -22,7 +22,7 @@ export const AddedPrice = (props: { productChanged?: boolean }) => {
         setAddedPrice((prev) => (prev += each.price));
         setOrderDetails((prev) => [
           ...prev,
-          { id: each._id, quantity: each.quantity },
+          { id: each._id, quantity: each.quantity, shopId: each.shopId },
         ]);
       });
     }

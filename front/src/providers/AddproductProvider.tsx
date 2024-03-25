@@ -32,7 +32,7 @@ type AddProductContextType = {
   categories: CategoryType[];
   subCategories: CategoryType[];
   setCategoryAdded: Dispatch<SetStateAction<boolean>>;
-  getProduct: (category: string) => Promise<void>;
+  getAdminProducts: (category: string) => Promise<void>;
   products: ProductType;
   getSingleCategory: (
     setState: Dispatch<SetStateAction<string>>,
@@ -74,20 +74,16 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
     } catch (error) {}
   };
 
-  const getProduct = async (category: string) => {
+  const getAdminProducts = async (category: string) => {
     try {
       const res = await api.get("/product/getAdmin", {
         headers: { Authorization: localStorage.getItem("token") },
-        params: {
-          category: category,
-        },
+        params: { category: category },
       });
 
-      const { products } = res.data;
-
-      setProducts(products);
+      setUserProducts(res.data.products);
     } catch (error) {
-      console.log(error);
+      console.log(error, "user product get error");
     }
   };
 
@@ -137,7 +133,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         categories,
         setCategoryAdded,
         subCategories,
-        getProduct,
+        getAdminProducts,
         products,
         getSingleCategory,
         getAllProducts,

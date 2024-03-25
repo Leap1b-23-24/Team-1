@@ -1,5 +1,5 @@
 "use client";
-import { ArrowForward } from "@mui/icons-material";
+import { ArrowForward, Category } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import { EachDashboardProduct } from "./EachDashboardProduct";
 import { useEffect, useState } from "react";
@@ -13,10 +13,10 @@ export const DashboardProduct = () => {
     { text: "Зарагдсан", width: 1 },
     { text: "Үнэ", width: 1 },
   ];
-  const { getUserProducts, userProduct } = useUser();
+  const { getAdminProducts, adminProducts } = useUser();
 
   useEffect(() => {
-    getUserProducts();
+    getAdminProducts("");
   }, []);
   return (
     <Stack
@@ -65,8 +65,8 @@ export const DashboardProduct = () => {
             );
           })}
         </Stack>
-        {userProduct
-          ? userProduct.map((each, index) => {
+        {adminProducts
+          ? adminProducts.map((each, index) => {
               return (
                 <EachDashboardProduct
                   key={index}

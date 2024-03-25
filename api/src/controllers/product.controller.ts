@@ -64,9 +64,16 @@ export const getUserProduct: RequestHandler = async (req, res) => {
 
 export const getAdminProduct: RequestHandler = async (req, res) => {
   const { category } = req.query;
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const { userId } = Jwt.verify(authorization, "secret-key") as JwtPayload;
   try {
     const products = await ProductModel.find(
-      category === "" ? {} : { categoryId: category }
+      category === ""
+        ? { shopId: userId }
+        : { shopId: userId, categoryId: category }
     );
 
     res.json({ products });

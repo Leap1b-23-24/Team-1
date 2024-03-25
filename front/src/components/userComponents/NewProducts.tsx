@@ -35,6 +35,7 @@ export const NewProducts = () => {
             return (
               <ShoppingCard
                 key={index}
+                shopId={item.shopId}
                 productId={item._id}
                 color={item.color}
                 images={item.images[0]}

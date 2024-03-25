@@ -15,10 +15,10 @@ export default function productPage() {
   const [date, setDate] = useState<string>("");
   const [price, setPrice] = useState("");
   const [search, setSearch] = useState("");
-  const { products, getProduct } = useProduct();
+  const { products, getAdminProducts } = useProduct();
 
   useEffect(() => {
-    getProduct(category);
+    getAdminProducts(category);
   }, [category]);
 
   return (
