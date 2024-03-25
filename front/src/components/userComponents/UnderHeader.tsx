@@ -21,12 +21,16 @@ export const UnderHeader = () => {
             flexDirection={"row"}
             alignItems={"center"}
             gap={"58px"}
-            onClick={() => {
-              router.push("/");
-            }}
             sx={{ cursor: "pointer" }}
           >
-            <Typography fontSize={34} fontWeight={700} color={"#0D0E43"}>
+            <Typography
+              fontSize={34}
+              fontWeight={700}
+              color={"#0D0E43"}
+              onClick={() => {
+                router.push("/");
+              }}
+            >
               Ecommerce
             </Typography>
             <Stack
@@ -34,20 +38,24 @@ export const UnderHeader = () => {
               alignItems={"center"}
               justifyContent={"center"}
               gap={3}
-              onClick={() => {
-                router.push("/");
-              }}
               sx={{ cursor: "pointer" }}
             >
               <Typography
-                color={pathname.includes("Category") ? "#0D0E43" : "#FB2E86"}
+                color={pathname.includes("sort") ? "#0D0E43" : "#FB2E86"}
                 sx={{ display: "flex", alignItems: "center" }}
+                onClick={() => {
+                  router.push("/");
+                }}
               >
                 Нүүр
                 <KeyboardArrowDown />
               </Typography>
               <Typography
-                color={!pathname.includes("Category") ? "#0D0E43" : "#FB2E86"}
+                color={!pathname.includes("sort") ? "#0D0E43" : "#FB2E86"}
+                onClick={() => {
+                  router.push("/sort");
+                  console.log("hi");
+                }}
               >
                 Ангилал
               </Typography>

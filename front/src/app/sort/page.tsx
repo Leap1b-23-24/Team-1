@@ -2,6 +2,7 @@
 
 import { ShoppingCard } from "@/components/userComponents/ShoppingCard";
 import { SortTop } from "@/components/userComponents/sort/SortTop";
+import { SorttingCard } from "@/components/userComponents/sort/SortingCard";
 import { useProduct } from "@/providers/AddproductProvider";
 import { ProductType } from "@/providers/UserProvider";
 import { Container, Stack, Typography } from "@mui/material";
@@ -9,6 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function Sort() {
   const [products, setProducts] = useState<ProductType>([]);
+  const [isWindow, setIsWindow] = useState(true);
   const { getAllProducts } = useProduct();
   useEffect(() => {
     getAllProducts({
@@ -37,13 +39,17 @@ export default function Sort() {
       </Stack>
       <Container maxWidth="lg">
         <Stack width={"100%"} gap={10}>
-          <SortTop />
+          <SortTop setIsWindow={setIsWindow} />
           <Stack
             width={"100%"}
-            sx={{ display: "grid", gridTemplateColumns: "repeat(4,2fr)" }}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: isWindow ? "repeat(4,2fr)" : "repeat(1,5fr)",
+              gap: "36px",
+            }}
           >
             {products.map((item, index) => {
-              return (
+              return isWindow ? (
                 <ShoppingCard
                   shopId={item.shopId}
                   productId={item._id}
@@ -51,6 +57,16 @@ export default function Sort() {
                   productPrice={item.productPrice}
                   color={item.color}
                   images={item.images[0]}
+                />
+              ) : (
+                <SorttingCard
+                  shopId={item.shopId}
+                  productId={item._id}
+                  productName={item.productName}
+                  productPrice={item.productPrice}
+                  color={item.color}
+                  images={item.images[0]}
+                  description={item.description}
                 />
               );
             })}

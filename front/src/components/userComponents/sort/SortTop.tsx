@@ -3,11 +3,16 @@
 import { Selection } from "@/components/SignUp/Selection";
 import { List, ViewList, Widgets, Window } from "@mui/icons-material";
 import { MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+
+type SortTopProps = {
+  setIsWindow: Dispatch<SetStateAction<boolean>>;
+};
 
 const selections = ["T-Shirt", "Jeans", "Coat"];
 
-export const SortTop = () => {
+export const SortTop = (props: SortTopProps) => {
+  const { setIsWindow } = props;
   const [sort, setSort] = useState("");
   return (
     <Stack
@@ -55,8 +60,16 @@ export const SortTop = () => {
         </Stack>
         <Stack direction={"row"} gap={0.5} alignItems={"center"}>
           <Typography color={"#3F509E"}>View:</Typography>
-          <Window sx={{ width: "16px", height: "16px", color: "#151875" }} />
-          <ViewList sx={{ width: "16px", height: "16px", color: "#151875" }} />
+          <Window
+            sx={{ width: "16px", height: "16px", color: "#151875" }}
+            onClick={() => {
+              setIsWindow(true);
+            }}
+          />
+          <ViewList
+            sx={{ width: "16px", height: "16px", color: "#151875" }}
+            onClick={() => setIsWindow(false)}
+          />
         </Stack>
       </Stack>
     </Stack>
