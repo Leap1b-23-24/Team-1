@@ -1,12 +1,7 @@
 "use client";
 
 import { Stack } from "@mui/material";
-import {
-  AddComment,
-  Footer,
-  ServiceCards,
-  WholeHeader,
-} from "@/components/userComponents";
+import { ServiceCards } from "@/components/userComponents";
 import { Container } from "@mui/material";
 import { Carousel } from "@/components/userComponents/CarouselBanner";
 import { NewProducts } from "@/components/userComponents/NewProducts";
