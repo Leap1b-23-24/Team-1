@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import "swiper/css/scrollbar";
 import "swiper/css/bundle";
+import { SecondCard } from "./SecondCard";
 
 export const SuggestingProducts = () => {
   const [products, setProducts] = useState<ProductType>([]);
@@ -62,7 +63,7 @@ export const SuggestingProducts = () => {
           {products.map((item, index) => {
             return (
               <SwiperSlide key={index}>
-                <ShoppingCard
+                <SecondCard
                   key={index}
                   shopId={item.shopId}
                   productId={item._id}
