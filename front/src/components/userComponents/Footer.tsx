@@ -24,7 +24,7 @@ const socialImg = ["/Group 202.png", "/Group 203.png", "/twitter.png"];
 
 export const Footer = () => {
   return (
-    <Stack width={1} marginTop={5}>
+    <Stack width={1}>
       <Stack width={1} bgcolor={"#EEEFFB"}>
         <Container
           maxWidth="lg"
