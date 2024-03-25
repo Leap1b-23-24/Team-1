@@ -15,7 +15,7 @@ const slides = [
 
 export default function Home() {
   return (
-    <Stack width={"100vw"} alignItems={"center"} bgcolor={"#F7F7F8"}>
+    <Stack width={"100vw"} alignItems={"center"} bgcolor={"white"}>
       {/* Main Container */}
       <Stack width={"100%"} gap={20}>
         {/* carousel container */}
