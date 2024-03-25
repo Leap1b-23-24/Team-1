@@ -9,13 +9,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
-type ShoppingCardProps = {
+export type ShoppingCardProps = {
   shopId: string;
   productId: string;
   color: string;
   images: string;
   productName: string;
   productPrice: number;
+  description: string;
 };
 
 type BucketProduct = {
