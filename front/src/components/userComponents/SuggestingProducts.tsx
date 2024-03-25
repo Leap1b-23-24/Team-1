@@ -5,6 +5,14 @@ import { Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { ShoppingCard } from "./ShoppingCard";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+// import "swiper/css/scrollbar";
+import "swiper/css/bundle";
+
 export const SuggestingProducts = () => {
   const [products, setProducts] = useState<ProductType>([]);
   const [slider, setSlider] = useState<number>(0);
@@ -23,7 +31,7 @@ export const SuggestingProducts = () => {
         Онцлох бүтээгдэхүүн
       </Typography>
       <Stack width={"100%"} overflow={"hidden"} position={"relative"}>
-        <Stack width={"100%"} flexDirection={"row"}>
+        {/* <Stack width={"100%"} flexDirection={"row"}>
           {products.map((item, index) => {
             return (
               <ShoppingCard
@@ -37,7 +45,36 @@ export const SuggestingProducts = () => {
               />
             );
           })}
-        </Stack>
+        </Stack> */}
+        <Swiper
+          className="swiper"
+          modules={[Navigation, Pagination, Scrollbar]}
+          navigation
+          pagination={{ clickable: true }}
+          // scrollbar={{ draggable: true }}
+          spaceBetween={20}
+          slidesPerView={4}
+          style={{
+            width: "100%",
+            paddingBottom: "35px",
+          }}
+        >
+          {products.map((item, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <ShoppingCard
+                  key={index}
+                  shopId={item.shopId}
+                  productId={item._id}
+                  color={item.color}
+                  images={item.images[0]}
+                  productName={item.productName}
+                  productPrice={item.productPrice}
+                />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </Stack>
     </Stack>
   );

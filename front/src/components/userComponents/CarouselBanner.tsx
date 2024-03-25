@@ -29,7 +29,15 @@ export const Carousel = (props: CarouselProps) => {
         scrollbar={{ draggable: true }}
         spaceBetween={0}
         slidesPerView={1}
-        style={{ width: "100%" }}
+        // style={{ width: "100%" }}
+        style={{
+          width: "100%",
+          // "--swiper-pagination-color": "#FFBA08",
+          // "--swiper-pagination-bullet-inactive-color": "#999999",
+          // "--swiper-pagination-bullet-inactive-opacity": "1",
+          // "--swiper-pagination-bullet-size": "16px",
+          // "--swiper-pagination-bullet-horizontal-gap": "10px",
+        }}
       >
         {slides.map((slide, index) => {
           return (
