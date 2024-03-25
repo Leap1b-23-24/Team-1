@@ -38,7 +38,7 @@ type Order = {
   orderNumber: string;
   status: string;
 };
-type OrderParamsType = {
+export type OrderParamsType = {
   status: string;
   contactInfo: string;
   amountToBePaid: number;

@@ -26,3 +26,25 @@ export const addOrder: RequestHandler = async (req, res) => {
     console.log(error, "addOrder Error");
   }
 };
+
+export const getAdminOrder: RequestHandler = async (req, res) => {
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const { userId } = jwt.verify(authorization, "secret-key") as JwtPayload;
+
+  console.log(userId, "shopId");
+  try {
+    const orders = await OrderModel.find({
+      orderDetails: {
+        $elemMatch: {
+          shopId: { $gte: userId },
+        },
+      },
+    });
+
+    res.json({ orders });
+  } catch (error) {}
+};

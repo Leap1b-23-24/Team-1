@@ -1,15 +1,8 @@
 "use client";
-
-import {
-  IncomeHeaderButton,
-  PaymentInformation,
-  buttonNames,
-} from "@/components/ProductComponents";
-import DeliveryInformation from "@/components/ProductComponents/DeliveryInformation";
-import BasicTable from "@/components/ProductComponents/OrderTable";
-import { ArrowBackIosNewOutlined } from "@mui/icons-material";
-import { Stack } from "@mui/material";
+import { OrderDetailType, useProduct } from "@/providers/AddproductProvider";
+import { Stack, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const mapBarMenu = [
   "Бүгд",
@@ -22,6 +15,11 @@ const mapBarMenu = [
 
 export default function OrderPage() {
   const pathName = usePathname();
+  const [orders, setOrders] = useState<OrderDetailType[]>([]);
+  const { getOrders } = useProduct();
+  useEffect(() => {
+    getOrders({ setOrders: setOrders });
+  }, []);
   return (
     <Stack width="100%" bgcolor="#F7F7F8" height={"95vh"}>
       <Stack width="100%" direction="row" borderBottom={"1px solid #D6D8DB"}>
@@ -38,15 +36,10 @@ export default function OrderPage() {
           );
         })}
       </Stack>
-      <Stack p={"34px 24px"} gap={3}>
-        {/* <Stack>
-          {buttonNames.map((item)=>{
-            return (
-                <IncomeHeaderButton/>
-            )
-          })}
-        </Stack> */}
-        <BasicTable />
+      <Stack p={"34px 24px"} gap={3} border={3}>
+        {orders.map((order) => {
+          return <Stack width={"100%"}></Stack>;
+        })}
       </Stack>
     </Stack>
   );

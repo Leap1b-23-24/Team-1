@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { addOrder } from "../controllers";
+import { addOrder, getAdminOrder } from "../controllers";
 
 const orderRouter = Router();
 
-export default orderRouter.post("/addOrder", addOrder);
+export default orderRouter
+  .post("/addOrder", addOrder)
+  .get("/getAdmin", getAdminOrder);
