@@ -11,7 +11,6 @@ import {
 import { useState } from "react";
 
 export const SorttingCard = (props: ShoppingCardProps) => {
-  const [checker, setChecker] = useState("");
   const {
     images,
     productName,
