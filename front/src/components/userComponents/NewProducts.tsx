@@ -29,6 +29,7 @@ export const NewProducts = () => {
       <Stack
         width={"100%"}
         sx={{ display: "grid", gridTemplateColumns: "repeat(4,2fr)" }}
+        gap={3}
       >
         {products?.map((item, index) => {
           if (index < 8)

@@ -38,7 +38,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
       height={1}
       paddingX={1}
       // boxShadow={"5px 10px 8px  #F5F5F5"}
-      boxShadow={"1px 1px 5px #1C202414"}
+      boxShadow={"1px 3px 8px #1C202414"}
     >
       <Stack
         position={"relative"}
