@@ -7,6 +7,7 @@ import Rating from "@mui/material/Rating";
 
 export const AddComment = () => {
   const [value, setValue] = useState<number | null>(2);
+  console.log(value);
 
   return (
     <Stack width={"100%"} gap={3}>

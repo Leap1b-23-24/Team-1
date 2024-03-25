@@ -1,7 +1,11 @@
 "use client";
 
 import { Stack } from "@mui/material";
-import { ServiceCards } from "@/components/userComponents";
+import {
+  AddComment,
+  AllComment,
+  ServiceCards,
+} from "@/components/userComponents";
 import { Container } from "@mui/material";
 import { Carousel } from "@/components/userComponents/CarouselBanner";
 import { NewProducts } from "@/components/userComponents/NewProducts";
@@ -28,6 +32,8 @@ export default function Home() {
             <SuggestingProducts />
             <NewProducts />
             <ServiceCards />
+            <AddComment />
+            <AllComment />
           </Stack>
         </Container>
       </Stack>

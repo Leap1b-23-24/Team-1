@@ -4,3 +4,4 @@ export * from "./UnderHeader";
 export * from "./WholeHeader";
 export * from "./ServiceCards";
 export * from "./AddComment";
+export * from "./AllComment";
