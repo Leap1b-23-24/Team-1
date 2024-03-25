@@ -1,7 +1,11 @@
 "use client";
 
 import { Stack } from "@mui/material";
-import { Footer, ServiceCards, WholeHeader } from "@/components/userComponents";
+import {
+  AddComment,
+  AllComment,
+  ServiceCards,
+} from "@/components/userComponents";
 import { Container } from "@mui/material";
 import { Carousel } from "@/components/userComponents/CarouselBanner";
 import { NewProducts } from "@/components/userComponents/NewProducts";
@@ -15,7 +19,7 @@ const slides = [
 
 export default function Home() {
   return (
-    <Stack width={"100vw"} alignItems={"center"} bgcolor={"#F7F7F8"}>
+    <Stack width={"100vw"} alignItems={"center"} bgcolor={"white"}>
       {/* Main Container */}
       <Stack width={"100%"} gap={20}>
         {/* carousel container */}
@@ -28,6 +32,8 @@ export default function Home() {
             <SuggestingProducts />
             <NewProducts />
             <ServiceCards />
+            <AddComment />
+            <AllComment />
           </Stack>
         </Container>
       </Stack>
