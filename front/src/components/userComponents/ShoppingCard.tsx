@@ -37,7 +37,6 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
       width={"100%"}
       height={1}
       paddingX={1}
-      // boxShadow={"5px 10px 8px  #F5F5F5"}
       boxShadow={"1px 3px 8px #1C202414"}
     >
       <Stack

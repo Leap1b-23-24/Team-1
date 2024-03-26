@@ -9,7 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Button, Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 type ShoppingCardProps = {
   shopId: string;
@@ -147,7 +147,9 @@ export const SecondCard = (props: ShoppingCardProps) => {
             </Stack>
           </Stack>
           <Stack pb={1.5} alignItems={"center"}>
-            <Link href={"/DetailedProduct"}>
+
+            <Link href={`/sort/${productId}`}>
+
               <Stack
                 py={1}
                 px={2}
@@ -157,9 +159,7 @@ export const SecondCard = (props: ShoppingCardProps) => {
                   width: "fit-content",
                   borderRadius: "2px",
                 }}
-                // onClick={() => {
-                //   router.push("/DetailedProduct");
-                // }}
+
               >
                 <Typography>дэлгэрэнгүй</Typography>
               </Stack>
