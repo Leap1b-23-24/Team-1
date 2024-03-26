@@ -14,7 +14,7 @@ export default function SingleProduct() {
   const { id } = useParams();
   if (!id) return;
 
-  const { singleProduct } = useProduct();
+  //   const { singleProduct } = useProduct();
 
   useEffect(() => {
     // const getProduct = () => {
@@ -34,7 +34,7 @@ export default function SingleProduct() {
     <Stack width={"100%"}>
       <Container maxWidth="lg">
         <Stack width={"100%"}>
-          <DetailedPage
+          {/* <DetailedPage
             productId={singleProduct?.shopId}
             productName={singleProduct?.productName}
             productPrice={singleProduct?.productPrice}
@@ -42,7 +42,7 @@ export default function SingleProduct() {
             shopId={singleProduct?.shopId}
             color={singleProduct?.color}
             description={singleProduct?.description}
-          />
+          /> */}
         </Stack>
       </Container>
       <Stack width={"100%"} bgcolor={"#F9F8FE"}>

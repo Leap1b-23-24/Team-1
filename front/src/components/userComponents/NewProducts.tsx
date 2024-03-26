@@ -42,7 +42,7 @@ export const NewProducts = () => {
                 images={item.images[0]}
                 productName={item.productName}
                 productPrice={item.productPrice}
-                description={item.description}
+                // description={item.description}
               />
             );
         })}

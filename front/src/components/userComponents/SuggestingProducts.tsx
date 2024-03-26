@@ -16,7 +16,7 @@ import Link from "next/link";
 
 export const SuggestingProducts = () => {
   const [products, setProducts] = useState<ProductType>([]);
-  const { getAllProducts, setSingleProduct } = useProduct();
+  const { getAllProducts } = useProduct();
 
   useEffect(() => {
     getAllProducts({
