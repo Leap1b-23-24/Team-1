@@ -11,7 +11,8 @@ import { useEffect, useState } from "react";
 export default function Sort() {
   const [products, setProducts] = useState<ProductType>([]);
   const [isWindow, setIsWindow] = useState(true);
-  const { getAllProducts } = useProduct();
+  const { getAllProducts, searchValue } = useProduct();
+
   useEffect(() => {
     getAllProducts({
       quantity: 0,
@@ -48,29 +49,39 @@ export default function Sort() {
               gap: "36px",
             }}
           >
-            {products.map((item, index) => {
-              return isWindow ? (
-                <ShoppingCard
-                  shopId={item.shopId}
-                  productId={item._id}
-                  productName={item.productName}
-                  productPrice={item.productPrice}
-                  color={item.color}
-                  images={item.images[0]}
-                  description={item.description}
-                />
-              ) : (
-                <SorttingCard
-                  shopId={item.shopId}
-                  productId={item._id}
-                  productName={item.productName}
-                  productPrice={item.productPrice}
-                  color={item.color}
-                  images={item.images[0]}
-                  description={item.description}
-                />
-              );
-            })}
+            {products
+              .filter(
+                (item) =>
+                  item.productName
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase()) ||
+                  item.description
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase())
+              )
+              .map((item, index) => {
+                return isWindow ? (
+                  <ShoppingCard
+                    shopId={item.shopId}
+                    productId={item._id}
+                    productName={item.productName}
+                    productPrice={item.productPrice}
+                    color={item.color}
+                    images={item.images[0]}
+                    description={item.description}
+                  />
+                ) : (
+                  <SorttingCard
+                    shopId={item.shopId}
+                    productId={item._id}
+                    productName={item.productName}
+                    productPrice={item.productPrice}
+                    color={item.color}
+                    images={item.images[0]}
+                    description={item.description}
+                  />
+                );
+              })}
           </Stack>
         </Stack>
       </Container>

@@ -11,7 +11,7 @@ export const NewProducts = () => {
   useEffect(() => {
     getAllProducts({
       setProducts: setProducts,
-      quantity: 4,
+      quantity: 8,
       filteredByDate: true,
       isSpecial: false,
     });
@@ -42,6 +42,7 @@ export const NewProducts = () => {
                 images={item.images[0]}
                 productName={item.productName}
                 productPrice={item.productPrice}
+                description={item.description}
               />
             );
         })}
