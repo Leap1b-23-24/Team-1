@@ -40,7 +40,7 @@ export default function OrderPage() {
           );
         })}
       </Stack>
-      <Stack p={"34px 24px"} height={"100%"} gap={3} border={3}>
+      <Stack p={"34px 24px"} height={"100%"}>
         <OrderTable />
       </Stack>
     </Stack>

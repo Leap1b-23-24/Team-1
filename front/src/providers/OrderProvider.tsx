@@ -3,11 +3,13 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { ProductType } from "./UserProvider";
 import { toast } from "react-toastify";
 import { api } from "@/common";
+import { string } from "yup";
 
 type OrderProviderType = {
   children: React.ReactNode;
@@ -33,22 +35,19 @@ type OrderContextType = {
   setBucketAdded: Dispatch<SetStateAction<boolean>>;
   orderProducts: (params: OrderDetailType) => Promise<void>;
   getOrders: (params: GetOrderParams) => Promise<void>;
+  getUserName: (id: string) => Promise<string>;
+  orderId: string;
+  setOrderId: Dispatch<SetStateAction<string>>;
 };
 
 type Order = {
   orderNumber: string;
   status: string;
 };
-// export type OrderParamsType = {
-//   status: string;
-//   contactInfo: string;
-//   amountToBePaid: number;
-//   orderDetail: { id: string; quantity: number; shopId: string }[];
-// };
 
 export type OrderDetailType = {
   _id?: string;
-  orderer?: string;
+  orderer?: { _id: string; userName: string; email: string };
   createdAt?: string;
   status: string;
   contactInfo: string;
@@ -65,6 +64,7 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
   const [order, setOrder] = useState<Order[]>([]);
   const [bucketProducts, setBucket] = useState<ProductType>([]);
   const [isBucketAdded, setBucketAdded] = useState<boolean>(false);
+  const [orderId, setOrderId] = useState<string>("");
 
   // params: BucketProduct
 
@@ -82,6 +82,7 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
     setBucketAdded((prev) => !prev);
     toast.success("Саванд нэмсэн");
   };
+
   const getBucketProducts = (
     setProduct: Dispatch<SetStateAction<BucketProductType[]>>
   ) => {
@@ -91,6 +92,7 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
       setProduct(products);
     }
   };
+
   const orderProducts = async (params: OrderDetailType) => {
     const { status, contactInfo, amountToBePaid, orderDetail } = params;
     try {
@@ -122,6 +124,15 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
     } catch (error) {}
   };
 
+  const getUserName = async (id: string) => {
+    try {
+      const res = await api.post("/user/getName", { _id: id });
+
+      return res.data.userName;
+    } catch (error) {
+      console.log(error, "getUserName Error");
+    }
+  };
   return (
     <OrderContext.Provider
       value={{
@@ -132,6 +143,9 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
         setBucketAdded,
         orderProducts,
         getOrders,
+        getUserName,
+        orderId,
+        setOrderId,
       }}
     >
       {children}

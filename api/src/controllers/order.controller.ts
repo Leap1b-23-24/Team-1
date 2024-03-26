@@ -42,7 +42,9 @@ export const getAdminOrder: RequestHandler = async (req, res) => {
           shopId: { $gte: userId },
         },
       },
-    });
+    }).populate("orderer");
+
+    console.log(orders);
 
     res.json({ orders });
   } catch (error) {}

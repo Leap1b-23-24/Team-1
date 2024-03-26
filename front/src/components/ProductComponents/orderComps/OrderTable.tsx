@@ -1,6 +1,11 @@
 "use client";
 import { OrderDetailType, useOrder } from "@/providers/OrderProvider";
-import { ArrowRight } from "@mui/icons-material";
+import {
+  ArrowDownward,
+  ArrowDropDown,
+  ArrowRight,
+  Paid,
+} from "@mui/icons-material";
 import {
   Stack,
   Table,
@@ -13,15 +18,10 @@ import {
 } from "@mui/material";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import { OrderStatus } from "./OrderStatus";
 
 type Column = {
-  id:
-    | "_id"
-    | "orderer"
-    | "createdAt"
-    | "status"
-    | "amountToBePaid"
-    | "orderDetail";
+  id: "_id" | "orderer" | "createdAt" | "amountToBePaid" | "orderDetail";
   label: string;
   minWidth?: number;
   align?: "right" | "left" | "center";
@@ -48,18 +48,12 @@ const columns: readonly Column[] = [
     minWidth: 170,
     align: "left",
   },
-  {
-    id: "status",
-    label: "Статус",
-    minWidth: 170,
-    align: "left",
-  },
   { id: "orderDetail", label: "Дэлгэрэнгүй", minWidth: 100, align: "left" },
 ];
 
 export const OrderTable = () => {
   const [orders, setOrders] = useState<OrderDetailType[]>([]);
-  const { getOrders } = useOrder();
+  const { getOrders, setOrderId } = useOrder();
 
   useEffect(() => {
     getOrders({ setOrders: setOrders });
@@ -77,9 +71,6 @@ export const OrderTable = () => {
                     key={each.id}
                     align={each.align}
                     style={{ minWidth: each.minWidth }}
-                    onClick={() => {
-                      console.log(orders);
-                    }}
                   >
                     {each.label}
                   </TableCell>
@@ -95,7 +86,7 @@ export const OrderTable = () => {
                   return (
                     <TableRow>
                       <TableCell>{order._id}</TableCell>
-                      <TableCell>{order.orderer}</TableCell>
+                      <TableCell>{order.orderer?.userName}</TableCell>
                       <TableCell>
                         {order.createdAt
                           ? format(order.createdAt, "yyyy-MM-dd")
@@ -103,15 +94,21 @@ export const OrderTable = () => {
                       </TableCell>
                       <TableCell>
                         {order.createdAt
-                          ? format(order.createdAt, "hh-mm")
+                          ? format(order.createdAt, "hh:mm")
                           : null}
                       </TableCell>
                       <TableCell>{order.amountToBePaid}</TableCell>
-                      <TableCell sx={{ fontWeight: 800 }}>
-                        {order.status}
-                      </TableCell>
                       <TableCell>
-                        <ArrowRight />
+                        <Stack
+                          width={"100%"}
+                          alignItems={"flex-start"}
+                          sx={{ cursor: "pointer" }}
+                          onClick={() => {
+                            setOrderId(order.?_id);
+                          }}
+                        >
+                          <ArrowRight />
+                        </Stack>
                       </TableCell>
                     </TableRow>
                   );

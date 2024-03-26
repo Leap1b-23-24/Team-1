@@ -5,7 +5,10 @@ const orderSchema = new Schema(
     orderNumber: String,
     status: String,
     contactInfo: String,
-    orderer: String,
+    orderer: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
     deliveryDate: Date,
     amountPaid: Number,
     amountToBePaid: Number,

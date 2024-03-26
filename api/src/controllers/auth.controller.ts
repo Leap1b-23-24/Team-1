@@ -54,3 +54,15 @@ export const logIn: RequestHandler = async (req, res) => {
     console.log(error, "logIn error");
   }
 };
+
+export const getUserName: RequestHandler = async (req, res) => {
+  const { _id } = req.body;
+  try {
+    const user = await UserModel.findOne({ _id: _id });
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+
+    res.json({ userName: user.userName });
+  } catch (error) {}
+};
