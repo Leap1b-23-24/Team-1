@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Button, Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+
 import { useState } from "react";
 type ShoppingCardProps = {
   shopId: string;
@@ -31,7 +32,7 @@ export const SecondCard = (props: ShoppingCardProps) => {
   const { images, productName, productPrice, productId, color, shopId } = props;
   const { addToBucket } = useOrder();
   const [open, setOpen] = useState(false);
-
+  const router = useRouter();
   return (
     <Stack
       width={1}
@@ -146,7 +147,9 @@ export const SecondCard = (props: ShoppingCardProps) => {
             </Stack>
           </Stack>
           <Stack pb={1.5} alignItems={"center"}>
+
             <Link href={`/sort/${productId}`}>
+
               <Stack
                 py={1}
                 px={2}
@@ -156,6 +159,7 @@ export const SecondCard = (props: ShoppingCardProps) => {
                   width: "fit-content",
                   borderRadius: "2px",
                 }}
+
               >
                 <Typography>дэлгэрэнгүй</Typography>
               </Stack>
