@@ -11,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 type ShoppingCardProps = {
   shopId: string;
   productId: string;
@@ -32,7 +33,7 @@ export const SecondCard = (props: ShoppingCardProps) => {
   const { images, productName, productPrice, productId, color, shopId } = props;
   const { addToBucket } = useOrder();
   const [open, setOpen] = useState(false);
-  const router = useRouter();
+
   return (
     <Stack
       width={1}
@@ -147,23 +148,18 @@ export const SecondCard = (props: ShoppingCardProps) => {
             </Stack>
           </Stack>
           <Stack pb={1.5} alignItems={"center"}>
-            <Link href={"/DetailedProduct"}>
-              <Stack
-                py={1}
-                px={2}
-                sx={{
-                  bgcolor: "#08D15F",
-                  color: "common.white",
-                  width: "fit-content",
-                  borderRadius: "2px",
-                }}
-                // onClick={() => {
-                //   router.push("/DetailedProduct");
-                // }}
-              >
-                <Typography>дэлгэрэнгүй</Typography>
-              </Stack>
-            </Link>
+            <Stack
+              py={1}
+              px={2}
+              sx={{
+                bgcolor: "#08D15F",
+                color: "common.white",
+                width: "fit-content",
+                borderRadius: "2px",
+              }}
+            >
+              <Typography>дэлгэрэнгүй</Typography>
+            </Stack>
           </Stack>
         </Stack>
       </Stack>
