@@ -5,3 +5,4 @@ export * from "./WholeHeader";
 export * from "./ServiceCards";
 export * from "./AddComment";
 export * from "./AllComment";
+export * from "./DetailedProduct";
