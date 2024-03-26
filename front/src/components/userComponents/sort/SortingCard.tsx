@@ -1,4 +1,3 @@
-import { useProduct } from "@/providers/AddproductProvider";
 import { useOrder } from "@/providers/OrderProvider";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
@@ -14,15 +13,8 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export const SorttingCard = (props: ShoppingCardProps) => {
   const [open, setOpen] = useState(false);
-  const {
-    images,
-    productName,
-    productPrice,
-    productId,
-    color,
-    shopId,
-    description,
-  } = props;
+  const { images, productName, productPrice, productId, color, shopId } = props;
+
   const { addToBucket } = useOrder();
   return (
     <Stack width={"100%"} direction={"row"} gap={2}>
@@ -55,7 +47,7 @@ export const SorttingCard = (props: ShoppingCardProps) => {
           >
             <Typography color={"#151875"}>{`${productPrice}₮`}</Typography>
           </Stack>
-          <Typography sx={{ mt: "12px" }}>{description}</Typography>
+          {/* <Typography sx={{ mt: "12px" }}>{description}</Typography> */}
         </Stack>
         <Stack>
           <Stack direction={"row"} gap={1.25} p={"11px"} height={1}>

@@ -16,7 +16,6 @@ export type ShoppingCardProps = {
   images: string;
   productName: string;
   productPrice: number;
-  description: string;
 };
 
 type BucketProduct = {
