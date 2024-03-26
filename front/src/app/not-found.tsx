@@ -20,8 +20,7 @@ import { useRouter } from "next/navigation";
 export default function NotFound() {
   const router = useRouter();
   return (
-    <Stack width={"100vw"} gap={4} alignItems={"center"} bgcolor={"#ffffff"}>
-      {/* <WholeHeader /> */}
+    <Stack width={"100vw"} gap={4} alignItems={"center"} bgcolor={"#F7F7F8"}>
       <Container maxWidth="lg">
         <Stack justifyContent={"center"} alignItems={"center"}>
           <Image

@@ -54,9 +54,7 @@ type AddProductContextType = {
   userProducts: ProductType;
   getAllProducts: (params: getAllProduct) => Promise<void>;
   getOrders: (params: GetOrderParams) => Promise<void>;
-  singleProduct: ShoppingCardProps | null;
-  setSingleProduct: Dispatch<SetStateAction<ShoppingCardProps | null>>;
-};
+
 
 const AddProductContext = createContext<AddProductContextType>(
   {} as AddProductContextType
@@ -69,9 +67,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType>([]);
   const [userProducts, setUserProducts] = useState<ProductType>([]);
-  const [singleProduct, setSingleProduct] = useState<ShoppingCardProps | null>(
-    null
-  );
+
 
   const getCategory = async () => {
     try {
@@ -169,8 +165,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         getAllProducts,
         userProducts,
         getOrders,
-        singleProduct,
-        setSingleProduct,
+
       }}
     >
       {children}

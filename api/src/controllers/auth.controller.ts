@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { UserModel } from "../model/admin.model";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { json } from "body-parser";
 
 export const signUp: RequestHandler = async (req, res) => {
   const { userName, email, password, marketName, role } = req.body;
@@ -47,10 +48,31 @@ export const logIn: RequestHandler = async (req, res) => {
 
     const userId = user._id;
 
-    const token = jwt.sign({ userId }, "secret-key");
+    const userRole = user.role;
+
+    const token = jwt.sign({ userId, userRole }, "secret-key");
 
     res.json({ token: token, role: user.role });
   } catch (error) {
     console.log(error, "logIn error");
   }
+};
+
+export const getUserName: RequestHandler = async (req, res) => {
+  const { authorization } = req.headers;
+
+  try {
+    if (!authorization) return;
+
+    const { userId: id } = jwt.verify(
+      authorization,
+      "secret-key"
+    ) as JwtPayload;
+
+    const user = await UserModel.findById(id);
+
+    res.json({
+      userName: user?.userName,
+    });
+  } catch (error) {}
 };

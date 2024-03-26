@@ -11,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 export type ShoppingCardProps = {
@@ -151,10 +152,14 @@ export const SecondCard = (props: ShoppingCardProps) => {
             </Stack>
           </Stack>
           <Stack pb={1.5} alignItems={"center"}>
+
             <Link
               style={{ textDecoration: "none" }}
               href={`/sort/${productId}`}
             >
+
+            <Link href={`/sort/${productId}`}>
+
               <Stack
                 py={1}
                 px={2}
@@ -164,9 +169,11 @@ export const SecondCard = (props: ShoppingCardProps) => {
                   width: "fit-content",
                   borderRadius: "2px",
                 }}
+
                 onClick={() => {
                   setSingleProduct(props);
                 }}
+
               >
                 <Typography>дэлгэрэнгүй</Typography>
               </Stack>
