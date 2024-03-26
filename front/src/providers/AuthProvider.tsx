@@ -1,6 +1,6 @@
 "use client";
 import { api } from "@/common";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import {
   Dispatch,
   SetStateAction,
@@ -10,6 +10,8 @@ import {
   useState,
 } from "react";
 import { Id, toast } from "react-toastify";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { object } from "yup";
 
 type AuthProviderType = {
   children: React.ReactNode;
@@ -40,6 +42,11 @@ type AuthContextType = {
   isLogged: boolean;
   userRole: "Худалдан авагч" | "Борлуулагч";
   setUserRole: Dispatch<SetStateAction<"Худалдан авагч" | "Борлуулагч">>;
+  getUserName: (
+    authorization: string,
+    setUserName: Dispatch<SetStateAction<string>>
+  ) => Promise<any>;
+  merchantChecker: () => Promise<void>;
 };
 
 type signUpParams = {
@@ -129,10 +136,36 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
     }
   };
 
+  const getUserName = async (
+    authorization: string,
+    setUserName: Dispatch<SetStateAction<string>>
+  ) => {
+    try {
+      const res = await api.get("/user/getUserName", {
+        headers: { Authorization: authorization },
+      });
+
+      const { userName } = res.data;
+      setUserName(userName);
+    } catch (error) {}
+  };
+
   const logOut = () => {
     localStorage.removeItem("token");
 
     setChecked((prev) => !prev);
+  };
+
+  const merchantChecker = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) return router.push("/");
+
+    const { userRole } = jwt.decode(token) as JwtPayload;
+
+    if (userRole === "Худалдан авагч") {
+      router.push("/");
+    }
   };
 
   return (
@@ -162,6 +195,8 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
         isLogged,
         userRole,
         setUserRole,
+        getUserName,
+        merchantChecker,
       }}
     >
       {children}

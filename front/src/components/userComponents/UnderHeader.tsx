@@ -1,4 +1,5 @@
 "use client";
+import { useProduct } from "@/providers/AddproductProvider";
 import { KeyboardArrowDown, Search } from "@mui/icons-material";
 import {
   Container,
@@ -10,6 +11,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 
 export const UnderHeader = () => {
+  const { searchValue, setSearchValue } = useProduct();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -61,6 +63,10 @@ export const UnderHeader = () => {
             </Stack>
           </Stack>
           <TextField
+            value={searchValue}
+            onChange={(event) => {
+              setSearchValue(event.target.value);
+            }}
             placeholder="Хайлт..."
             type="search"
             //    onChange={(event) => {

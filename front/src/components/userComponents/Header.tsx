@@ -14,7 +14,17 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useOrder } from "@/providers/OrderProvider";
+import Link from "next/link";
+import { useAuth } from "@/providers/AuthProvider";
 export const Header = () => {
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      getUserName(token, setUserName);
+    }
+  }, []);
+  const { getUserName } = useAuth();
   const [buckets, setBucket] = useState<number>(0);
   const { isBucketAdded } = useOrder();
   useEffect(() => {
@@ -67,18 +77,20 @@ export const Header = () => {
             </Stack>
           </Stack>
           <Stack flexDirection={"row"} alignItems={"center"} gap={"29px"}>
-            <Stack
-              flexDirection={"row"}
-              gap={"3px"}
-              fontSize={"24px"}
-              color={"#F1F1F1"}
-              alignItems={"center"}
-            >
-              <Typography fontSize={16} fontWeight={600}>
-                Нэвтрэх
-              </Typography>
-              <PermIdentityIcon fontSize="small" />
-            </Stack>
+            <Link href={"/logIn"} style={{ textDecoration: "none" }}>
+              <Stack
+                flexDirection={"row"}
+                gap={"3px"}
+                fontSize={"24px"}
+                color={"#F1F1F1"}
+                alignItems={"center"}
+              >
+                <Typography fontSize={16} fontWeight={600}>
+                  {userName ? userName : "  Нэвтрэх"}
+                </Typography>
+                <PermIdentityIcon fontSize="small" />
+              </Stack>
+            </Link>
             <Stack
               flexDirection={"row"}
               alignItems={"center"}
