@@ -7,7 +7,6 @@ import Rating from "@mui/material/Rating";
 
 export const AddComment = () => {
   const [value, setValue] = useState<number | null>(2);
-  console.log(value);
 
   return (
     <Stack width={"100%"} gap={3}>
@@ -23,10 +22,10 @@ export const AddComment = () => {
         gap={5}
       >
         <Stack width={"100%"} borderBottom={"solid 2px #BFC6E0"} padding={2}>
-          <Box
-            sx={{
-              "& > legend": { mt: 2 },
-            }}
+          {/* <Box
+          // sx={{
+          //   "& > legend": { mt: 2 },
+          // }}
           >
             <Rating
               name="simple-controlled"
@@ -35,7 +34,14 @@ export const AddComment = () => {
                 setValue(newValue);
               }}
             />
-          </Box>
+          </Box> */}
+          <Rating
+            name="simple-controlled"
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+          />
         </Stack>
         <Stack width={"100%"} borderBottom={"solid 2px #BFC6E0"}>
           <TextField
