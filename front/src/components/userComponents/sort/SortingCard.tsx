@@ -32,7 +32,7 @@ export const SorttingCard = (props: ShoppingCardProps) => {
           className="image"
           alt="product image"
           style={{ objectFit: "cover" }}
-          src={images}
+          src={images[0]}
           fill
           sizes="small"
         />
@@ -175,7 +175,7 @@ export const SorttingCard = (props: ShoppingCardProps) => {
             <Stack position={"relative"} width={"550px"} height={"550px"}>
               <Image
                 style={{ objectFit: "contain" }}
-                src={images}
+                src={images[0]}
                 alt="shaadgue"
                 fill
               />

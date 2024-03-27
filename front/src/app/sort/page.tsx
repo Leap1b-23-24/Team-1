@@ -67,7 +67,7 @@ export default function Sort() {
                     productName={item.productName}
                     productPrice={item.productPrice}
                     color={item.color}
-                    images={item.images[0]}
+                    images={item.images}
                     description={item.description}
                   />
                 ) : (
@@ -77,7 +77,7 @@ export default function Sort() {
                     productName={item.productName}
                     productPrice={item.productPrice}
                     color={item.color}
-                    images={item.images[0]}
+                    images={item.images}
                     description={item.description}
                   />
                 );

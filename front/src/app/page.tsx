@@ -32,8 +32,6 @@ export default function Home() {
             <SuggestingProducts />
             <NewProducts />
             <ServiceCards />
-            <AddComment />
-            <AllComment />
           </Stack>
         </Container>
       </Stack>

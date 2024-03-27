@@ -81,7 +81,7 @@ export default function Bucket() {
                       setDeleted={setDeleted}
                       deleteId={index}
                       productPrice={price}
-                      image={image}
+                      image={image[0]}
                       productColor={productColor}
                       productName={productName}
                       quantity={quantity}

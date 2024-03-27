@@ -100,7 +100,7 @@ export default function Order() {
                       color={productColor}
                       name={productName}
                       price={price}
-                      image={image}
+                      image={image[0]}
                     />
                   );
                 })}
