@@ -9,15 +9,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
-import { NumericFormat } from "react-number-format";
-export type ShoppingCardProps = {
+type ShoppingCardProps = {
   shopId: string;
   productId: string;
   color: string;
   images: string;
   productName: string;
   productPrice: number;
-  description: string;
 };
 
 type BucketProduct = {
@@ -34,12 +32,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
   const { addToBucket } = useOrder();
   const [open, setOpen] = useState(false);
   return (
-    <Stack
-      width={"100%"}
-      height={1}
-      paddingX={1}
-      boxShadow={"1px 3px 8px #1C202414"}
-    >
+    <Stack width={"100%"} height={1} paddingX={1}>
       <Stack
         position={"relative"}
         width={1}
@@ -150,26 +143,9 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
         >
           {productName}
         </Typography>
-        <Stack flexDirection={"row"} gap={"6px"} mt={1} mb="15px">
-          {/* {productColor.map((item, index) => (
-            <Stack
-              key={index}
-              p={"5px"}
-              borderRadius={10}
-              bgcolor={item}
-            ></Stack>
-          ))} */}
-        </Stack>
+        <Stack flexDirection={"row"} gap={"6px"} mt={1} mb="15px"></Stack>
         <Stack flexDirection={"row"} gap={1.25} fontSize={14} fontWeight={400}>
-          <Typography color={"#151875"}>
-            <NumericFormat
-              value={productPrice}
-              thousandSeparator=","
-              displayType="text"
-              suffix="₮"
-              renderText={(value) => <b>{value}</b>}
-            />
-          </Typography>
+          <Typography color={"#151875"}>{`${productPrice}₮`}</Typography>
           <Typography
             color={"#FB2E86"}
             sx={{ textDecoration: "line-through" }}

@@ -11,10 +11,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { NumericFormat } from "react-number-format";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
+import { NumericFormat } from "react-number-format";
 export type ShoppingCardProps = {
   shopId: string;
   productId: string;

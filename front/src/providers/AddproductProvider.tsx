@@ -11,6 +11,7 @@ import {
 } from "react";
 import { ProductType } from "./UserProvider";
 import { toast } from "react-toastify";
+import { string } from "yup";
 
 type AddProductProviderProps = {
   children: ReactNode;
@@ -20,6 +21,17 @@ type getAllProduct = {
   filteredByDate: boolean;
   isSpecial: boolean;
   setProducts: Dispatch<SetStateAction<ProductType>>;
+};
+
+type Comment = {
+  productId: string;
+  comment: string;
+}[];
+
+type ReviewParams = {
+  productId: string;
+  comment: string;
+  rating: number | null;
 };
 
 export type CategoryType = {
@@ -42,6 +54,7 @@ type AddProductContextType = {
   // getOrders: (params: GetOrderParams) => Promise<void>;
   searchValue: string;
   setSearchValue: (value: string) => void;
+  addReview: (params: ReviewParams) => Promise<void>;
 };
 
 const AddProductContext = createContext<AddProductContextType>(
@@ -54,6 +67,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType>([]);
+  const [comments, setComments] = useState<Comment>([]);
 
   const [userProducts, setUserProducts] = useState<ProductType>([]);
   const [searchValue, setSearchValue] = useState("");
@@ -120,6 +134,56 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
       setState(res.data.category);
     } catch (error) {}
   };
+
+  // const addReview = async (
+  //   productId: string,
+  //   rating: number,
+  //   comment: string
+  // ) => {
+  //   try {
+  //     // const { data } = await api.post(
+  //     //   "product/addReview"
+  //     //   // { productId, star },
+  //     //   // { headers: { Authorization: localStorage.getItem("token") } }
+  //     // );
+  //     // const reviewID = data.reviewID;
+  //     const res = await api.post(
+  //       "comment/addComment",
+  //       {
+  //         productId: productId,
+  //         comment: comment,
+  //         rating: rating,
+  //       },
+  //       { headers: { Authorization: localStorage.getItem("token") } }
+  //     );
+  //     const { comment } = res.data;
+  //     setComments(comment);
+  //     // setRefresh((prev) => prev + 1);
+  //     toast.success(res.data.message, {
+  //       position: "top-center",
+  //       hideProgressBar: true,
+  //     });
+  //   } catch (error) {
+  //     console.log(error), "FFF";
+  //   }
+  // };
+
+  const addReview = async (params: ReviewParams) => {
+    try {
+      const res = await api.post(
+        "comment/addComment",
+        {
+          productId: params.productId,
+          rating: params.rating,
+          comment: params.comment,
+        },
+        { headers: { Authorization: localStorage.getItem("token") } }
+      );
+      toast.success(res.data.message);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  };
   useEffect(() => {
     getCategory();
     getSubCategory();
@@ -132,6 +196,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   return (
     <AddProductContext.Provider
       value={{
+        addReview,
         addCategory,
         setAddCategory,
         categories,

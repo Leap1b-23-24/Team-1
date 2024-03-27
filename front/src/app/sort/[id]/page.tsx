@@ -9,8 +9,20 @@ import { useProduct } from "@/providers/AddproductProvider";
 import { Container, Stack, Typography } from "@mui/material";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+type CommentType = {
+  userId: string;
+  productId: string;
+  rating: number;
+  comment: string;
+};
+type ProductDetailProps = {
+  productId: string;
+  rating: number;
+  comments: CommentType[];
+};
 
-export default function SingleProduct() {
+export default function SingleProduct(props: ProductDetailProps) {
+  const { productId, rating, comments } = props;
   const { id } = useParams();
   if (!id) return;
 
@@ -56,8 +68,12 @@ export default function SingleProduct() {
                 {"Үнэлгээ"}
               </Typography>
             </Stack>
-            <AddComment />
-            <AllComment />
+            <AddComment
+              productId={productId}
+              rating={rating}
+              comments={comments}
+            />
+            {/* <AllComment /> */}
           </Stack>
         </Container>
       </Stack>
