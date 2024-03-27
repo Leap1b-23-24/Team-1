@@ -11,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { NumericFormat } from "react-number-format";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
@@ -199,8 +200,13 @@ export const SecondCard = (props: ShoppingCardProps) => {
           className="productPrice"
           color={"#151875"}
         >
-          {productPrice}
-          {"₮"}
+          <NumericFormat
+            value={productPrice}
+            thousandSeparator=","
+            displayType="text"
+            suffix="₮"
+            renderText={(value) => <b>{value}</b>}
+          />
         </Typography>
       </Stack>
       <Modal

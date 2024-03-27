@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
+import { NumericFormat } from "react-number-format";
 export type ShoppingCardProps = {
   shopId: string;
   productId: string;
@@ -160,7 +161,15 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
           ))} */}
         </Stack>
         <Stack flexDirection={"row"} gap={1.25} fontSize={14} fontWeight={400}>
-          <Typography color={"#151875"}>{`${productPrice}₮`}</Typography>
+          <Typography color={"#151875"}>
+            <NumericFormat
+              value={productPrice}
+              thousandSeparator=","
+              displayType="text"
+              suffix="₮"
+              renderText={(value) => <b>{value}</b>}
+            />
+          </Typography>
           <Typography
             color={"#FB2E86"}
             sx={{ textDecoration: "line-through" }}

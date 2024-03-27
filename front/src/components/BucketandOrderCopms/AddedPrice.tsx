@@ -3,6 +3,7 @@ import { BucketProductType, useOrder } from "@/providers/OrderProvider";
 import { Stack, Typography } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { NumericFormat } from "react-number-format";
 
 export const AddedPrice = (props: { productChanged?: boolean }) => {
   const [addedPrice, setAddedPrice] = useState<number>(0);
@@ -51,7 +52,13 @@ export const AddedPrice = (props: { productChanged?: boolean }) => {
             Нийлбэр:
           </Typography>
           <Typography fontSize={18} fontWeight={600} color={"#1D3178"}>
-            {addedPrice} ₮
+            <NumericFormat
+              value={addedPrice}
+              thousandSeparator=","
+              displayType="text"
+              suffix="₮"
+              renderText={(value) => <b>{value}</b>}
+            />
           </Typography>
         </Stack>
         <Stack
@@ -65,7 +72,13 @@ export const AddedPrice = (props: { productChanged?: boolean }) => {
             Төлөх дүн:
           </Typography>
           <Typography fontSize={18} fontWeight={600} color={"#1D3178"}>
-            {addedPrice} ₮
+            <NumericFormat
+              value={addedPrice}
+              thousandSeparator=","
+              displayType="text"
+              suffix="₮"
+              renderText={(value) => <b>{value}</b>}
+            />
           </Typography>
         </Stack>
         <Typography

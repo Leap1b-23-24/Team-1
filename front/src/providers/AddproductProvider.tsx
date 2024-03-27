@@ -38,11 +38,10 @@ type AddProductContextType = {
     setState: Dispatch<SetStateAction<string>>,
     categoryId: string
   ) => Promise<void>;
-  getAllProducts: (params: getAllProduct) => Promise<void>
-  getOrders: (params: GetOrderParams) => Promise<void>;
+  getAllProducts: (params: getAllProduct) => Promise<void>;
+  // getOrders: (params: GetOrderParams) => Promise<void>;
   searchValue: string;
   setSearchValue: (value: string) => void;
-
 };
 
 const AddProductContext = createContext<AddProductContextType>(
@@ -58,7 +57,6 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
 
   const [userProducts, setUserProducts] = useState<ProductType>([]);
   const [searchValue, setSearchValue] = useState("");
-
 
   const getCategory = async () => {
     try {
@@ -144,11 +142,10 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         getSingleCategory,
         getAllProducts,
 
-        userProducts,
-        getOrders,
+        // userProducts,
+        // getOrders,
         searchValue,
         setSearchValue,
-
       }}
     >
       {children}
