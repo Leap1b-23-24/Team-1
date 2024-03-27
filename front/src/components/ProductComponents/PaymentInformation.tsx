@@ -1,12 +1,24 @@
 "use client";
 import { LocalShippingOutlined } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductCardType } from ".";
+import { BucketProductType } from "@/providers/OrderProvider";
 
-export const PaymentInformation = () => {
-  const [totalPrice, setTotalPrice] = useState(807800);
-  const [chosenClothes, setChosenClothes] = useState<[]>([]);
+type PaymentProps = {
+  orderDetails: BucketProductType[];
+};
+
+export const PaymentInformation = (props: PaymentProps) => {
+  const { orderDetails } = props;
+  const [totalPrice, setTotalPrice] = useState<number>(5000);
+
+  useEffect(() => {
+    setTotalPrice(0);
+    orderDetails.forEach((each) => {
+      setTotalPrice((prev) => (prev += each.quantity * each.price));
+    });
+  }, []);
   return (
     <Stack
       borderRadius="12px"
@@ -28,14 +40,14 @@ export const PaymentInformation = () => {
           <Typography fontSize="16px" fontWeight={400} color="#3F4145">
             {"Бүтээгдэхүүн"}
           </Typography>
-          <Stack>
-            {chosenClothes.map((data: ProductCardType, index) => {
+          <Stack gap={1}>
+            {orderDetails.map((each, index) => {
               return (
                 <ProductRow
                   key={index}
-                  productName={data.productName}
-                  productQuantity={data.productQuantity}
-                  productPrice={data.productPrice}
+                  productName={each.productName}
+                  productQuantity={each.quantity}
+                  productPrice={each.price}
                 />
               );
             })}
@@ -79,7 +91,7 @@ export const ProductRow = (props: ProductCardType) => {
         {productName}
       </Typography>
       <Typography width="25%" fontWeight={600} fontSize="14px" color="#3F4145">
-        *{productQuantity}
+        * {productQuantity}
       </Typography>
       <Typography
         width="25%"
@@ -89,7 +101,7 @@ export const ProductRow = (props: ProductCardType) => {
         display="flex"
         justifyContent="flex-end"
       >
-        {productPrice}
+        {productPrice * productQuantity}
       </Typography>
     </Stack>
   );

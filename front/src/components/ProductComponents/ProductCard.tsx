@@ -1,9 +1,11 @@
 import { Stack, Typography } from "@mui/material";
+import Image from "next/image";
 
 export type ProductCardType = {
   productName: string;
   date?: string;
-  productId?: number;
+  productId?: string;
+  productPicture?: string;
   productQuantity: number;
   productPrice: number;
   totalPrice?: number;
@@ -16,7 +18,7 @@ export const ProductCard = (props: ProductCardType) => {
     productId,
     productQuantity,
     productPrice,
-    totalPrice,
+    productPicture,
   } = props;
   return (
     <Stack
@@ -24,11 +26,10 @@ export const ProductCard = (props: ProductCardType) => {
       direction="row"
       borderRadius="12px"
       bgcolor="#F7F7F8"
-      //   height="fit-content"
       overflow="hidden"
     >
-      <Stack width="30%">
-        <img src="tshirt.jpeg" alt="" style={{ objectFit: "cover" }} />
+      <Stack width="30%" position={"relative"}>
+        <Image src={`${productPicture}`} alt="" fill />
       </Stack>
       <Stack width="70%" gap={2} justifyContent="center" padding={3}>
         <Typography fontSize="24px" fontWeight={700} color="primary">
@@ -69,8 +70,7 @@ export const ProductCard = (props: ProductCardType) => {
             </Typography>
           </Stack>
           <Typography fontSize="18px" fontWeight={600} color="primary">
-            {" "}
-            ₮{totalPrice}
+            ₮{productPrice * productQuantity}
           </Typography>
         </Stack>
       </Stack>

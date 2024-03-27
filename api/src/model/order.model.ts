@@ -11,7 +11,6 @@ const orderSchema = new Schema(
       ref: "user",
     },
 
-
     deliveryDate: Date,
     amountPaid: Number,
     amountToBePaid: Number,
@@ -21,7 +20,17 @@ const orderSchema = new Schema(
     },
     description: String,
     orderType: String,
-    orderDetails: [{ id: String, quantity: Number, shopId: String }],
+    orderDetails: [
+      {
+        shopId: String,
+        _id: String,
+        productName: String,
+        productColor: String,
+        image: String,
+        price: Number,
+        quantity: Number,
+      },
+    ],
     createdAt: Date,
     updatedAt: Date,
   },

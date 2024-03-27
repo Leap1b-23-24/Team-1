@@ -36,8 +36,10 @@ type OrderContextType = {
   orderProducts: (params: OrderDetailType) => Promise<void>;
   getOrders: (params: GetOrderParams) => Promise<void>;
   getUserName: (id: string) => Promise<string>;
-  orderId: string;
-  setOrderId: Dispatch<SetStateAction<string>>;
+  orderDetails: BucketProductType[];
+  setOrderDetails: Dispatch<SetStateAction<BucketProductType[]>>;
+  orderInfo: OrderInfo;
+  setOrderInfo: Dispatch<SetStateAction<OrderInfo>>;
 };
 
 type Order = {
@@ -52,7 +54,13 @@ export type OrderDetailType = {
   status: string;
   contactInfo: string;
   amountToBePaid: number;
-  orderDetail: { id: string; quantity: number; shopId: string }[];
+  orderDetails: BucketProductType[];
+};
+
+type OrderInfo = {
+  id: string;
+  ordererName: string;
+  ordererEmail: string;
 };
 
 type GetOrderParams = {
@@ -64,7 +72,8 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
   const [order, setOrder] = useState<Order[]>([]);
   const [bucketProducts, setBucket] = useState<ProductType>([]);
   const [isBucketAdded, setBucketAdded] = useState<boolean>(false);
-  const [orderId, setOrderId] = useState<string>("");
+  const [orderDetails, setOrderDetails] = useState<BucketProductType[]>([]);
+  const [orderInfo, setOrderInfo] = useState<OrderInfo>({} as OrderInfo);
 
   // params: BucketProduct
 
@@ -94,7 +103,7 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
   };
 
   const orderProducts = async (params: OrderDetailType) => {
-    const { status, contactInfo, amountToBePaid, orderDetail } = params;
+    const { status, contactInfo, amountToBePaid, orderDetails } = params;
     try {
       const res = await api.post(
         "/order/addOrder",
@@ -102,7 +111,7 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
           status,
           contactInfo,
           amountToBePaid,
-          orderDetail,
+          orderDetails,
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       );
@@ -144,8 +153,10 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
         orderProducts,
         getOrders,
         getUserName,
-        orderId,
-        setOrderId,
+        orderDetails,
+        setOrderDetails,
+        orderInfo,
+        setOrderInfo,
       }}
     >
       {children}

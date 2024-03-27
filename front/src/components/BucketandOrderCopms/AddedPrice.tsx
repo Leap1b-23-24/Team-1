@@ -6,9 +6,7 @@ import { useEffect, useState } from "react";
 
 export const AddedPrice = (props: { productChanged?: boolean }) => {
   const [addedPrice, setAddedPrice] = useState<number>(0);
-  const [orderDetails, setOrderDetails] = useState<
-    { id: string; quantity: number; shopId: string }[]
-  >([]);
+  const [orderDetails, setOrderDetails] = useState<BucketProductType[]>([]);
   const router = useRouter();
   const pathName = usePathname();
   const { orderProducts } = useOrder();
@@ -18,12 +16,10 @@ export const AddedPrice = (props: { productChanged?: boolean }) => {
       let products: BucketProductType[] = JSON.parse(raw);
       setAddedPrice(0);
       setOrderDetails([]);
+      console.log(products);
       products.forEach((each) => {
         setAddedPrice((prev) => (prev += each.price));
-        setOrderDetails((prev) => [
-          ...prev,
-          { id: each._id, quantity: each.quantity, shopId: each.shopId },
-        ]);
+        setOrderDetails((prev) => [...prev, each]);
       });
     }
   }, [props.productChanged]);
@@ -83,7 +79,7 @@ export const AddedPrice = (props: { productChanged?: boolean }) => {
               : orderProducts({
                   status: "Шинэ захиалга",
                   amountToBePaid: addedPrice,
-                  orderDetail: orderDetails,
+                  orderDetails: orderDetails,
                   contactInfo: "80125413",
                 });
           }}
