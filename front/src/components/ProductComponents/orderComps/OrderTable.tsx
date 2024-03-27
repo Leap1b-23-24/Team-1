@@ -7,6 +7,8 @@ import {
   Paid,
 } from "@mui/icons-material";
 import {
+  Icon,
+  IconButton,
   Stack,
   Table,
   TableBody,
@@ -17,8 +19,8 @@ import {
   Typography,
 } from "@mui/material";
 import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { OrderStatus } from "./OrderStatus";
 
 type Column = {
   id: "_id" | "orderer" | "createdAt" | "amountToBePaid" | "orderDetail";
@@ -54,6 +56,7 @@ const columns: readonly Column[] = [
 export const OrderTable = () => {
   const [orders, setOrders] = useState<OrderDetailType[]>([]);
   const { getOrders, setOrderId } = useOrder();
+  const router = useRouter();
 
   useEffect(() => {
     getOrders({ setOrders: setOrders });
@@ -104,10 +107,17 @@ export const OrderTable = () => {
                           alignItems={"flex-start"}
                           sx={{ cursor: "pointer" }}
                           onClick={() => {
-                            setOrderId(order.?_id);
+                            if (order._id) {
+                              setOrderId(order._id);
+                              router.push(
+                                "/dashboard/orderPage/orderDetailPage"
+                              );
+                            }
                           }}
                         >
-                          <ArrowRight />
+                          <IconButton>
+                            <ArrowRight />
+                          </IconButton>
                         </Stack>
                       </TableCell>
                     </TableRow>
