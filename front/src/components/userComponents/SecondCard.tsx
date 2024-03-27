@@ -10,8 +10,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
-import { NumericFormat } from "react-number-format";
+
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
@@ -19,7 +18,7 @@ export type ShoppingCardProps = {
   shopId: string;
   productId: string;
   color: string;
-  images: string;
+  images: string[];
   productName: string;
   productPrice: number;
 };
@@ -37,7 +36,9 @@ export const SecondCard = (props: ShoppingCardProps) => {
   const { addToBucket } = useOrder();
   const [open, setOpen] = useState(false);
 
-  // const { setSingleProduct } = useProduct();
+  const router = useRouter();
+
+  const { getSingleProduct } = useProduct();
 
   return (
     <Stack
@@ -89,7 +90,7 @@ export const SecondCard = (props: ShoppingCardProps) => {
           }}
           fill
           sizes="small"
-          src={images}
+          src={images[0]}
         />
         <Stack
           position={"absolute"}
@@ -153,23 +154,21 @@ export const SecondCard = (props: ShoppingCardProps) => {
             </Stack>
           </Stack>
           <Stack pb={1.5} alignItems={"center"}>
-            <Link href={`/sort/${productId}`}>
-              <Stack
-                py={1}
-                px={2}
-                sx={{
-                  bgcolor: "#08D15F",
-                  color: "common.white",
-                  width: "fit-content",
-                  borderRadius: "2px",
-                }}
-                onClick={() => {
-                  // setSingleProduct(props);
-                }}
-              >
-                <Typography>дэлгэрэнгүй</Typography>
-              </Stack>
-            </Link>
+            <Stack
+              py={1}
+              px={2}
+              sx={{
+                bgcolor: "#08D15F",
+                color: "common.white",
+                width: "fit-content",
+                borderRadius: "2px",
+              }}
+              onClick={() => {
+                router.push(`/${productId}`);
+              }}
+            >
+              <Typography>дэлгэрэнгүй</Typography>
+            </Stack>
           </Stack>
         </Stack>
       </Stack>
@@ -200,13 +199,8 @@ export const SecondCard = (props: ShoppingCardProps) => {
           className="productPrice"
           color={"#151875"}
         >
-          <NumericFormat
-            value={productPrice}
-            thousandSeparator=","
-            displayType="text"
-            suffix="₮"
-            renderText={(value) => <b>{value}</b>}
-          />
+          {productPrice}
+          {"₮"}
         </Typography>
       </Stack>
       <Modal
@@ -253,7 +247,7 @@ export const SecondCard = (props: ShoppingCardProps) => {
             <Stack position={"relative"} width={"550px"} height={"550px"}>
               <Image
                 style={{ objectFit: "contain" }}
-                src={images}
+                src={images[0]}
                 alt="shaadgue"
                 fill
               />

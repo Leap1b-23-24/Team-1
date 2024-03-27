@@ -20,7 +20,7 @@ export type BucketProductType = {
   _id: string;
   productName: string;
   productColor: string;
-  image: string;
+  image: string[];
   price: number;
   quantity: number;
 };

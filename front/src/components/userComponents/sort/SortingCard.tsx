@@ -14,7 +14,15 @@ import { NumericFormat } from "react-number-format";
 
 export const SorttingCard = (props: ShoppingCardProps) => {
   const [open, setOpen] = useState(false);
-  const { images, productName, productPrice, productId, color, shopId } = props;
+  const {
+    images,
+    productName,
+    productPrice,
+    productId,
+    color,
+    shopId,
+    description,
+  } = props;
 
   const { addToBucket } = useOrder();
   return (
@@ -57,7 +65,7 @@ export const SorttingCard = (props: ShoppingCardProps) => {
               />
             </Typography>
           </Stack>
-          {/* <Typography sx={{ mt: "12px" }}>{description}</Typography> */}
+          <Typography sx={{ mt: "12px" }}>{description}</Typography>
         </Stack>
         <Stack>
           <Stack direction={"row"} gap={1.25} p={"11px"} height={1}>
