@@ -22,7 +22,7 @@ export const addComment: RequestHandler = async (req, res) => {
       comment: comment,
       rating: rating,
     });
-    return res.json({ message: "comment added" });
+    return res.json({ message: "comment added:)" });
   } catch (err) {
     res.json(err);
   }
