@@ -5,6 +5,7 @@ import productRouter from "./routers/product.router";
 import authRouter from "./routers/auth.router";
 import categoryRouter from "./routers/category.router";
 import orderRouter from "./routers/order.router";
+import commentRouter from "./routers/comment.router";
 
 const app = express();
 app.use(json());
@@ -14,5 +15,5 @@ app.use("/product", productRouter);
 app.use("/category", categoryRouter);
 app.use("/user", authRouter);
 app.use("/order", orderRouter);
-
+app.use("/comment", commentRouter);
 export default app;
