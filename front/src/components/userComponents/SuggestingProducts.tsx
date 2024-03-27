@@ -12,10 +12,12 @@ import "swiper/css/pagination";
 // import "swiper/css/scrollbar";
 import "swiper/css/bundle";
 import { SecondCard } from "./SecondCard";
+import Link from "next/link";
 
 export const SuggestingProducts = () => {
   const [products, setProducts] = useState<ProductType>([]);
   const { getAllProducts } = useProduct();
+
   useEffect(() => {
     getAllProducts({
       setProducts: setProducts,

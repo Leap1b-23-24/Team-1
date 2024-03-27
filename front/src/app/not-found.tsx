@@ -21,7 +21,6 @@ export default function NotFound() {
   const router = useRouter();
   return (
     <Stack width={"100vw"} gap={4} alignItems={"center"} bgcolor={"#F7F7F8"}>
-      <WholeHeader />
       <Container maxWidth="lg">
         <Stack justifyContent={"center"} alignItems={"center"}>
           <Image
@@ -47,7 +46,7 @@ export default function NotFound() {
           </Stack>
         </Stack>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </Stack>
   );
 }

@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { UserModel } from "../model/admin.model";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { json } from "body-parser";
 
 export const signUp: RequestHandler = async (req, res) => {
   const { userName, email, password, marketName, role } = req.body;
@@ -47,7 +48,9 @@ export const logIn: RequestHandler = async (req, res) => {
 
     const userId = user._id;
 
-    const token = jwt.sign({ userId }, "secret-key");
+    const userRole = user.role;
+
+    const token = jwt.sign({ userId, userRole }, "secret-key");
 
     res.json({ token: token, role: user.role });
   } catch (error) {
@@ -56,13 +59,22 @@ export const logIn: RequestHandler = async (req, res) => {
 };
 
 export const getUserName: RequestHandler = async (req, res) => {
-  const { _id } = req.body;
-  try {
-    const user = await UserModel.findOne({ _id: _id });
-    if (!user) {
-      return res.status(401).json({ message: "User not found" });
-    }
 
-    res.json({ userName: user.userName });
+  const { authorization } = req.headers;
+
+  try {
+    if (!authorization) return;
+
+    const { userId: id } = jwt.verify(
+      authorization,
+      "secret-key"
+    ) as JwtPayload;
+
+    const user = await UserModel.findById(id);
+
+    res.json({
+      userName: user?.userName,
+    });
+
   } catch (error) {}
 };

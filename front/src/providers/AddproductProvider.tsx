@@ -11,6 +11,7 @@ import {
 } from "react";
 import { ProductType } from "./UserProvider";
 import { toast } from "react-toastify";
+
 type AddProductProviderProps = {
   children: ReactNode;
 };
@@ -37,7 +38,11 @@ type AddProductContextType = {
     setState: Dispatch<SetStateAction<string>>,
     categoryId: string
   ) => Promise<void>;
-  getAllProducts: (params: getAllProduct) => Promise<void>;
+  getAllProducts: (params: getAllProduct) => Promise<void>
+  getOrders: (params: GetOrderParams) => Promise<void>;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+
 };
 
 const AddProductContext = createContext<AddProductContextType>(
@@ -50,6 +55,10 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType>([]);
+
+  const [userProducts, setUserProducts] = useState<ProductType>([]);
+  const [searchValue, setSearchValue] = useState("");
+
 
   const getCategory = async () => {
     try {
@@ -134,6 +143,12 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         products,
         getSingleCategory,
         getAllProducts,
+
+        userProducts,
+        getOrders,
+        searchValue,
+        setSearchValue,
+
       }}
     >
       {children}

@@ -6,6 +6,8 @@ const authRouter = Router();
 authRouter
   .post("/signUp", signUp)
   .post("/logIn", logIn)
-  .post("/getName", getUserName);
+
+  .get("/getUserName", getUserName);
+
 
 export default authRouter;

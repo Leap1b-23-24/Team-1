@@ -1,15 +1,20 @@
 "use client";
+import { useProduct } from "@/providers/AddproductProvider";
 import { useOrder } from "@/providers/OrderProvider";
+
 import {
   FavoriteBorder,
   ShoppingCartOutlined,
   ZoomIn,
 } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Button, Modal, Stack, Typography } from "@mui/material";
+import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
-type ShoppingCardProps = {
+export type ShoppingCardProps = {
   shopId: string;
   productId: string;
   color: string;
@@ -30,6 +35,8 @@ export const SecondCard = (props: ShoppingCardProps) => {
   const { images, productName, productPrice, productId, color, shopId } = props;
   const { addToBucket } = useOrder();
   const [open, setOpen] = useState(false);
+
+  // const { setSingleProduct } = useProduct();
 
   return (
     <Stack
@@ -145,18 +152,23 @@ export const SecondCard = (props: ShoppingCardProps) => {
             </Stack>
           </Stack>
           <Stack pb={1.5} alignItems={"center"}>
-            <Stack
-              py={1}
-              px={2}
-              sx={{
-                bgcolor: "#08D15F",
-                color: "common.white",
-                width: "fit-content",
-                borderRadius: "2px",
-              }}
-            >
-              <Typography>дэлгэрэнгүй</Typography>
-            </Stack>
+            <Link href={`/sort/${productId}`}>
+              <Stack
+                py={1}
+                px={2}
+                sx={{
+                  bgcolor: "#08D15F",
+                  color: "common.white",
+                  width: "fit-content",
+                  borderRadius: "2px",
+                }}
+                onClick={() => {
+                  // setSingleProduct(props);
+                }}
+              >
+                <Typography>дэлгэрэнгүй</Typography>
+              </Stack>
+            </Link>
           </Stack>
         </Stack>
       </Stack>
