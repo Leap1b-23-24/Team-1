@@ -81,7 +81,7 @@ export const AddedPrice = (props: { productChanged?: boolean }) => {
             pathName.includes("bucket")
               ? router.push("/order")
               : orderProducts({
-                  status: "paid",
+                  status: "Шинэ захиалга",
                   amountToBePaid: addedPrice,
                   orderDetail: orderDetails,
                   contactInfo: "80125413",

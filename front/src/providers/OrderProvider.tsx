@@ -3,11 +3,13 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { ProductType } from "./UserProvider";
 import { toast } from "react-toastify";
 import { api } from "@/common";
+import { string } from "yup";
 
 type OrderProviderType = {
   children: React.ReactNode;
@@ -31,26 +33,38 @@ type OrderContextType = {
   ) => void;
   isBucketAdded: boolean;
   setBucketAdded: Dispatch<SetStateAction<boolean>>;
-  orderProducts: (params: OrderParamsType) => Promise<void>;
+  orderProducts: (params: OrderDetailType) => Promise<void>;
+  getOrders: (params: GetOrderParams) => Promise<void>;
+  getUserName: (id: string) => Promise<string>;
+  orderId: string;
+  setOrderId: Dispatch<SetStateAction<string>>;
 };
 
 type Order = {
   orderNumber: string;
   status: string;
 };
-export type OrderParamsType = {
+
+export type OrderDetailType = {
+  _id?: string;
+  orderer?: { _id: string; userName: string; email: string };
+  createdAt?: string;
   status: string;
   contactInfo: string;
   amountToBePaid: number;
   orderDetail: { id: string; quantity: number; shopId: string }[];
 };
 
+type GetOrderParams = {
+  setOrders: Dispatch<SetStateAction<OrderDetailType[]>>;
+};
 const OrderContext = createContext<OrderContextType>({} as OrderContextType);
 
 export const OrderProvider = ({ children }: OrderProviderType) => {
   const [order, setOrder] = useState<Order[]>([]);
   const [bucketProducts, setBucket] = useState<ProductType>([]);
   const [isBucketAdded, setBucketAdded] = useState<boolean>(false);
+  const [orderId, setOrderId] = useState<string>("");
 
   // params: BucketProduct
 
@@ -68,6 +82,7 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
     setBucketAdded((prev) => !prev);
     toast.success("Саванд нэмсэн");
   };
+
   const getBucketProducts = (
     setProduct: Dispatch<SetStateAction<BucketProductType[]>>
   ) => {
@@ -77,7 +92,8 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
       setProduct(products);
     }
   };
-  const orderProducts = async (params: OrderParamsType) => {
+
+  const orderProducts = async (params: OrderDetailType) => {
     const { status, contactInfo, amountToBePaid, orderDetail } = params;
     try {
       const res = await api.post(
@@ -97,6 +113,26 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
     }
   };
 
+  const getOrders = async (params: GetOrderParams) => {
+    const { setOrders } = params;
+    try {
+      const res = await api.get("/order/getAdmin", {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
+
+      setOrders(res.data.orders);
+    } catch (error) {}
+  };
+
+  const getUserName = async (id: string) => {
+    try {
+      const res = await api.post("/user/getName", { _id: id });
+
+      return res.data.userName;
+    } catch (error) {
+      console.log(error, "getUserName Error");
+    }
+  };
   return (
     <OrderContext.Provider
       value={{
@@ -106,6 +142,10 @@ export const OrderProvider = ({ children }: OrderProviderType) => {
         isBucketAdded,
         setBucketAdded,
         orderProducts,
+        getOrders,
+        getUserName,
+        orderId,
+        setOrderId,
       }}
     >
       {children}
