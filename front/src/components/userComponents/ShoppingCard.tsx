@@ -14,7 +14,7 @@ export type ShoppingCardProps = {
   shopId: string;
   productId: string;
   color: string;
-  images: string;
+  images: string[];
   productName: string;
   productPrice: number;
   description: string;
@@ -30,7 +30,15 @@ type BucketProduct = {
 };
 
 export const ShoppingCard = (props: ShoppingCardProps) => {
-  const { images, productName, productPrice, productId, color, shopId } = props;
+  const {
+    images,
+    productName,
+    productPrice,
+    productId,
+    color,
+    shopId,
+    description,
+  } = props;
   const { addToBucket } = useOrder();
   const [open, setOpen] = useState(false);
   return (
@@ -64,7 +72,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
           className="image"
           alt="product image"
           style={{ objectFit: "cover" }}
-          src={images}
+          src={images[0]}
           fill
           sizes="small"
         />
@@ -220,7 +228,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
             <Stack position={"relative"} width={"550px"} height={"550px"}>
               <Image
                 style={{ objectFit: "contain" }}
-                src={images}
+                src={images[0]}
                 alt="shaadgue"
                 fill
               />

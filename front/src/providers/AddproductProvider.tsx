@@ -39,9 +39,17 @@ type AddProductContextType = {
     categoryId: string
   ) => Promise<void>;
   getAllProducts: (params: getAllProduct) => Promise<void>;
+<<<<<<< HEAD
   // getOrders: (params: GetOrderParams) => Promise<void>;
   searchValue: string;
   setSearchValue: (value: string) => void;
+=======
+  getOrders: (params: GetOrderParams) => Promise<void>;
+  // singleProductData: ShoppingCardProps | null;
+  // getSingleProduct: (productId: string) => void;
+  // productId: string;
+  // setProductId: Dispatch<SetStateAction<string>>;
+>>>>>>> ec40556 (orderProduct page)
 };
 
 const AddProductContext = createContext<AddProductContextType>(
@@ -56,7 +64,13 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [products, setProducts] = useState<ProductType>([]);
 
   const [userProducts, setUserProducts] = useState<ProductType>([]);
+<<<<<<< HEAD
   const [searchValue, setSearchValue] = useState("");
+=======
+  // const [singleProductData, setSingleProductData] =
+  //   useState<ShoppingCardProps | null>(null);
+  // const [productId, setProductId] = useState<string>("");
+>>>>>>> ec40556 (orderProduct page)
 
   const getCategory = async () => {
     try {
@@ -120,6 +134,17 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
       setState(res.data.category);
     } catch (error) {}
   };
+
+  // const getSingleProduct = async (productId: string) => {
+  //   try {
+  //     const res = await api.post("/singleProduct", { productId });
+
+  //     const { singleProduct } = res.data;
+
+  //     setSingleProductData(singleProduct);
+  //   } catch (error) {}
+  // };
+
   useEffect(() => {
     getCategory();
     getSubCategory();
@@ -141,11 +166,20 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         products,
         getSingleCategory,
         getAllProducts,
+<<<<<<< HEAD
 
         // userProducts,
         // getOrders,
         searchValue,
         setSearchValue,
+=======
+        userProducts,
+        getOrders,
+        // singleProductData,
+        // getSingleProduct,
+        // productId,
+        // setProductId,
+>>>>>>> ec40556 (orderProduct page)
       }}
     >
       {children}
