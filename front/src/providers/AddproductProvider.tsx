@@ -11,6 +11,7 @@ import {
 } from "react";
 import { ProductType } from "./UserProvider";
 import { toast } from "react-toastify";
+import { OrderDetailType } from "./OrderProvider";
 
 type AddProductProviderProps = {
   children: ReactNode;
@@ -20,6 +21,10 @@ type getAllProduct = {
   filteredByDate: boolean;
   isSpecial: boolean;
   setProducts: Dispatch<SetStateAction<ProductType>>;
+};
+
+type GetOrderParams = {
+  setOrders: Dispatch<SetStateAction<OrderDetailType[]>>;
 };
 
 export type CategoryType = {
@@ -38,11 +43,10 @@ type AddProductContextType = {
     setState: Dispatch<SetStateAction<string>>,
     categoryId: string
   ) => Promise<void>;
-  getAllProducts: (params: getAllProduct) => Promise<void>
+  getAllProducts: (params: getAllProduct) => Promise<void>;
   getOrders: (params: GetOrderParams) => Promise<void>;
   searchValue: string;
   setSearchValue: (value: string) => void;
-
 };
 
 const AddProductContext = createContext<AddProductContextType>(
@@ -55,10 +59,8 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType>([]);
-
   const [userProducts, setUserProducts] = useState<ProductType>([]);
   const [searchValue, setSearchValue] = useState("");
-
 
   const getCategory = async () => {
     try {
@@ -122,6 +124,17 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
       setState(res.data.category);
     } catch (error) {}
   };
+
+  const getOrders = async (params: GetOrderParams) => {
+    const { setOrders } = params;
+    try {
+      const res = await api.get("/orders/getAdmin", {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
+
+      setOrders(res.data.orders);
+    } catch (error) {}
+  };
   useEffect(() => {
     getCategory();
     getSubCategory();
@@ -143,12 +156,9 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         products,
         getSingleCategory,
         getAllProducts,
-
-        userProducts,
-        getOrders,
         searchValue,
         setSearchValue,
-
+        getOrders,
       }}
     >
       {children}

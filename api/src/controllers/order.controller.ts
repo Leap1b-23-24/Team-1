@@ -44,8 +44,6 @@ export const getAdminOrder: RequestHandler = async (req, res) => {
       },
     }).populate("orderer");
 
-    console.log(orders);
-
     res.json({ orders });
   } catch (error) {}
 };
