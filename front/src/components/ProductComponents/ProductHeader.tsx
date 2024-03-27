@@ -1,3 +1,4 @@
+"use client";
 import { PineWhite } from "@/assets/PineWhite";
 import { useAuth } from "@/providers/AuthProvider";
 import { NotificationsOutlined, PersonOutline } from "@mui/icons-material";
