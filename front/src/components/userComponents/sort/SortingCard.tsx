@@ -10,10 +10,19 @@ import {
 import { useState } from "react";
 import { ShoppingCardProps } from "../ShoppingCard";
 import CloseIcon from "@mui/icons-material/Close";
+import { NumericFormat } from "react-number-format";
 
 export const SorttingCard = (props: ShoppingCardProps) => {
   const [open, setOpen] = useState(false);
-  const { images, productName, productPrice, productId, color, shopId } = props;
+  const {
+    images,
+    productName,
+    productPrice,
+    productId,
+    color,
+    shopId,
+    description,
+  } = props;
 
   const { addToBucket } = useOrder();
   return (
@@ -45,9 +54,18 @@ export const SorttingCard = (props: ShoppingCardProps) => {
             fontSize={14}
             fontWeight={400}
           >
-            <Typography color={"#151875"}>{`${productPrice}₮`}</Typography>
+            <Typography color={"#151875"}>
+              {" "}
+              <NumericFormat
+                value={productPrice}
+                thousandSeparator=","
+                displayType="text"
+                suffix="₮"
+                renderText={(value) => <b>{value}</b>}
+              />
+            </Typography>
           </Stack>
-          {/* <Typography sx={{ mt: "12px" }}>{description}</Typography> */}
+          <Typography sx={{ mt: "12px" }}>{description}</Typography>
         </Stack>
         <Stack>
           <Stack direction={"row"} gap={1.25} p={"11px"} height={1}>

@@ -5,6 +5,7 @@ import { Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { toast } from "react-toastify";
+import { NumericFormat } from "react-number-format";
 
 type BucketProps = {
   image: string;
@@ -91,7 +92,13 @@ export const BucketProduct = (props: BucketProps) => {
         width={"25%"}
         textAlign={"center"}
       >
-        {productPrice}
+        <NumericFormat
+          value={productPrice}
+          thousandSeparator=","
+          displayType="text"
+          suffix="₮"
+          renderText={(value) => <b>{value}</b>}
+        />
       </Typography>
       <Stack width={"25%"} alignItems={"center"} justifyContent={"center"}>
         <Stack
@@ -145,7 +152,13 @@ export const BucketProduct = (props: BucketProps) => {
         width={"25%"}
         textAlign={"center"}
       >
-        {productPrice * quantity}
+        <NumericFormat
+          value={productPrice * quantity}
+          thousandSeparator=","
+          displayType="text"
+          suffix="₮"
+          renderText={(value) => <b>{value}</b>}
+        />
       </Typography>
     </Stack>
   );

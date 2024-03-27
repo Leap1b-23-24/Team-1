@@ -44,10 +44,17 @@ type AddProductContextType = {
     categoryId: string
   ) => Promise<void>;
   getAllProducts: (params: getAllProduct) => Promise<void>;
+
   getOrders: (params: GetOrderParams) => Promise<void>;
   searchValue: string;
   setSearchValue: (value: string) => void;
-};
+
+  // getOrders: (params: GetOrderParams) => Promise<void>;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+
+  getOrders: (params: GetOrderParams) => Promise<void>;
+
 
 const AddProductContext = createContext<AddProductContextType>(
   {} as AddProductContextType
@@ -60,7 +67,10 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType>([]);
   const [userProducts, setUserProducts] = useState<ProductType>([]);
+
   const [searchValue, setSearchValue] = useState("");
+
+
 
   const getCategory = async () => {
     try {
@@ -125,6 +135,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
     } catch (error) {}
   };
 
+
   const getOrders = async (params: GetOrderParams) => {
     const { setOrders } = params;
     try {
@@ -135,6 +146,7 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
       setOrders(res.data.orders);
     } catch (error) {}
   };
+
   useEffect(() => {
     getCategory();
     getSubCategory();
@@ -156,9 +168,19 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         products,
         getSingleCategory,
         getAllProducts,
+
         searchValue,
         setSearchValue,
         getOrders,
+
+
+    
+        searchValue,
+        setSearchValue,
+
+        userProducts,
+        getOrders,
+
       }}
     >
       {children}

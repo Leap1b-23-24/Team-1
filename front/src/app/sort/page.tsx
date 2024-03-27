@@ -50,15 +50,15 @@ export default function Sort() {
             }}
           >
             {products
-              .filter(
-                (item) =>
-                  item.productName
-                    .toLowerCase()
-                    .includes(searchValue.toLowerCase()) ||
-                  item.description
-                    .toLowerCase()
-                    .includes(searchValue.toLowerCase())
-              )
+              // .filter(
+              //   (item) =>
+              //     item.productName
+              //       .toLowerCase()
+              //       .includes(searchValue.toLowerCase()) ||
+              //     item.description
+              //       .toLowerCase()
+              //       .includes(searchValue.toLowerCase())
+              // )
               .map((item, index) => {
                 return isWindow ? (
                   <ShoppingCard

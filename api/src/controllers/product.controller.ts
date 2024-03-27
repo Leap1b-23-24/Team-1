@@ -91,3 +91,14 @@ export const getAllProducts: RequestHandler = async (req, res) => {
     res.json(err);
   }
 };
+export const getSingleProduct: RequestHandler = async (req, res) => {
+  const { productId } = req.body;
+
+  try {
+    const singleProduct = await ProductModel.findOne({ _id: productId });
+
+    return res.json({ singleProduct: singleProduct });
+  } catch (err) {
+    res.json(err);
+  }
+};

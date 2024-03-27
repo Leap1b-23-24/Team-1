@@ -9,11 +9,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
+import { NumericFormat } from "react-number-format";
 export type ShoppingCardProps = {
   shopId: string;
   productId: string;
   color: string;
-  images: string;
+  images: string[];
   productName: string;
   productPrice: number;
   description: string;
@@ -29,7 +30,15 @@ type BucketProduct = {
 };
 
 export const ShoppingCard = (props: ShoppingCardProps) => {
-  const { images, productName, productPrice, productId, color, shopId } = props;
+  const {
+    images,
+    productName,
+    productPrice,
+    productId,
+    color,
+    shopId,
+    description,
+  } = props;
   const { addToBucket } = useOrder();
   const [open, setOpen] = useState(false);
   return (
@@ -63,7 +72,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
           className="image"
           alt="product image"
           style={{ objectFit: "cover" }}
-          src={images}
+          src={images[0]}
           fill
           sizes="small"
         />
@@ -160,7 +169,15 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
           ))} */}
         </Stack>
         <Stack flexDirection={"row"} gap={1.25} fontSize={14} fontWeight={400}>
-          <Typography color={"#151875"}>{`${productPrice}₮`}</Typography>
+          <Typography color={"#151875"}>
+            <NumericFormat
+              value={productPrice}
+              thousandSeparator=","
+              displayType="text"
+              suffix="₮"
+              renderText={(value) => <b>{value}</b>}
+            />
+          </Typography>
           <Typography
             color={"#FB2E86"}
             sx={{ textDecoration: "line-through" }}
@@ -211,7 +228,7 @@ export const ShoppingCard = (props: ShoppingCardProps) => {
             <Stack position={"relative"} width={"550px"} height={"550px"}>
               <Image
                 style={{ objectFit: "contain" }}
-                src={images}
+                src={images[0]}
                 alt="shaadgue"
                 fill
               />

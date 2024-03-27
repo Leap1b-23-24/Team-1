@@ -16,6 +16,7 @@ export const NewProducts = () => {
       isSpecial: false,
     });
   }, []);
+
   return (
     <Stack
       width={"100%"}
@@ -39,10 +40,10 @@ export const NewProducts = () => {
                 shopId={item.shopId}
                 productId={item._id}
                 color={item.color}
-                images={item.images[0]}
+                images={item.images}
                 productName={item.productName}
                 productPrice={item.productPrice}
-                // description={item.description}
+                description={item.description}
               />
             );
         })}
