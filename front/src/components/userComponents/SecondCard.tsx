@@ -10,12 +10,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-<<<<<<< HEAD
-import Link from "next/link";
-import { NumericFormat } from "react-number-format";
-=======
 
->>>>>>> ec40556 (orderProduct page)
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
@@ -204,13 +199,8 @@ export const SecondCard = (props: ShoppingCardProps) => {
           className="productPrice"
           color={"#151875"}
         >
-          <NumericFormat
-            value={productPrice}
-            thousandSeparator=","
-            displayType="text"
-            suffix="₮"
-            renderText={(value) => <b>{value}</b>}
-          />
+          {productPrice}
+          {"₮"}
         </Typography>
       </Stack>
       <Modal
