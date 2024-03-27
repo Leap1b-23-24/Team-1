@@ -59,7 +59,6 @@ export const logIn: RequestHandler = async (req, res) => {
 };
 
 export const getUserName: RequestHandler = async (req, res) => {
-
   const { authorization } = req.headers;
 
   try {
@@ -75,6 +74,18 @@ export const getUserName: RequestHandler = async (req, res) => {
     res.json({
       userName: user?.userName,
     });
+  } catch (error) {}
+};
 
+export const getUserId: RequestHandler = async (req, res) => {
+  const { authorization } = req.headers;
+  try {
+    if (!authorization) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const { userId } = jwt.verify(authorization, "secret-key") as JwtPayload;
+
+    res.json({ userId });
   } catch (error) {}
 };

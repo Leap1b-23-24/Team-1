@@ -1,31 +1,41 @@
 "use client";
 import { ArrowDropDown } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { OrderDetailTop } from "./OrderDetailTop";
 import { ProductCard, ProductCardType } from "..";
+import { BucketProductType } from "@/providers/OrderProvider";
+import { api } from "@/common";
 
 type OrderDetail1Props = {
   orderNumber: string;
   user: string;
   userEmail: string;
   userNumber: string;
-  order: object[];
+  order: BucketProductType[];
   orderState: string;
   setOrderState?: Dispatch<SetStateAction<string>>;
 };
 
 export const OrderDetail1 = (props: OrderDetail1Props) => {
-  const {
-    orderNumber,
-    user,
-    userEmail,
-    userNumber,
-    order,
-    orderState,
-    setOrderState,
-  } = props;
+  const { orderNumber, user, userEmail, userNumber, order } = props;
   const [isShown, setIsShown] = useState(false);
+  const [id, setId] = useState<string>("");
+
+  const getUserId = async (setId: Dispatch<SetStateAction<string>>) => {
+    try {
+      const res = await api.get("/user/getUserId", {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
+
+      setId(res.data.userId);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getUserId(setId);
+  }, []);
+
   return (
     <Stack
       width={"100%"}
@@ -38,7 +48,6 @@ export const OrderDetail1 = (props: OrderDetail1Props) => {
     >
       <OrderDetailTop
         orderNumber={orderNumber}
-        // setOrderState={setOrderState}
         isShown={isShown}
         setIsShown={setIsShown}
       />
@@ -54,15 +63,15 @@ export const OrderDetail1 = (props: OrderDetail1Props) => {
           <Typography fontSize={16}>{`${userEmail}, ${userNumber}`}</Typography>
         </Stack>
       </Stack>
-      {order.map((item: any, index) => {
+      {order.map((item, index) => {
+        const { productName, price, image, quantity } = item;
         return (
-          <Stack key={index}>
-            <ProductCard
-              productName={item.productName}
-              productPrice={item.price}
-              productQuantity={item.quantity}
-            />
-          </Stack>
+          <ProductCard
+            productName={productName}
+            productPrice={price}
+            productPicture={image}
+            productQuantity={quantity}
+          />
         );
       })}
     </Stack>

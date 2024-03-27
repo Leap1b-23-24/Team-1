@@ -11,6 +11,7 @@ import {
 } from "react";
 import { ProductType } from "./UserProvider";
 import { toast } from "react-toastify";
+import { OrderDetailType } from "./OrderProvider";
 
 type AddProductProviderProps = {
   children: ReactNode;
@@ -20,6 +21,10 @@ type getAllProduct = {
   filteredByDate: boolean;
   isSpecial: boolean;
   setProducts: Dispatch<SetStateAction<ProductType>>;
+};
+
+type GetOrderParams = {
+  setOrders: Dispatch<SetStateAction<OrderDetailType[]>>;
 };
 
 export type CategoryType = {
@@ -39,18 +44,17 @@ type AddProductContextType = {
     categoryId: string
   ) => Promise<void>;
   getAllProducts: (params: getAllProduct) => Promise<void>;
-<<<<<<< HEAD
+
+  getOrders: (params: GetOrderParams) => Promise<void>;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+
   // getOrders: (params: GetOrderParams) => Promise<void>;
   searchValue: string;
   setSearchValue: (value: string) => void;
-=======
+
   getOrders: (params: GetOrderParams) => Promise<void>;
-  // singleProductData: ShoppingCardProps | null;
-  // getSingleProduct: (productId: string) => void;
-  // productId: string;
-  // setProductId: Dispatch<SetStateAction<string>>;
->>>>>>> ec40556 (orderProduct page)
-};
+
 
 const AddProductContext = createContext<AddProductContextType>(
   {} as AddProductContextType
@@ -62,15 +66,11 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [subCategories, setSubCategories] = useState<CategoryType[]>([]);
   const [products, setProducts] = useState<ProductType>([]);
-
   const [userProducts, setUserProducts] = useState<ProductType>([]);
-<<<<<<< HEAD
+
   const [searchValue, setSearchValue] = useState("");
-=======
-  // const [singleProductData, setSingleProductData] =
-  //   useState<ShoppingCardProps | null>(null);
-  // const [productId, setProductId] = useState<string>("");
->>>>>>> ec40556 (orderProduct page)
+
+
 
   const getCategory = async () => {
     try {
@@ -135,15 +135,17 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
     } catch (error) {}
   };
 
-  // const getSingleProduct = async (productId: string) => {
-  //   try {
-  //     const res = await api.post("/singleProduct", { productId });
 
-  //     const { singleProduct } = res.data;
+  const getOrders = async (params: GetOrderParams) => {
+    const { setOrders } = params;
+    try {
+      const res = await api.get("/orders/getAdmin", {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
 
-  //     setSingleProductData(singleProduct);
-  //   } catch (error) {}
-  // };
+      setOrders(res.data.orders);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     getCategory();
@@ -166,20 +168,19 @@ export const AddProductProvider = ({ children }: AddProductProviderProps) => {
         products,
         getSingleCategory,
         getAllProducts,
-<<<<<<< HEAD
 
-        // userProducts,
-        // getOrders,
         searchValue,
         setSearchValue,
-=======
+        getOrders,
+
+
+    
+        searchValue,
+        setSearchValue,
+
         userProducts,
         getOrders,
-        // singleProductData,
-        // getSingleProduct,
-        // productId,
-        // setProductId,
->>>>>>> ec40556 (orderProduct page)
+
       }}
     >
       {children}

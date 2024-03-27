@@ -1,15 +1,26 @@
 "use client";
 
+import { api } from "@/common";
 import { PaymentInformation } from "@/components/ProductComponents";
 import DeliveryInformation from "@/components/ProductComponents/DeliveryInformation";
 import { OrderDetail1 } from "@/components/ProductComponents/orderComps/OrderDetail1";
+import { useOrder } from "@/providers/OrderProvider";
 import { ArrowBackIosNewOutlined } from "@mui/icons-material";
 import { Stack } from "@mui/material";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { string } from "yup";
 
 export default function OrderDetailPage() {
   const [a, setA] = useState([]);
   const [b, setB] = useState("");
+
+  const { orderDetails, orderInfo } = useOrder();
+  const router = useRouter();
+
+  useEffect(() => {
+    !orderInfo.id ? router.push("/dashboard/orderPage") : null;
+  }, []);
   return (
     <Stack width="100%" bgcolor="#F7F7F8" height="95vh">
       <Stack
@@ -28,16 +39,16 @@ export default function OrderDetailPage() {
 
       <Stack direction="row" padding={3} gap={3} width="100%">
         <OrderDetail1
-          order={a}
-          orderNumber=""
-          orderState=""
-          user=""
-          userEmail=""
+          order={orderDetails}
+          orderNumber={orderInfo.id}
+          orderState="Paid"
+          user={orderInfo.ordererName}
+          userEmail={orderInfo.ordererEmail}
           userNumber=""
         />
         <Stack gap={3}>
           <DeliveryInformation />
-          <PaymentInformation />
+          <PaymentInformation orderDetails={orderDetails} />
         </Stack>
       </Stack>
     </Stack>
