@@ -15,6 +15,13 @@ const productSchema = new Schema(
     soldQuantity: Number,
     description: String,
     viewsCount: String,
+    comment: [
+      {
+        userName: String,
+        comment: String,
+        rating: Number,
+      },
+    ],
   },
   { timestamps: true }
 );

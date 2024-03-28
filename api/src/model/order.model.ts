@@ -2,7 +2,6 @@ import { Schema, model } from "mongoose";
 
 const orderSchema = new Schema(
   {
-    orderNumber: String,
     status: String,
     contactInfo: String,
 
@@ -10,29 +9,19 @@ const orderSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
     },
-
-    deliveryDate: Date,
-    amountPaid: Number,
     amountToBePaid: Number,
-    coupon: {
-      type: String,
-      required: false,
-    },
-    description: String,
-    orderType: String,
     orderDetails: [
       {
         shopId: String,
         _id: String,
         productName: String,
-        productColor: String,
-        image: String,
+        productColor: { type: String, required: false },
+        image: [String],
         price: Number,
         quantity: Number,
+        status: { type: String, required: false },
       },
     ],
-    createdAt: Date,
-    updatedAt: Date,
   },
   { timestamps: true }
 );

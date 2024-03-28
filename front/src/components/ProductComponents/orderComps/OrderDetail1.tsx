@@ -46,11 +46,13 @@ export const OrderDetail1 = (props: OrderDetail1Props) => {
       gap={3}
       bgcolor={"white"}
     >
-      <OrderDetailTop
-        orderNumber={orderNumber}
-        isShown={isShown}
-        setIsShown={setIsShown}
-      />
+      <Stack width={"100%"} flexDirection={"row"}>
+        <Typography fontSize={16}>Захиалгын ID дугаар : </Typography>
+        <Typography fontSize={16} fontWeight={600}>
+          {" "}
+          {orderNumber}
+        </Typography>
+      </Stack>
       <Stack gap={1}>
         <Stack direction={"row"} gap={0.5}>
           <Typography fontSize={16}>Захиалагч: </Typography>
@@ -67,9 +69,10 @@ export const OrderDetail1 = (props: OrderDetail1Props) => {
         const { productName, price, image, quantity } = item;
         return (
           <ProductCard
+            key={index}
             productName={productName}
             productPrice={price}
-            productPicture={image}
+            productPicture={image[0]}
             productQuantity={quantity}
           />
         );

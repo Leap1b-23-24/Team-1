@@ -1,24 +1,19 @@
 "use client";
 
+import { api } from "@/common";
 import { PaymentInformation } from "@/components/ProductComponents";
 import DeliveryInformation from "@/components/ProductComponents/DeliveryInformation";
 import { OrderDetail1 } from "@/components/ProductComponents/orderComps/OrderDetail1";
-import { useOrder } from "@/providers/OrderProvider";
 import { ArrowBackIosNewOutlined } from "@mui/icons-material";
 import { Stack } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { useState } from "react";
 
 export default function OrderDetailPage() {
   const [a, setA] = useState([]);
   const [b, setB] = useState("");
+  const { id } = useParams();
 
-  const { orderDetails, orderInfo } = useOrder();
-  const router = useRouter();
-
-  useEffect(() => {
-    !orderInfo.id ? router.push("/dashboard/orderPage") : null;
-  }, []);
   return (
     <Stack width="100%" bgcolor="#F7F7F8" height="95vh">
       <Stack
@@ -31,26 +26,22 @@ export default function OrderDetailPage() {
         alignItems="center"
         bgcolor="white"
       >
-        <ArrowBackIosNewOutlined
-          onClick={() => {
-            console.log(orderDetails);
-          }}
-        />
+        <ArrowBackIosNewOutlined />
         {"Захиалгын дэлгэрэнгүй"}
       </Stack>
 
       <Stack direction="row" padding={3} gap={3} width="100%">
         <OrderDetail1
-          order={orderDetails}
-          orderNumber={orderInfo.id}
-          orderState="Paid"
-          user={orderInfo.ordererName}
-          userEmail={orderInfo.ordererEmail}
+          order={a}
+          orderNumber=""
+          orderState=""
+          user=""
+          userEmail=""
           userNumber=""
         />
         <Stack gap={3}>
           <DeliveryInformation />
-          <PaymentInformation orderDetails={orderDetails} />
+          <PaymentInformation />
         </Stack>
       </Stack>
     </Stack>

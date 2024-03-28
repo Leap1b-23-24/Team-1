@@ -1,7 +1,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { RequestHandler } from "express";
 import { OrderModel } from "../model";
-import { raw } from "body-parser";
 
 export const addOrder: RequestHandler = async (req, res) => {
   const { status, contactInfo, amountToBePaid, orderDetails } = req.body;
@@ -49,8 +48,6 @@ export const getAdminOrder: RequestHandler = async (req, res) => {
       ...item,
       orderDetails: item.orderDetails.filter((each) => each.shopId == userId),
     }));
-
-    console.log(orders);
 
     res.json({ orders });
   } catch (error) {}
