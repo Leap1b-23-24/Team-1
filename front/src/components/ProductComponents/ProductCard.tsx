@@ -1,24 +1,27 @@
+import { ArrowDropDown } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import Image from "next/image";
 
 export type ProductCardType = {
   productName: string;
   date?: string;
-  productId?: string;
+  _id?: string;
   productPicture?: string;
   productQuantity: number;
   productPrice: number;
   totalPrice?: number;
+  status?: String;
 };
 
 export const ProductCard = (props: ProductCardType) => {
   const {
     productName,
     date,
-    productId,
+    _id,
     productQuantity,
     productPrice,
     productPicture,
+    status,
   } = props;
   return (
     <Stack
@@ -32,23 +35,33 @@ export const ProductCard = (props: ProductCardType) => {
         <Image src={`${productPicture}`} alt="" fill />
       </Stack>
       <Stack width="70%" gap={2} justifyContent="center" padding={3}>
-        <Typography fontSize="24px" fontWeight={700} color="primary">
-          {productName}
-        </Typography>
-        <Stack>
-          <Typography fontSize="14px" fontWeight={400} color="#3F4145">
-            {date}
-          </Typography>
-          <Typography
-            display="flex"
-            fontSize="14px"
-            fontWeight={400}
-            color="#3F4145"
+        <Stack
+          flexDirection={"row"}
+          justifyContent={"space-between"}
+          alignItems={"flex-start"}
+        >
+          <Stack gap={2}>
+            <Typography fontSize="24px" fontWeight={700} color="primary">
+              {productName}
+            </Typography>
+            <Typography fontSize="14px" fontWeight={400} color="#3F4145">
+              {"Бүтээгдэхүүний ID:"}
+              {_id}
+            </Typography>
+          </Stack>
+          <Stack
+            border={2}
+            padding={"4px 10px"}
+            flexDirection={"row"}
+            gap={1}
+            sx={{ cursor: "pointer" }}
+            borderRadius={"12px"}
           >
-            {"Бүтээгдэхүүний ID:"}
-            {productId}
-          </Typography>
+            <Typography fontWeight={550}>{status}</Typography>
+            <ArrowDropDown />
+          </Stack>
         </Stack>
+
         <Stack direction="row" alignItems={"center"}>
           <Stack
             direction="row"
@@ -69,6 +82,7 @@ export const ProductCard = (props: ProductCardType) => {
               {productPrice}₮
             </Typography>
           </Stack>
+
           <Typography fontSize="18px" fontWeight={600} color="primary">
             ₮{productPrice * productQuantity}
           </Typography>
@@ -77,3 +91,10 @@ export const ProductCard = (props: ProductCardType) => {
     </Stack>
   );
 };
+
+{
+  /* <Stack height={"100%"} justifyContent={"space-between"} border={1}>
+            <Stack position={"relative"}>
+              <Typography>{status}</Typography>
+            </Stack>     </Stack> */
+}

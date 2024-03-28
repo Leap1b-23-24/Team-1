@@ -91,7 +91,7 @@ export const OrderTable = () => {
                   <TableCell
                     key={each.id}
                     align={each.align}
-                    style={{ minWidth: each.minWidth }}
+                    style={{ minWidth: each.minWidth, fontWeight: 550 }}
                   >
                     {each.label}
                   </TableCell>

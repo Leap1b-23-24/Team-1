@@ -6,13 +6,11 @@ import { OrderDetail1 } from "@/components/ProductComponents/orderComps/OrderDet
 import { useOrder } from "@/providers/OrderProvider";
 import { ArrowBackIosNewOutlined } from "@mui/icons-material";
 import { Stack } from "@mui/material";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function OrderDetailPage() {
-  const [a, setA] = useState([]);
-  const [b, setB] = useState("");
-
   const { orderDetails, orderInfo } = useOrder();
   const router = useRouter();
 
@@ -31,11 +29,14 @@ export default function OrderDetailPage() {
         alignItems="center"
         bgcolor="white"
       >
-        <ArrowBackIosNewOutlined
+        <Stack
+          sx={{ cursor: "pointer" }}
           onClick={() => {
-            console.log(orderDetails);
+            router.push("/dashboard/orderPage");
           }}
-        />
+        >
+          <ArrowBackIosNewOutlined />
+        </Stack>
         {"Захиалгын дэлгэрэнгүй"}
       </Stack>
 

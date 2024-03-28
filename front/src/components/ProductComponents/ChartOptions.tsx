@@ -9,7 +9,7 @@ export const BarChartContainer = (
     <Stack
       overflow={"hidden"}
       height={"100%"}
-      width={"565px"}
+      width={"100%"}
       borderRadius={3}
       px={3}
       py={3}

@@ -34,11 +34,15 @@ export default function Dashboard() {
       display={loading ? "none" : "flex"}
       bgcolor="#F7F7F8"
       gap={3}
-      height="95vh"
       width="100%"
       p={2}
     >
-      <Stack gap={3} direction="row">
+      <Stack
+        gap={3}
+        direction="row"
+        display={"grid"}
+        gridTemplateColumns={"repeat(3,1fr)"}
+      >
         <DashboardInformation name="Орлого" number={23100} icon={AttachMoney} />
         <DashboardInformation name="Захиалга" number={58} icon={ContentPaste} />
         <DashboardInformation
@@ -47,13 +51,14 @@ export default function Dashboard() {
           icon={Person2Outlined}
         />
       </Stack>
-      <Stack flexDirection={"row"} gap={3}>
-        <Stack width={700}>
-          <DashboardProduct />
-        </Stack>
-        <Stack>
-          <ChartContainer />
-        </Stack>
+      <Stack
+        flexDirection={"row"}
+        gap={3}
+        display={"grid"}
+        gridTemplateColumns={"repeat(2,1fr)"}
+      >
+        <DashboardProduct />
+        <ChartContainer />
       </Stack>
     </Stack>
   );

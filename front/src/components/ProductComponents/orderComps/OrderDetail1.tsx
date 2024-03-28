@@ -21,6 +21,7 @@ export const OrderDetail1 = (props: OrderDetail1Props) => {
   const { orderNumber, user, userEmail, userNumber, order } = props;
   const [isShown, setIsShown] = useState(false);
   const [id, setId] = useState<string>("");
+  console.log(order);
 
   const getUserId = async (setId: Dispatch<SetStateAction<string>>) => {
     try {
@@ -66,14 +67,16 @@ export const OrderDetail1 = (props: OrderDetail1Props) => {
         </Stack>
       </Stack>
       {order.map((item, index) => {
-        const { productName, price, image, quantity } = item;
+        const { productName, price, image, quantity, status, _id } = item;
         return (
           <ProductCard
             key={index}
+            status={status}
             productName={productName}
             productPrice={price}
             productPicture={image[0]}
             productQuantity={quantity}
+            _id={_id}
           />
         );
       })}

@@ -1,13 +1,7 @@
 "use client";
 import { OrderTable } from "@/components/ProductComponents/orderComps/OrderTable";
-import {
-  BucketProductType,
-  OrderDetailType,
-  useOrder,
-} from "@/providers/OrderProvider";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const mapBarMenu = [
   "Бүгд",
@@ -31,7 +25,13 @@ export default function OrderPage() {
               borderBottom={pathName == word ? "solid 1px black" : ""}
               color={pathName == word ? "#121316" : "#3F4145"}
             >
-              {word}
+              <Typography
+                sx={{ cursor: "pointer" }}
+                fontSize={16}
+                fontWeight={600}
+              >
+                {word}
+              </Typography>
             </Stack>
           );
         })}
