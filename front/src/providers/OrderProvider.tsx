@@ -10,6 +10,7 @@ import { ProductType } from "./UserProvider";
 import { toast } from "react-toastify";
 import { api } from "@/common";
 import { string } from "yup";
+import { OrderDocType } from "@/components/ProductComponents/orderComps/OrderTable";
 
 type OrderProviderType = {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ export type BucketProductType = {
   image: string[];
   price: number;
   quantity: number;
+  status: string;
 };
 
 type OrderContextType = {
@@ -64,7 +66,9 @@ type OrderInfo = {
 };
 
 type GetOrderParams = {
-  setOrders: Dispatch<SetStateAction<OrderDetailType[]>>;
+  setOrders: Dispatch<
+    SetStateAction<{ _doc: OrderDocType; orderDetails: BucketProductType[] }[]>
+  >;
 };
 const OrderContext = createContext<OrderContextType>({} as OrderContextType);
 

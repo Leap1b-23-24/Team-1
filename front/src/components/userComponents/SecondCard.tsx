@@ -118,6 +118,7 @@ export const SecondCard = (props: ShoppingCardProps) => {
                   image: images,
                   price: productPrice,
                   shopId: shopId,
+                  status: "paid",
                 });
               }}
             >
