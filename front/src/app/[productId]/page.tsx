@@ -106,7 +106,7 @@ export default function productDetail() {
           </Stack>
         </Container>
       </Stack>
-      <Stack width={"100%"} py={"130px"}>
+      <Stack width={"100%"} paddingTop={"130px"}>
         <Container maxWidth="lg">
           <Stack width={"100%"} gap={6}>
             <Typography color={"#101750"} fontSize={"36px"} fontWeight={800}>
@@ -116,7 +116,6 @@ export default function productDetail() {
               sx={{ display: "grid", gridTemplateColumns: "repeat(4,2fr)" }}
               gap={3}
               width={"100%"}
-              maxHeight={363}
             >
               {products
                 .filter(
