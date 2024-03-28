@@ -1,6 +1,14 @@
 "use client";
 import { DashboardProduct } from "@/components/DashboardComponents/DashboardProduct";
+import { ChartContainer } from "@/components/ProductComponents/ChartContainer";
+import DashboardInformation from "@/components/ProductComponents/DashboardInfo";
 import { useAuth } from "@/providers/AuthProvider";
+import {
+  AttachMoney,
+  ContentPaste,
+  Person2Outlined,
+  VerifiedUserOutlined,
+} from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -28,10 +36,24 @@ export default function Dashboard() {
       gap={3}
       height="95vh"
       width="100%"
+      p={2}
     >
-      <Stack gap={3} direction="row"></Stack>
-      <Stack width={700}>
-        <DashboardProduct />
+      <Stack gap={3} direction="row">
+        <DashboardInformation name="Орлого" number={23100} icon={AttachMoney} />
+        <DashboardInformation name="Захиалга" number={58} icon={ContentPaste} />
+        <DashboardInformation
+          name="Хэрэглэгч"
+          number={980}
+          icon={Person2Outlined}
+        />
+      </Stack>
+      <Stack flexDirection={"row"} gap={3}>
+        <Stack width={700}>
+          <DashboardProduct />
+        </Stack>
+        <Stack>
+          <ChartContainer />
+        </Stack>
       </Stack>
     </Stack>
   );
