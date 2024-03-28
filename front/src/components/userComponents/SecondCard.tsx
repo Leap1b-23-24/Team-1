@@ -38,8 +38,6 @@ export const SecondCard = (props: ShoppingCardProps) => {
 
   const router = useRouter();
 
-  const { getSingleProduct } = useProduct();
-
   return (
     <Stack
       width={1}
@@ -120,6 +118,7 @@ export const SecondCard = (props: ShoppingCardProps) => {
                   image: images,
                   price: productPrice,
                   shopId: shopId,
+                  status: "paid",
                 });
               }}
             >

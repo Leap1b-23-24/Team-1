@@ -1,6 +1,10 @@
 "use client";
 import { OrderTable } from "@/components/ProductComponents/orderComps/OrderTable";
-import { OrderDetailType, useOrder } from "@/providers/OrderProvider";
+import {
+  BucketProductType,
+  OrderDetailType,
+  useOrder,
+} from "@/providers/OrderProvider";
 import { Stack } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,11 +20,6 @@ const mapBarMenu = [
 
 export default function OrderPage() {
   const pathName = usePathname();
-  const [orders, setOrders] = useState<OrderDetailType[]>([]);
-  const { getOrders } = useOrder();
-  useEffect(() => {
-    getOrders({ setOrders: setOrders });
-  }, []);
   return (
     <Stack width="100%" bgcolor="#F7F7F8" height={"95vh"}>
       <Stack width="100%" direction="row" borderBottom={"1px solid #D6D8DB"}>
@@ -31,9 +30,6 @@ export default function OrderPage() {
               padding={2}
               borderBottom={pathName == word ? "solid 1px black" : ""}
               color={pathName == word ? "#121316" : "#3F4145"}
-              onClick={() => {
-                console.log(orders);
-              }}
             >
               {word}
             </Stack>

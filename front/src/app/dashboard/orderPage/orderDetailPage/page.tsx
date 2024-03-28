@@ -1,6 +1,5 @@
 "use client";
 
-import { api } from "@/common";
 import { PaymentInformation } from "@/components/ProductComponents";
 import DeliveryInformation from "@/components/ProductComponents/DeliveryInformation";
 import { OrderDetail1 } from "@/components/ProductComponents/orderComps/OrderDetail1";
@@ -8,8 +7,7 @@ import { useOrder } from "@/providers/OrderProvider";
 import { ArrowBackIosNewOutlined } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { string } from "yup";
+import { useEffect, useState } from "react";
 
 export default function OrderDetailPage() {
   const [a, setA] = useState([]);
@@ -33,7 +31,11 @@ export default function OrderDetailPage() {
         alignItems="center"
         bgcolor="white"
       >
-        <ArrowBackIosNewOutlined />
+        <ArrowBackIosNewOutlined
+          onClick={() => {
+            console.log(orderDetails);
+          }}
+        />
         {"Захиалгын дэлгэрэнгүй"}
       </Stack>
 

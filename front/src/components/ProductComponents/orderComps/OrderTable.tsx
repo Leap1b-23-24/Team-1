@@ -1,5 +1,9 @@
 "use client";
-import { OrderDetailType, useOrder } from "@/providers/OrderProvider";
+import {
+  BucketProductType,
+  OrderDetailType,
+  useOrder,
+} from "@/providers/OrderProvider";
 import { ArrowRight } from "@mui/icons-material";
 import {
   IconButton,
@@ -46,10 +50,25 @@ const columns: readonly Column[] = [
   { id: "orderDetail", label: "Дэлгэрэнгүй", minWidth: 100, align: "left" },
 ];
 
+export type OrderDocType = {
+  _id?: string;
+  orderer?: { _id: string; userName: string; email: string };
+  createdAt?: string;
+  status: string;
+  contactInfo: string;
+  amountToBePaid: number;
+};
+
 export const OrderTable = () => {
-  const [orders, setOrders] = useState<OrderDetailType[]>([]);
   const { getOrders, setOrderDetails, setOrderInfo } = useOrder();
   const router = useRouter();
+  const [orders, setOrders] = useState<
+    { _doc: OrderDocType; orderDetails: BucketProductType[] }[]
+  >([]);
+
+  useEffect(() => {
+    getOrders({ setOrders: setOrders });
+  }, []);
 
   useEffect(() => {
     getOrders({ setOrders: setOrders });
@@ -83,7 +102,9 @@ export const OrderTable = () => {
           <TableBody>
             {orders.length === 0
               ? null
-              : orders.map((order) => {
+              : orders.map((each) => {
+                  const order = each._doc;
+                  const orderDetails = each.orderDetails;
                   return (
                     <TableRow>
                       <TableCell>{order._id}</TableCell>
@@ -106,7 +127,7 @@ export const OrderTable = () => {
                           sx={{ cursor: "pointer" }}
                           onClick={() => {
                             if (order._id && order.orderer) {
-                              setOrderDetails(order.orderDetails);
+                              setOrderDetails(orderDetails);
                               setOrderInfo({
                                 ordererName: order.orderer.userName,
                                 ordererEmail: order.orderer.email,
