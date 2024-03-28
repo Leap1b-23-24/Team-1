@@ -32,11 +32,11 @@ export default function productDetail() {
 
   const { getAllProducts } = useProduct();
   const [products, setProducts] = useState<ProductType>([]);
+  const [acitve, setActive] = useState(0);
 
   const [productData, setProductData] = useState<DetailedType>(
     {} as DetailedType
   );
-  console.log(productData, "pro");
 
   const [isLoading, setLoading] = useState(true);
 
@@ -63,6 +63,30 @@ export default function productDetail() {
       isSpecial: true,
     });
   }, []);
+
+  const checkActive = () => {
+    if (acitve == 0) {
+      return (
+        <Stack gap={1}>
+          <Typography color={"#151875"} fontSize={22} fontWeight={800}>
+            {"Varius tempor."}
+          </Typography>
+          <Typography color={"#A9ACC6"} fontSize={16} fontWeight={800}>
+            {
+              "Aliquam dis vulputate vulputate integer sagittis. Faucibus dolor ornare faucibus vel sed et eleifend habitasse amet. Montes, mauris varius ac est bibendum. Scelerisque a, risus ac ante. Velit consectetur neque, elit, aliquet. Non varius proin sed urna, egestas consequat laoreet diam tincidunt. Magna eget faucibus cras justo, tortor sed donec tempus. Imperdiet consequat, quis diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr ."
+            }
+          </Typography>
+        </Stack>
+      );
+    } else {
+      return (
+        <Stack gap={3}>
+          <AddComment />
+          <AllComment />
+        </Stack>
+      );
+    }
+  };
 
   return (
     <Stack width={"100%"}>
@@ -94,15 +118,26 @@ export default function productDetail() {
         <Container maxWidth={"lg"}>
           <Stack py={"100px"} gap={6} maxHeight={"1800px"}>
             <Stack direction={"row"} gap={3}>
-              <Typography color={"#151875"} fontWeight={800} fontSize={"24px"}>
+              <Typography
+                color={"#151875"}
+                fontWeight={800}
+                fontSize={"24px"}
+                onClick={() => setActive(0)}
+                sx={{ textDecoration: `${acitve == 0 ? "underline" : null}` }}
+              >
                 {"Нэмэлт мэдээлэл"}
               </Typography>
-              <Typography color={"#151875"} fontWeight={800} fontSize={"24px"}>
+              <Typography
+                color={"#151875"}
+                fontWeight={800}
+                fontSize={"24px"}
+                onClick={() => setActive(1)}
+                sx={{ textDecoration: `${acitve == 1 ? "underline" : null}` }}
+              >
                 {"Үнэлгээ"}
               </Typography>
             </Stack>
-            <AddComment />
-            <AllComment />
+            {checkActive()}
           </Stack>
         </Container>
       </Stack>
