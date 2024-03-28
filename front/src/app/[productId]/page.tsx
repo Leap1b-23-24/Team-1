@@ -133,7 +133,7 @@ export default function productDetail() {
       </Container>
       <Stack width={"100%"} bgcolor={"#F9F8FE"}>
         <Container maxWidth={"lg"}>
-          <Stack py={"100px"} gap={6} maxHeight={"1800px"}>
+          <Stack py={"100px"} gap={6}>
             <Stack direction={"row"} gap={3}>
               <Typography
                 color={"#151875"}
@@ -156,35 +156,6 @@ export default function productDetail() {
             </Stack>
             {checkActive()}
           </Stack>
-          {isLoading ? null : (
-            <Stack py={"100px"} gap={6}>
-              <Stack direction={"row"} gap={3}>
-                <Typography
-                  color={"#151875"}
-                  fontWeight={800}
-                  fontSize={"24px"}
-                >
-                  {"Нэмэлт мэдээлэл"}
-                </Typography>
-                <Typography
-                  color={"#151875"}
-                  fontWeight={800}
-                  fontSize={"24px"}
-                >
-                  {"Үнэлгээ"}
-                </Typography>
-              </Stack>
-              <AddComment
-                productId={productId}
-                isCommentAdded={isCommentAdded}
-                setIsCommentAdded={setIsCommentAdded}
-              />
-              <AllComment
-                comments={productData.comment}
-                isCommentAdded={isCommentAdded}
-              />
-            </Stack>
-          )}
         </Container>
       </Stack>
       <Stack width={"100%"} paddingTop={"130px"}>

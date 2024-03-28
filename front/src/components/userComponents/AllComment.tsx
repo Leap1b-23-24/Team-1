@@ -25,7 +25,7 @@ export const AllComment = (props: AllCommentProps) => {
     ratingTotal();
   }, []);
   return (
-    <Stack width={"100%"} gap={3} overflow={"scroll"}>
+    <Stack width={"100%"} gap={3}>
       <Stack direction={"row"} gap={2}>
         <Typography color={"#1D3178"} fontSize={"18px"} fontWeight={800}>
           {"Нийт үнэлгээ:"}{" "}
@@ -35,63 +35,45 @@ export const AllComment = (props: AllCommentProps) => {
           {`(${comments.length})`}
         </Stack>
       </Stack>
-      {comments?.map((item) => {
-        return (
-          <Stack
-            width={"100%"}
-            gap={3}
-            px={3}
-            py={4}
-            bgcolor={"white"}
-            borderRadius={"8px"}
-          >
+      <Stack gap={2} maxHeight={"450px"} overflow={"scroll"}>
+        {comments?.map((item) => {
+          return (
             <Stack
               width={"100%"}
-              borderBottom={"1px #BFC6E0 dashed"}
-              gap={4}
-              paddingBottom={4}
+              gap={3}
+              px={3}
+              py={4}
+              bgcolor={"white"}
+              borderRadius={"8px"}
             >
-              <Rating value={item.rating} />
-              <Stack gap={1}>
-                <Typography
-                  fontSize={"18px"}
-                  fontWeight={800}
-                  color={"#1D3178"}
-                >
-                  {item.userName}
-                </Typography>
-                <Typography
-                  color={"#9295AA"}
-                  fontWeight={400}
-                  fontSize={"17px"}
-                >
-                  {item.comment}
-                </Typography>
+              <Stack
+                width={"100%"}
+                borderBottom={"1px #BFC6E0 dashed"}
+                gap={4}
+                paddingBottom={4}
+              >
+                <Rating value={item.rating} />
+                <Stack gap={1}>
+                  <Typography
+                    fontSize={"18px"}
+                    fontWeight={800}
+                    color={"#1D3178"}
+                  >
+                    {item.userName}
+                  </Typography>
+                  <Typography
+                    color={"#9295AA"}
+                    fontWeight={400}
+                    fontSize={"17px"}
+                  >
+                    {item.comment}
+                  </Typography>
+                </Stack>
               </Stack>
             </Stack>
-          </Stack>
-        );
-      })}
+          );
+        })}
+      </Stack>
     </Stack>
   );
 };
-// const Comment = () => {
-//   return (
-//     <Stack
-//       width={"100%"}
-//       borderBottom={"1px #BFC6E0 dashed"}
-//       gap={4}
-//       paddingBottom={4}
-//     >
-//       <Rating value={ratingNumber} />
-//       <Stack gap={1}>
-//         <Typography fontSize={"18px"} fontWeight={800} color={"#1D3178"}>
-//           {"Name"}
-//         </Typography>
-//         <Typography color={"#9295AA"} fontWeight={400} fontSize={"17px"}>
-//           {"Материал нь ёстой гоё юм байна дахиж авна аа"}
-//         </Typography>
-//       </Stack>
-//     </Stack>
-//   );
-// };
