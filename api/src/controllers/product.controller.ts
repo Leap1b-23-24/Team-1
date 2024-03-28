@@ -1,6 +1,8 @@
 import { RequestHandler } from "express";
 import { ProductModel } from "../model/product.model";
 import Jwt, { JwtPayload } from "jsonwebtoken";
+import { UserModel } from "../model";
+import { log } from "console";
 
 export const addProduct: RequestHandler = async (req, res) => {
   const {
@@ -101,4 +103,44 @@ export const getSingleProduct: RequestHandler = async (req, res) => {
   } catch (err) {
     res.json(err);
   }
+};
+
+export const addComment: RequestHandler = async (req, res) => {
+  const { productId, rating, comment } = req.body;
+  const { authorization } = req.headers;
+
+  try {
+    if (!authorization)
+      return res.status(401).json({
+        message: "Нэвтэрч орсны дараа сэтгэгдэл бичнэ үү",
+      });
+
+    const { userId: id } = Jwt.verify(
+      authorization,
+      "secret-key"
+    ) as JwtPayload;
+
+    const user = await UserModel.findById(id);
+
+    const product = await ProductModel.findOne({ _id: productId });
+
+    const comments = product?.comment;
+
+    const newComment = comments?.push({ userName: "ganuu" });
+
+    await ProductModel.findOneAndUpdate(
+      { _id: productId },
+      {
+        $push: {
+          comment: {
+            userName: user?.userName,
+            rating: rating,
+            comment: comment,
+          },
+        },
+      }
+    );
+
+    res.json({ message: "Таны сэтгэгдэл амжилттай нэмэгдлээ" });
+  } catch (error) {}
 };

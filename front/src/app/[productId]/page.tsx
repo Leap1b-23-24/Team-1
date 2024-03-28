@@ -15,6 +15,12 @@ import { CircularProgress, Container, Stack, Typography } from "@mui/material";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+export type CommentType = {
+  userName: string;
+  comment: string;
+  rating: number;
+};
+
 type DetailedType = {
   productId: string;
   productName: string;
@@ -24,10 +30,13 @@ type DetailedType = {
   description: string;
   images: string[];
   categoryId: string;
+  comment: CommentType[];
 };
 
 export default function productDetail() {
   const { productId } = useParams();
+  console.log(typeof productId);
+
   if (!productId) return;
 
   const { getAllProducts } = useProduct();
@@ -39,6 +48,7 @@ export default function productDetail() {
   );
 
   const [isLoading, setLoading] = useState(true);
+  const [isCommentAdded, setIsCommentAdded] = useState(false);
 
   const getSingleProduct = async () => {
     setLoading(true);
@@ -53,7 +63,7 @@ export default function productDetail() {
 
   useEffect(() => {
     getSingleProduct();
-  }, []);
+  }, [isCommentAdded]);
 
   useEffect(() => {
     getAllProducts({
@@ -81,8 +91,15 @@ export default function productDetail() {
     } else {
       return (
         <Stack gap={3}>
-          <AddComment />
-          <AllComment />
+          <AddComment
+            isCommentAdded={isCommentAdded}
+            setIsCommentAdded={setIsCommentAdded}
+            productId={productId}
+          />
+          <AllComment
+            isCommentAdded={isCommentAdded}
+            comments={productData.comment}
+          />
         </Stack>
       );
     }
@@ -139,6 +156,35 @@ export default function productDetail() {
             </Stack>
             {checkActive()}
           </Stack>
+          {isLoading ? null : (
+            <Stack py={"100px"} gap={6}>
+              <Stack direction={"row"} gap={3}>
+                <Typography
+                  color={"#151875"}
+                  fontWeight={800}
+                  fontSize={"24px"}
+                >
+                  {"Нэмэлт мэдээлэл"}
+                </Typography>
+                <Typography
+                  color={"#151875"}
+                  fontWeight={800}
+                  fontSize={"24px"}
+                >
+                  {"Үнэлгээ"}
+                </Typography>
+              </Stack>
+              <AddComment
+                productId={productId}
+                isCommentAdded={isCommentAdded}
+                setIsCommentAdded={setIsCommentAdded}
+              />
+              <AllComment
+                comments={productData.comment}
+                isCommentAdded={isCommentAdded}
+              />
+            </Stack>
+          )}
         </Container>
       </Stack>
       <Stack width={"100%"} paddingTop={"130px"}>
