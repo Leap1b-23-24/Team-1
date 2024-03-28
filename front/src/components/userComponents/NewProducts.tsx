@@ -1,5 +1,5 @@
 "use client";
-import { Grid, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { ShoppingCard } from "./ShoppingCard";
 import { useEffect, useState } from "react";
 import { useProduct } from "@/providers/AddproductProvider";

@@ -7,7 +7,7 @@ export const AllComment = () => {
   const [totalComment, setTotalComment] = useState(23);
 
   return (
-    <Stack width={"100%"} gap={3}>
+    <Stack width={"100%"} gap={3} overflow={"scroll"}>
       <Stack direction={"row"} gap={2}>
         <Typography color={"#1D3178"} fontSize={"18px"} fontWeight={800}>
           {"Нийт үнэлгээ:"}{" "}
