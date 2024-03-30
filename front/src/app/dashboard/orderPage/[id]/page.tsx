@@ -41,7 +41,7 @@ export default function OrderDetailPage() {
         />
         <Stack gap={3}>
           <DeliveryInformation />
-          <PaymentInformation />
+          {/* <PaymentInformation /> */}
         </Stack>
       </Stack>
     </Stack>
